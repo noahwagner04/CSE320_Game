@@ -12,8 +12,6 @@ var rand_target_mod = Vector2((randf() * 2 - 1) * 10, (randf() * 2 - 1) * 10)
 var knockback : Vector2 = Vector2.ZERO
 var friction : float = 1000
 
-signal despawn
-
 func _ready():
 	home.global_position = global_position
 	speed += (randf() * 2 - 1) * 10
@@ -53,5 +51,4 @@ func _on_hurt_box_hurt(hit_box):
 	health -= hit_box.damage
 	knockback = (global_position - hit_box.global_position).normalized() * hit_box.knockback
 	if health <= 0:
-		emit_signal("despawn")
 		queue_free()
