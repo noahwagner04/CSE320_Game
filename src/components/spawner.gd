@@ -32,8 +32,7 @@ func spawn():
 	if instance is Node2D:
 		var angle = randf() * 2 * PI
 		instance.position = Vector2(sin(angle), cos(angle)) * radius * randf()
-		if ("despawn" in instance) and (instance.despawn is Signal):
-			instance.despawn.connect(_on_despawn)
+		instance.tree_exited.connect(_on_despawn)
 	add_child(instance)
 	spawned_count += 1
 
@@ -50,7 +49,7 @@ func _on_despawn():
 
 func _draw():
 	if Engine.is_editor_hint() and debug:
-		draw_circle(Vector2.ZERO, radius, Color(1, 1, 0, 0.5))
+		draw_circle(Vector2.ZERO, radius, Color(1, 1, 0, 0.3))
 
 func _get_configuration_warnings():
 	if scene == null:
