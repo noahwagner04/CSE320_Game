@@ -8,7 +8,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="."]
+[node name="HostButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 703.0
 offset_top = 553.0
@@ -17,7 +17,7 @@ offset_bottom = 630.0
 theme_override_font_sizes/font_size = 50
 text = "Host"
 
-[node name="Button2" type="Button" parent="."]
+[node name="JoinButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 958.0
 offset_top = 553.0
@@ -26,7 +26,7 @@ offset_bottom = 630.0
 theme_override_font_sizes/font_size = 50
 text = "Join"
 
-[node name="Label" type="Label" parent="."]
+[node name="NameLabel" type="Label" parent="."]
 layout_mode = 2
 offset_left = 703.0
 offset_top = 450.5
@@ -35,7 +35,7 @@ offset_bottom = 522.5
 theme_override_font_sizes/font_size = 50
 text = "Name:"
 
-[node name="LineEdit" type="LineEdit" parent="."]
+[node name="NameTextFeild" type="LineEdit" parent="."]
 layout_mode = 2
 offset_left = 912.0
 offset_top = 451.0
