@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dde3h6haoynnn"]
+[gd_scene load_steps=9 format=3 uid="uid://dde3h6haoynnn"]
 
 [ext_resource type="Texture2D" uid="uid://e351ya36oghj" path="res://assets/enemies/giant_vole.png" id="1_6ruth"]
 [ext_resource type="Script" path="res://src/enemies/giant_vole.gd" id="1_36olq"]
+[ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="2_5sn6e"]
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="3_afjd4"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="4_yoi8p"]
 
@@ -21,6 +22,9 @@ collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_36olq")
 
+[node name="HealthContainer" parent="." instance=ExtResource("2_5sn6e")]
+max_health = 20.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_6ruth")
 
@@ -32,18 +36,20 @@ shape = SubResource("CapsuleShape2D_kvlx5")
 [node name="HitBox" parent="." instance=ExtResource("3_afjd4")]
 collision_layer = 2
 damage = 2.0
+response = 2
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="HitBox"]
 unique_name_in_owner = true
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_2ohi8")
 
-[node name="HurtBox" parent="." instance=ExtResource("4_yoi8p")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("4_yoi8p")]
 collision_layer = 0
+health_container = NodePath("../HealthContainer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_olf1s")
 
-[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
