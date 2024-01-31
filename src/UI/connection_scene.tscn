@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dfe5fnwrcfr36"]
+
+[node name="ConnectionScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 703.0
+offset_top = 553.0
+offset_right = 933.0
+offset_bottom = 630.0
+theme_override_font_sizes/font_size = 50
+text = "Host"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 2
+offset_left = 958.0
+offset_top = 553.0
+offset_right = 1188.0
+offset_bottom = 630.0
+theme_override_font_sizes/font_size = 50
+text = "Join"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 703.0
+offset_top = 450.5
+offset_right = 862.0
+offset_bottom = 522.5
+theme_override_font_sizes/font_size = 50
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+offset_left = 912.0
+offset_top = 451.0
+offset_right = 1186.0
+offset_bottom = 523.0
+theme_override_font_sizes/font_size = 40
