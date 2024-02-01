@@ -2,24 +2,24 @@
 extends Marker2D
 class_name Spawner
 
-@export_range(0, 60, 0.001, "or_greater", "suffix:s") 
-var frequency : float = 1
+@export_range(0.001, 60, 0.001, "or_greater", "suffix:s") 
+var frequency: float = 1
 @export_range(0, 1000, 1, "or_greater", "suffix:px") 
-var radius : int = 32:
+var radius: int = 32:
 	set(new_radius):
 		radius = new_radius
 		queue_redraw()
-@export var debug : bool = true:
+@export var debug: bool = true:
 	set(new_debug):
 		debug = new_debug
 		queue_redraw()
-@export var max_spawn : int = 1
-@export var scene : PackedScene:
+@export var max_spawn: int = 1
+@export var scene: PackedScene:
 	set(new_scene):
 		scene = new_scene
 		update_configuration_warnings()
-var spawned_count : int = 0
-var timer : Timer = Timer.new()
+var spawned_count: int = 0
+var timer: Timer = Timer.new()
 
 func _ready():
 	timer.timeout.connect(spawn)
