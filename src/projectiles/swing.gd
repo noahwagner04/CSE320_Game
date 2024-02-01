@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var speed : float = 300
+@export var speed: float = 300
 @export_range(0, 10, 0.01, "or_greater", "suffix:s") var lifetime : float = 0.1
 
 func _ready():
