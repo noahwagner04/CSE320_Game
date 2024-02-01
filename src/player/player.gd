@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
-@export var health = 100
 @export var speed = 300
 @export var acceleration = 3000
 @export var friction = 3000
 
-@onready var health_bar : ProgressBar = %HealthBar
+@onready var health_bar: ProgressBar = %HealthBar
+@onready var health_container: HealthContainer = %HealthContainer
+
+func _ready():
+	health_bar.max_value = health_container.max_health
 
 func move(_delta):
 	# get acceleration direction
@@ -28,11 +31,8 @@ func move(_delta):
 func _process(_delta):
 	move(_delta)
 
+func _on_health_container_health_changed(_amount):
+	health_bar.value = health_container.get_health()
 
-
-func _on_hurt_box_hurt(hit_box):
-	if health <= 0:
-		queue_free()
-	
-	health -= hit_box.damage
-	health_bar.value = health
+func _on_health_container_health_depleted():
+	queue_free()
