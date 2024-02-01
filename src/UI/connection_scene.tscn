@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dfe5fnwrcfr36"]
+[gd_scene load_steps=2 format=3 uid="uid://dfe5fnwrcfr36"]
+
+[ext_resource type="Script" path="res://src/UI/connection_scene.gd" id="1_lyrlr"]
 
 [node name="ConnectionScene" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lyrlr")
 
 [node name="HostButton" type="Button" parent="."]
 layout_mode = 2
@@ -42,3 +45,6 @@ offset_top = 451.0
 offset_right = 1186.0
 offset_bottom = 523.0
 theme_override_font_sizes/font_size = 40
+
+[connection signal="pressed" from="HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
