@@ -1,7 +1,11 @@
 extends Node
 
 var xp : int = 0;
-var level : int = 0;
+var character_level : int = 0;
+var warrior_level : int = 0;
+var knight_level : int = 0;
+var rogue_level : int = 0;
+var wizard_level : int = 0;
 
 var health : int;
 var defense : int;
@@ -14,16 +18,20 @@ var stamina : int;
 
 var xp_level_thresholds = [100, 300, 700, 1300, 2000]
 
+#Call when enemy is killed or quest is completed
 func gain_xp(amount):
 	xp += amount;
 	checkLevelUp()
 
+# Checks if a character meets a threshold requried for leveling up
 func checkLevelUp():
-	if xp > xp_level_thresholds[level]:
+	if xp > xp_level_thresholds[character_level]:
 		levelUp()
 
+# level up the character
 func levelUp():
-	level += 1
+	character_level += 1
+	#Open level up UI
 	#Need to determine how stat increases will work based on chosen class. 
 
 
