@@ -58,5 +58,7 @@ shape = SubResource("RectangleShape2D_vhwkk")
 script = ExtResource("4_agtwi")
 attack_speed = 0.3
 
+[node name="PlayerStats" type="Node" parent="."]
+
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
