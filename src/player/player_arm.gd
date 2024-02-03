@@ -1,10 +1,10 @@
 extends Node2D
 
-@export var spawn_global : bool = false
+@export var spawn_global: bool = false
 @export_range(0, 1, 0.01, "or_greater", "suffix:s") var attack_speed : float = 0.5
-@onready var Swing = preload("res://src/projectiles/swing.tscn")
-var timer : Timer = Timer.new()
-var last_click_spawn : float = 0
+@onready var Swing: PackedScene = preload("res://src/projectiles/swing.tscn")
+var timer: Timer = Timer.new()
+var last_click_spawn: float = 0
 
 func _ready():
 	timer.wait_time = attack_speed

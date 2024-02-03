@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxoarw6w1dm6h"]
+
+[ext_resource type="Script" path="res://src/components/health_container.gd" id="1_v2q5n"]
+
+[node name="HealthContainer" type="Node"]
+script = ExtResource("1_v2q5n")
+
+[connection signal="health_changed" from="." to="." method="_on_health_changed"]
