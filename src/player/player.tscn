@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=11 format=3 uid="uid://ctd2eb2gkf7xw"]
+
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
@@ -58,7 +60,6 @@ shape = SubResource("RectangleShape2D_vhwkk")
 [node name="Arm" type="Node2D" parent="."]
 script = ExtResource("4_agtwi")
 attack_speed = 0.3
-
 [node name="MageStaff" parent="." instance=ExtResource("6_j36ve")]
 
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
