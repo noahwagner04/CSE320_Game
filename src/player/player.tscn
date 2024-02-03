@@ -1,21 +1,13 @@
-<<<<<<< HEAD
-[gd_scene load_steps=11 format=3 uid="uid://ctd2eb2gkf7xw"]
-=======
 
 [gd_scene load_steps=11 format=3 uid="uid://ctd2eb2gkf7xw"]
 
->>>>>>> master
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="2_2f0gs"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="3_5ej63"]
 [ext_resource type="Script" path="res://src/player/player_arm.gd" id="4_agtwi"]
-<<<<<<< HEAD
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
-=======
-[ext_resource type="PackedScene" uid="uid://dv3i37pthetip" path="res://src/weapons/mage_staff.tscn" id="6_j36ve"]
->>>>>>> master
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tjo2q"]
 radius = 8.0
@@ -68,7 +60,6 @@ shape = SubResource("RectangleShape2D_vhwkk")
 [node name="Arm" type="Node2D" parent="."]
 script = ExtResource("4_agtwi")
 attack_speed = 0.3
-[node name="MageStaff" parent="." instance=ExtResource("6_j36ve")]
 
 [node name="Sounds" type="Node" parent="."]
 
