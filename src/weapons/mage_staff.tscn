@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv3i37pthetip"]
+
+[ext_resource type="Script" path="res://src/weapons/mage_staff.gd" id="1_3soqx"]
+[ext_resource type="PackedScene" uid="uid://bhgvfs2sl78bn" path="res://src/components/projectile_spawner.tscn" id="2_tm6gy"]
+[ext_resource type="PackedScene" uid="uid://bdfvxmqa0n6be" path="res://src/projectiles/mage_staff_projectile.tscn" id="3_oekrr"]
+
+[node name="MageStaff" type="Node2D"]
+script = ExtResource("1_3soqx")
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("2_tm6gy")]
+projectile = ExtResource("3_oekrr")

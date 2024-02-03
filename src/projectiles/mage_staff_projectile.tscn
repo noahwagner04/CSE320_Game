@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdfvxmqa0n6be"]
+
+[ext_resource type="Script" path="res://src/projectiles/mage_staff_projectile.gd" id="1_g7w5n"]
+[ext_resource type="Texture2D" uid="uid://d6lf4wfnnpwe" path="res://assets/effects/mage_staff_projectile_image.png" id="2_16e0t"]
+[ext_resource type="Script" path="res://src/components/hit_box.gd" id="2_u24bg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ur0u7"]
+
+[node name="MageStaffProjectile" type="Node2D"]
+script = ExtResource("1_g7w5n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_16e0t")
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("2_u24bg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_ur0u7")
