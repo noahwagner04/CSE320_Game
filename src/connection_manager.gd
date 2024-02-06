@@ -19,7 +19,7 @@ func peer_connected(id):
 # gets called on both servers and clients
 func peer_disconnected(id):
 	print("Player disconnected " + str(id))
-	sync_player_disconnect(id)
+	delete_player(id)
 	
 # gets called only on clients
 func connected_to_server():
@@ -67,16 +67,6 @@ func sync_player_join(pname, id):
 		for i in players:
 			sync_player_join.rpc(players[i].name, i)
 			
-@rpc("any_peer")
-func sync_player_disconnect(id):
-	# add given player to player dictionary if entry doesn't exist
-	
-	players.erase(id)
-	delete_player(id)
-	# if we're the server, tell all other players a new player joined
-	if multiplayer.is_server():
-		sync_player_disconnect.rpc(id)
-
 func instantiate_player(id):
 	var new_player = preload("res://src/player/player.tscn").instantiate()
 	new_player.name = str(id)
@@ -84,6 +74,7 @@ func instantiate_player(id):
 	get_node("/root").add_child(new_player)
 	
 func delete_player(id):
+	players.erase(id)	
 	var players = get_tree().get_nodes_in_group("player")
 	for i in players:
 		if i.name == str(id):
