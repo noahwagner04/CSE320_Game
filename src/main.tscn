@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcpd2g41uikew"]
+[gd_scene load_steps=4 format=3 uid="uid://bcpd2g41uikew"]
 
-[ext_resource type="PackedScene" uid="uid://ctd2eb2gkf7xw" path="res://src/player/player.tscn" id="1_8ysvy"]
+[ext_resource type="Script" path="res://src/main.gd" id="1_4x1n8"]
+[ext_resource type="PackedScene" uid="uid://ldya24kqafli" path="res://src/player/player.tscn" id="1_8ysvy"]
 [ext_resource type="PackedScene" uid="uid://dgi8vrclbu3ch" path="res://src/places/meadow.tscn" id="1_y2l12"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_4x1n8")
 
 [node name="Meadow" parent="." instance=ExtResource("1_y2l12")]
 

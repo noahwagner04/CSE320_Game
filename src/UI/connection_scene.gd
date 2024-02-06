@@ -13,9 +13,11 @@ func _process(delta):
 
 func _on_host_button_pressed():
 	ConnectionManager.set_peer_host()
+	ConnectionManager.player_name = $NameTextFeild.text	
 	get_tree().change_scene_to_file("res://src/main.tscn")
 
 
 func _on_join_button_pressed():
 	ConnectionManager.set_peer_client()	
+	ConnectionManager.player_name = $NameTextFeild.text
 	get_tree().change_scene_to_file("res://src/main.tscn")

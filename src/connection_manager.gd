@@ -1,6 +1,7 @@
 extends Node
 
 var players = {}
+var player_name
 var address = "127.0.0.1"
 var port = 8910
 var peer
@@ -26,6 +27,7 @@ func peer_disconnected(id):
 # gets called only on clients
 func connected_to_server():
 	print("connected to server")
+	sync_player_join.rpc_id(1, player_name, multiplayer.get_unique_id())
 
 #gets called only on clients
 func connection_failed():
@@ -47,3 +49,18 @@ func set_peer_client():
 	peer.create_client(address, port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
+	
+@rpc("any_peer")
+func sync_player_join(pname, id):
+	# add given player to player dictionary if entry doesn't exist
+	if !players.has(id):
+		players[id] = {
+			"name": pname,
+			"id": id
+		}
+	
+	# if we're the server, tell all other players a new player joined
+	if multiplayer.is_server():
+		# rpc to all players to send the new player all other players
+		for i in players:
+			sync_player_join.rpc(players[i].name, i)
