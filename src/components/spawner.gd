@@ -31,7 +31,7 @@ func spawn():
 	var instance = scene.instantiate()
 	if instance is Node2D:
 		var angle = randf() * 2 * PI
-		instance.position = Vector2(sin(angle), cos(angle)) * radius * randf()
+		instance.position = Vector2(cos(angle), sin(angle)) * radius * randf()
 		instance.tree_exited.connect(_on_despawn)
 	add_child(instance)
 	spawned_count += 1
