@@ -3,15 +3,6 @@ extends Node
 var players = {}
 var player_name
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func instantiate_player(id):
 	var new_player = preload("res://src/player/player.tscn").instantiate()
 	new_player.name = str(id)
