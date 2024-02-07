@@ -13,7 +13,10 @@ script = ExtResource("1_g7w5n")
 texture = ExtResource("2_16e0t")
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_mask = 2
 script = ExtResource("2_u24bg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_ur0u7")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
