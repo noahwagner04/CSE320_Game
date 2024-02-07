@@ -17,7 +17,8 @@ config/icon="res://assets/icon.svg"
 
 [autoload]
 
-ConnectionManager="*res://src/connection_manager.gd"
+ConnectionHandler="*res://src/connection_handler.gd"
+GameManager="*res://src/game_manager.gd"
 
 [display]
 
