@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwag6wjockfhd"]
+
+[ext_resource type="Script" path="res://src/components/velocity_damper.gd" id="1_somxl"]
+
+[node name="VelocityDamper" type="Node"]
+script = ExtResource("1_somxl")
