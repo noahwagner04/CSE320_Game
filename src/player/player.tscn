@@ -61,6 +61,7 @@ script = ExtResource("4_agtwi")
 attack_speed = 0.3
 
 [node name="MageStaff" parent="." instance=ExtResource("6_1nqgo")]
+aoe_explosion = false
 
 [node name="Sounds" type="Node" parent="."]
 
