@@ -11,7 +11,7 @@ func instantiate_player(id):
 	
 func delete_player(id):
 	players.erase(id)	
-	var players = get_tree().get_nodes_in_group("player")
-	for i in players:
+	var scene_players = get_tree().get_nodes_in_group("player")
+	for i in scene_players:
 		if i.name == str(id):
 			i.queue_free()
