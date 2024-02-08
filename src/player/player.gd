@@ -1,11 +1,8 @@
 extends CharacterBody2D
 
-@export var speed = 300
-@export var acceleration = 3000
-@export var friction = 3000
-
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var health_container: HealthContainer = %HealthContainer
+@onready var motion_controller: MotionController = %MotionController
 
 func _ready():
 	health_bar.max_value = health_container.max_health
@@ -16,16 +13,14 @@ func move(_delta):
 
 	# apply friction if no input is pressed
 	if direction.length() == 0:
-		if velocity.length() > friction * _delta:
-			velocity -= velocity.normalized() * friction * _delta
-		else:
-			velocity = Vector2.ZERO
+		motion_controller.stop_desired_motion()
 	
 	# apply acceleration and limit velocity
-	velocity += direction * acceleration * _delta
-	velocity = velocity.limit_length(speed)
+	motion_controller.acc_dir = direction
+	motion_controller.update(_delta)
 	
 	# move the player
+	velocity = motion_controller.get_velocity()
 	move_and_slide()
 	
 func _process(_delta):
