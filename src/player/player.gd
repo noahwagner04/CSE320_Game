@@ -10,7 +10,6 @@ extends CharacterBody2D
 @onready var Ouch = preload("res://assets/sfx/umph-47201.mp3")
 
 func _ready():
-	$PlayerMenu.visible = false
 	health_bar.max_value = health_container.max_health
 
 func move(_delta):
