@@ -1,13 +1,9 @@
 extends Node
 
 var xp : int = 0;
-var character_level : int = 0;
-var warrior_level : int = 0;
-var knight_level : int = 0;
-var rogue_level : int = 0;
-var wizard_level : int = 0;
+var level : int = 0;
 
-var health : int;
+@export var health : int = 100;
 var defense : int;
 var hp_regen : int;
 var attack : int;
@@ -25,18 +21,25 @@ func gain_xp(amount):
 
 # Checks if a character meets a threshold requried for leveling up
 func checkLevelUp():
-	if xp > xp_level_thresholds[character_level]:
+	if xp > xp_level_thresholds[level]:
 		levelUp()
 
 # level up the character
 func levelUp():
-	character_level += 1
+	level += 1
 	#Open level up UI
 	#Need to determine how stat increases will work based on chosen class. 
+
+signal health_changed(new_health: int)
+
+func set_health(new_health):
+	health = new_health
+	emit_signal("health_changed",health)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_health(100)
 	pass # Replace with function body.
 
 
