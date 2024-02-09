@@ -3,8 +3,11 @@ extends Node2D
 @export var spawn_global: bool = false
 @export_range(0, 1, 0.01, "or_greater", "suffix:s") var attack_speed : float = 0.5
 @onready var Swing: PackedScene = preload("res://src/projectiles/swing.tscn")
+@onready var Sound = preload("res://assets/sfx/clean-fast-swooshaiff-14784.mp3")
 var timer: Timer = Timer.new()
 var last_click_spawn: float = 0
+
+
 
 func _ready():
 	timer.wait_time = attack_speed
@@ -29,6 +32,9 @@ func _input(event):
 			if delta_click_time > attack_speed:
 				spawn_mouse_attack()
 				last_click_spawn = Time.get_ticks_msec() / 1000.0
+				if ! $swingsound.is_playing():
+					$swingsound.stream = Sound
+					$swingsound.play()
 			timer.start()
 		elif event.button_index == 1 && event.pressed == false:
 			timer.stop()
