@@ -10,7 +10,6 @@ extends CanvasLayer
 @onready var stamina_label : RichTextLabel = $VBoxContainer/Stamina
 
 func update_health(new_health : int):
-	health_label = $VBoxContainer/Health
 	health_label.bbcode_text = "Health " + str(new_health)
 
 func _ready():
