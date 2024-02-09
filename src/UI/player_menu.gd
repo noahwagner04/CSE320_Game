@@ -2,11 +2,11 @@ extends CanvasLayer
 
 @onready var health_label : RichTextLabel = $VBoxContainer/Health
 @onready var defense_label : RichTextLabel = $VBoxContainer/Defense
-@onready var hp_regen_label : RichTextLabel = $VBoxContainer/HP_Regen
+@onready var hp_regen_label : RichTextLabel = $"VBoxContainer/HP Regen"
 @onready var attack_label : RichTextLabel = $VBoxContainer/Attack
 @onready var dexterity_label : RichTextLabel = $VBoxContainer/Dexterity
 @onready var speed_label : RichTextLabel = $VBoxContainer/Speed
-@onready var sp_regen_label : RichTextLabel = $VBoxContainer/SP_Regen
+@onready var sp_regen_label : RichTextLabel = $"VBoxContainer/SP Regen"
 @onready var stamina_label : RichTextLabel = $VBoxContainer/Stamina
 
 func update_health(new_health : int):
