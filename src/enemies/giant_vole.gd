@@ -1,16 +1,20 @@
 extends CharacterBody2D
 
 @export var agro_dist: float = 300
+
+var home: Node2D = Node2D.new()
+
+var _rand_target_mod: Vector2 = Vector2((randf() * 2 - 1) * 10, (randf() * 2 - 1) * 10)
+var _target: Node2D
+
 @onready var player: Node = get_tree().get_first_node_in_group("player")
 @onready var collider: CollisionShape2D = %HitBoxShape
 @onready var motion_controller: MotionController = %MotionController
-var _target: Node2D
-var home: Node2D = Node2D.new()
-var rand_target_mod: Vector2 = Vector2((randf() * 2 - 1) * 10, (randf() * 2 - 1) * 10)
 
 func _ready():
 	home.global_position = global_position
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
+
 
 func _physics_process(_delta):
 	var player_dist = agro_dist + 1
@@ -21,15 +25,17 @@ func _physics_process(_delta):
 	else:
 		_target = home
 	
-	var new_target = _target.global_position + rand_target_mod
+	var new_target = _target.global_position + _rand_target_mod
 	
-	motion_controller.acc_dir = global_position.direction_to(new_target).normalized()
+	motion_controller.acc_dir = global_position.direction_to(new_target)
 	motion_controller.update(_delta)
 	velocity = motion_controller.get_velocity()
 	move_and_slide()
 
+
 func _on_health_container_health_depleted():
 	queue_free()
+
 
 func _on_hurt_box_hurt(hit_box):
 	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * hit_box.knockback)
