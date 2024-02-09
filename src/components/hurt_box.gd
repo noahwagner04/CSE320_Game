@@ -1,8 +1,9 @@
 class_name HurtBox extends Area2D
 
+signal hurt(hit_box)
+
 @export var health_container: HealthContainer
 
-signal hurt(hit_box)
 
 func _on_area_entered(area):
 	if not (area is HitBox):
