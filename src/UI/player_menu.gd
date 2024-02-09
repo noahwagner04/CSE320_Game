@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 var health_label : RichTextLabel
 var defense_label : RichTextLabel
@@ -28,10 +28,19 @@ func load_stats_data():
 	speed_label.bbcode_text = "Speed "
 	sp_regen_label.bbcode_text = "SP Regeneration "
 	stamina_label.bbcode_text = "Stamina "
-	
+
+func update_health(new_health : int):
+	health_label = $VBoxContainer/Health
+	health_label.bbcode_text = "Health " + str(new_health)
 
 func _ready():
 	load_stats_data()
+	var stats = get_node("/root/Player/PlayerStats")
+	if stats != null:
+		stats.connect("health_changed", update_health)
+	else:
+		print("Its null")
+		print_tree_pretty()
 	pass # Replace with function body.
 
 

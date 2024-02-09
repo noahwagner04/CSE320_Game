@@ -3,7 +3,7 @@ extends Node
 var xp : int = 0;
 var level : int = 0;
 
-var health : int = 100;
+@export var health : int = 100;
 var defense : int;
 var hp_regen : int;
 var attack : int;
@@ -30,9 +30,16 @@ func levelUp():
 	#Open level up UI
 	#Need to determine how stat increases will work based on chosen class. 
 
+signal health_changed(new_health: int)
+
+func set_health(new_health):
+	health = new_health
+	emit_signal("health_changed",health)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_health(100)
 	pass # Replace with function body.
 
 
