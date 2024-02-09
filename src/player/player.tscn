@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://ldya24kqafli"]
+[gd_scene load_steps=13 format=3 uid="uid://ldya24kqafli"]
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="2_2f0gs"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="3_5ej63"]
+[ext_resource type="AudioStream" uid="uid://bn6ncjhgcdlr0" path="res://assets/sfx/umph-47201.mp3" id="3_cwkal"]
 [ext_resource type="Script" path="res://src/player/player_arm.gd" id="4_agtwi"]
 [ext_resource type="PackedScene" uid="uid://dv3i37pthetip" path="res://src/weapons/mage_staff.tscn" id="6_1nqgo"]
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
@@ -60,12 +61,13 @@ shape = SubResource("RectangleShape2D_vhwkk")
 script = ExtResource("4_agtwi")
 attack_speed = 0.3
 
+[node name="swingsound" type="AudioStreamPlayer2D" parent="Arm"]
+stream = ExtResource("6_at6ld")
+
 [node name="MageStaff" parent="." instance=ExtResource("6_1nqgo")]
 
-[node name="Sounds" type="Node" parent="."]
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
-stream = ExtResource("6_at6ld")
+[node name="hurtsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cwkal")
 
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]

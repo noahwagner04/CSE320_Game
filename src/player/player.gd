@@ -7,6 +7,8 @@ extends CharacterBody2D
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var health_container: HealthContainer = %HealthContainer
 
+@onready var Ouch = preload("res://assets/sfx/umph-47201.mp3")
+
 func _ready():
 	health_bar.max_value = health_container.max_health
 
@@ -33,6 +35,11 @@ func _process(_delta):
 
 func _on_health_container_health_changed(_amount):
 	health_bar.value = health_container.get_health()
+	if _amount < 0:
+		if ! $hurtsound.is_playing():
+					$hurtsound.stream = Ouch
+					$hurtsound.play()
+	
 
 func _on_health_container_health_depleted():
 	queue_free()
