@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ldya24kqafli"]
+[gd_scene load_steps=18 format=3 uid="uid://ldya24kqafli"]
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
@@ -9,9 +9,10 @@
 [ext_resource type="Script" path="res://src/player/player_arm.gd" id="4_agtwi"]
 [ext_resource type="PackedScene" uid="uid://dv3i37pthetip" path="res://src/weapons/mage_staff.tscn" id="6_1nqgo"]
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
-[ext_resource type="PackedScene" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
-[ext_resource type="PackedScene" path="res://src/components/player_stats.tscn" id="9_10w05"]
+[ext_resource type="PackedScene" uid="uid://22wskpfroyx6" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
+[ext_resource type="PackedScene" uid="uid://bun6y0ddq8lx3" path="res://src/components/player_stats.tscn" id="9_10w05"]
 [ext_resource type="Script" path="res://src/components/player_stats.gd" id="10_sfrx4"]
+[ext_resource type="PackedScene" uid="uid://c03lcp1vpib8k" path="res://src/weapons/dagger.tscn" id="13_0ws4y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyc80"]
 bg_color = Color(0.6, 0, 0, 1)
@@ -77,7 +78,7 @@ shape = SubResource("RectangleShape2D_vhwkk")
 
 [node name="Arm" type="Node2D" parent="."]
 script = ExtResource("4_agtwi")
-attack_speed = 0.3
+attack_speed = 1.0
 
 [node name="SwingSound" type="AudioStreamPlayer2D" parent="Arm"]
 unique_name_in_owner = true
@@ -88,6 +89,9 @@ max_polyphony = 10
 
 [node name="PlayerMenu" parent="." instance=ExtResource("8_ul1em")]
 visible = false
+
+[node name="Dagger" parent="." instance=ExtResource("13_0ws4y")]
+enabled = true
 
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
