@@ -2,14 +2,16 @@ extends Node2D
 
 @export var enabled: bool = false 
 
-@export var attack_speed: float = 1.0
-@export var projectile_damage: float = 10
-@export var projectile_speed: float = 300
-@export_range(5, 500, 1) var projectile_range: float = 500
+@export var attack_speed: float = 4.0
+@export var projectile_damage: float = 6
+@export var projectile_speed: float = 500
+@export_range(5, 500, 1) var projectile_range: float = 50
 @export_enum("line", "swing") var projectile_type: String = "line"
-var aoe_explosion: bool = false
-@export var item_special_duration: float = 5.0
 var time_of_last_attack: float = 0.0
+var time_of_last_special: float = 0.0
+var special_delay: float = 0.3
+var special_projectile_damage: float = 24
+var special_projectile_range: float = 300
 
 
 func _ready():
@@ -18,7 +20,6 @@ func _ready():
 	$ProjectileSpawner.projectile_range = projectile_range
 	$ProjectileSpawner.projectile_type = projectile_type
 	$ProjectileSpawner.projectile_speed = projectile_speed
-	$ProjectileSpawner.aoe_explosion = aoe_explosion
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -34,16 +35,18 @@ func basic_attack():
 		return
 	time_of_last_attack = current_time
 	var direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
-	$ProjectileSpawner.spawn_projectile(direction)
-	
+	$ProjectileSpawner.spawn_melee_projectile(direction)
+
 func item_special():
-	if aoe_explosion == true:
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if (current_time - time_of_last_special) < special_delay:
 		return
-	# subtract mana
-	aoe_explosion = true;
-	$ProjectileSpawner.aoe_explosion = aoe_explosion
-	print("aoe on!")
-	await get_tree().create_timer(item_special_duration).timeout
-	aoe_explosion = false;
-	$ProjectileSpawner.aoe_explosion = aoe_explosion
-	print("aoe off!")
+	# subtract 30 mana
+	time_of_last_special = current_time
+	$ProjectileSpawner.projectile_damage = special_projectile_damage
+	$ProjectileSpawner.projectile_range = special_projectile_range
+	var direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
+	$ProjectileSpawner.spawn_projectile(direction)
+	$ProjectileSpawner.projectile_damage = projectile_damage
+	$ProjectileSpawner.projectile_range = projectile_range
+	

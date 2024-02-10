@@ -23,6 +23,7 @@ func spawn_mouse_attack():
 		add_child(swing_instance)
 
 func _input(event):
+	return
 	if event is InputEventMouseButton:
 		if event.button_index == 1 && event.pressed == true:
 			var delta_click_time = Time.get_ticks_msec() / 1000.0 - last_click_spawn
