@@ -16,11 +16,7 @@ func spawn_projectile(direction):
 	projectile_instance.rotation = (projectile_direction).angle()
 	projectile_instance.find_child("Sprite2D").flip_v = false if abs(projectile_instance.rotation) < PI / 2 else true
 	projectile_instance.position = global_position
-	projectile_instance.projectile_speed = projectile_speed
-	projectile_instance.projectile_damage = projectile_damage
-	projectile_instance.projectile_range = projectile_range
-	projectile_instance.projectile_type = projectile_type
-	projectile_instance.aoe_explosion = aoe_explosion
+	set_projectile_values(projectile_instance)
 	get_node("/root").add_child(projectile_instance)
 
 func spawn_melee_projectile(direction):
@@ -31,9 +27,13 @@ func spawn_melee_projectile(direction):
 	projectile_instance.rotation = (projectile_direction).angle()
 	projectile_instance.find_child("Sprite2D").flip_v = false if abs(projectile_instance.rotation) < PI / 2 else true
 	projectile_instance.position = position
+	set_projectile_values(projectile_instance)
+	add_child(projectile_instance)
+	
+func set_projectile_values(projectile_instance):
 	projectile_instance.projectile_speed = projectile_speed
 	projectile_instance.projectile_damage = projectile_damage
 	projectile_instance.projectile_range = projectile_range
 	projectile_instance.projectile_type = projectile_type
 	projectile_instance.aoe_explosion = aoe_explosion
-	add_child(projectile_instance)
+	return
