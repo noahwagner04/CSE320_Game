@@ -36,11 +36,10 @@ func summon_voles():
 	
 	for i in 8:
 		vole_guard = giant_vole_scene.instantiate()
-		angle = i * 0.25 * PI
 		
-		vole_guard.global_position =  + player.global_position + 96 * Vector2(cos(angle), sin(angle))
-		#print("vole_guard global position is: ", vole_guard.global_position)
-		#print("vole_guard position is: ", vole_guard.position)
+		angle = i * 0.25 * PI
+		vole_guard.global_position = player.global_position + 96 * Vector2(cos(angle), sin(angle))
+		
 		call_deferred("add_sibling", vole_guard, false)
 
 func _on_health_container_health_depleted():
