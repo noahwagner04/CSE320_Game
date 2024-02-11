@@ -78,7 +78,6 @@ shape = SubResource("RectangleShape2D_vhwkk")
 
 [node name="Arm" type="Node2D" parent="."]
 script = ExtResource("4_agtwi")
-attack_speed = 1.0
 
 [node name="SwingSound" type="AudioStreamPlayer2D" parent="Arm"]
 unique_name_in_owner = true

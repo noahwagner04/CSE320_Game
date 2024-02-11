@@ -7,6 +7,7 @@ extends Node2D
 @export_range(5, 500, 1) var projectile_range: float = 0
 @export_enum("line", "swing") var projectile_type: String = "line"
 @export var aoe_explosion: bool = false
+@export var projectile_knockback: float = 0
 	
 func spawn_projectile(direction):
 	projectile_direction = direction
@@ -36,4 +37,5 @@ func set_projectile_values(projectile_instance):
 	projectile_instance.projectile_range = projectile_range
 	projectile_instance.projectile_type = projectile_type
 	projectile_instance.aoe_explosion = aoe_explosion
+	projectile_instance.knockback = projectile_knockback
 	return

@@ -6,12 +6,12 @@ extends Node2D
 @export_range(5, 500, 1) var projectile_range: float = 50
 @export_enum("line", "swing") var projectile_type: String = "line"
 @export var aoe_explosion: bool = false
-
-var projectile_lifetime: float = projectile_range / projectile_speed
+@export var knockback: float = 0
 
 func _ready():
-	projectile_lifetime = projectile_range / projectile_speed
+	var projectile_lifetime = projectile_range / projectile_speed
 	$HitBox.damage = projectile_damage
+	$HitBox.knockback = knockback
 	await get_tree().create_timer(projectile_lifetime).timeout
 	queue_free()
 
