@@ -2,8 +2,7 @@ extends CharacterBody2D
 
 @export var agro_dist: float = 300
 
-#var _rand_target_mod := Vector2((randf() * 2 - 1) * 10, (randf() * 2 - 1) * 10)
-var _target #: Node2D
+var _target
 
 @onready var health_checker: HealthContainer = %HealthContainer
 @onready var motion_controller: MotionController = %MotionController
@@ -11,15 +10,15 @@ var _target #: Node2D
 @onready var second_phase: bool = false
 @onready var start_position: Vector2 = global_position
 
-
 func _physics_process(_delta):
-	#var player_dist = agro_dist + 1
+	var player_dist: float
 	
 	if player != null:
-		var player_dist: float = global_position.distance_to(player.global_position)
+		player_dist = global_position.distance_to(player.global_position)
 		if player_dist <= agro_dist:
 			_target = player
-			agro_dist = 450
+			if (agro_dist < 450):
+				agro_dist = 450
 		else:
 			_target = null
 	else:
@@ -27,7 +26,6 @@ func _physics_process(_delta):
 			player = get_tree().get_first_node_in_group("player")
 		return
 	
-	#var new_target = _target.global_position + _rand_target_mod
 	if (_target != null):
 		motion_controller.acc_dir = global_position.direction_to(_target.global_position)
 	else:
@@ -69,4 +67,4 @@ func _on_hurt_box_hurt(hit_box):
 		if (health_checker.get_health() <= health_checker.max_health * 0.3):
 			summon_voles(1)
 		else:
-			summon_voles(0)
+			summon_voles(1)
