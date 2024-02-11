@@ -67,4 +67,4 @@ func _on_hurt_box_hurt(hit_box):
 		if (health_checker.get_health() <= health_checker.max_health * 0.3):
 			summon_voles(1)
 		else:
-			summon_voles(1)
+			summon_voles(0)
