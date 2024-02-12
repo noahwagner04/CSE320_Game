@@ -17,10 +17,10 @@ func _physics_process(_delta):
 		player_dist = global_position.distance_to(player.global_position)
 		if player_dist <= agro_dist:
 			_target = player
-			if (agro_dist < 450):
-				agro_dist = 450
+			agro_dist = 450
 		else:
 			_target = null
+			agro_dist = 300
 	else:
 		if (player == null):
 			player = get_tree().get_first_node_in_group("player")
