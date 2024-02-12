@@ -35,13 +35,12 @@ func _physics_process(_delta):
 	velocity = motion_controller.get_velocity()
 	move_and_slide()
 	
+	
 func summon_voles(ring_num):
 	var angle: float
 	var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
 	var i: int = 1
 	var vole_guard: Node
-	
-	ring_num = 3
 	
 	while i <= ring_num:
 		for j in range(i * 8):
@@ -54,25 +53,14 @@ func summon_voles(ring_num):
 			
 		i += 1
 		
-	#if (large_ring == 1):
-		#for i in 16:
-			#vole_guard = giant_vole_scene.instantiate()
-			
-			#angle = i * 0.125 * PI
-			#vole_guard.global_position = player.global_position + 192 * Vector2(cos(angle), sin(angle))
-			
-			#call_deferred("add_sibling", vole_guard, false)
 		
 func _on_health_container_health_depleted():
 	queue_free()
 
+
 func _on_hurt_box_hurt(hit_box):
 	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * 0.7 * hit_box.knockback)
 	if (second_phase == false && health_checker.get_health() <= health_checker.max_health * 0.5):
-		var ring_num: int = 6 - health_checker.get_health() / health_checker.max_health * 10
-		print(ring_num) 
 		second_phase = true
-		#if (health_checker.get_health() <= health_checker.max_health * 0.3):
+		var ring_num: int = 6 - health_checker.get_health() / health_checker.max_health * 10
 		summon_voles(ring_num)
-		#else:
-			#summon_voles(0)
