@@ -7,8 +7,8 @@ extends Node2D
 @export var item_special_duration: float = 5.0
 @export_range(5, 500, 1) var projectile_range: float = 500
 @export_enum("line", "swing") var projectile_type: String = "line"
-
 var aoe_explosion: bool = false
+@export var knockback: float = 0
 var time_of_last_attack: float = 0.0
 
 
