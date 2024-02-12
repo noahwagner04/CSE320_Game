@@ -40,16 +40,16 @@ func summon_voles(ring_num):
 	var angle: float
 	var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
 	var i: int = 1
-	var vole_guard: Node
+	var giant_vole_instance: Node
 	
 	while i <= ring_num:
 		for j in range(i * 8):
-			vole_guard = giant_vole_scene.instantiate()
+			giant_vole_instance = giant_vole_scene.instantiate()
 			
 			angle = j * 0.25 / i * PI
-			vole_guard.global_position = player.global_position + 64 * (1 + i) * Vector2(cos(angle), sin(angle))
+			giant_vole_instance.global_position = global_position + 32 * (1 + i) * Vector2(cos(angle), sin(angle))
 			
-			call_deferred("add_sibling", vole_guard, false)
+			call_deferred("add_sibling", giant_vole_instance, false)
 			
 		i += 1
 		
