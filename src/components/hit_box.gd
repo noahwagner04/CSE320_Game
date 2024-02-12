@@ -9,6 +9,8 @@ enum ResponseType {NO_RESPONSE, DISABLE, TEMPORARY_DISABLE}
 @export_range(0.001, 60, 0.001, "or_greater", "suffix:s")
 var disable_time: float = 1
 
+@onready var poison_component: Node = $PoisonComponent
+
 
 func _on_area_entered(_area):
 	match response:
@@ -20,3 +22,12 @@ func _on_area_entered(_area):
 			set_deferred("monitoring", true)
 		_:
 			return
+			
+func set_basic_attributes(damage_param, knockback_param):
+	damage = damage_param
+	knockback = knockback_param
+
+func set_poison(active_param, percent_param, duration_param):
+	poison_component.effect_active = active_param
+	poison_component.percent_of_max_health_per_second = percent_param
+	poison_component.duration = duration_param
