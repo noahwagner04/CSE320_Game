@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://src/projectiles/mage_staff_projectile.gd" id="1_g7w5n"]
 [ext_resource type="Texture2D" uid="uid://d6lf4wfnnpwe" path="res://assets/effects/mage_staff_projectile_image.png" id="2_16e0t"]
-[ext_resource type="Script" path="res://src/components/hit_box.gd" id="2_u24bg"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="3_lvmmw"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ur0u7"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_afkra"]
 
 [node name="MageStaffProjectile" type="Node2D"]
 script = ExtResource("1_g7w5n")
@@ -12,11 +12,7 @@ script = ExtResource("1_g7w5n")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_16e0t")
 
-[node name="HitBox" type="Area2D" parent="."]
-collision_mask = 2
-script = ExtResource("2_u24bg")
+[node name="HitBox" parent="." instance=ExtResource("3_lvmmw")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CircleShape2D_ur0u7")
-
-[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+shape = SubResource("CircleShape2D_afkra")
