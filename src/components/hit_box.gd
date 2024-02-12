@@ -28,6 +28,6 @@ func set_basic_attributes(damage_param, knockback_param):
 	knockback = knockback_param
 
 func set_poison(active_param, percent_param, duration_param):
-	poison_component.effect_active = active_param
-	poison_component.percent_of_max_health_per_second = percent_param
-	poison_component.duration = duration_param
+	$PoisonComponent.effect_active = active_param
+	$PoisonComponent.percent_of_max_health_per_second = percent_param
+	$PoisonComponent.duration = duration_param

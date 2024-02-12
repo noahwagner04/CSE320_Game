@@ -13,6 +13,9 @@ script = ExtResource("1_g7w5n")
 texture = ExtResource("2_16e0t")
 
 [node name="HitBox" parent="." instance=ExtResource("3_lvmmw")]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_afkra")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
