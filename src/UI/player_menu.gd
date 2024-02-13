@@ -9,8 +9,6 @@ extends CanvasLayer
 @onready var sp_regen_label : RichTextLabel = $"VBoxContainer/SP Regen"
 @onready var stamina_label : RichTextLabel = $VBoxContainer/Stamina
 
-func update_health(new_health : int):
-	health_label.bbcode_text = "Health " + str(new_health)
 
 func _ready():
 	var stats = $"../PlayerStats"
@@ -22,6 +20,5 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func update_health(new_health : int):
+	health_label.bbcode_text = "Health " + str(new_health)
