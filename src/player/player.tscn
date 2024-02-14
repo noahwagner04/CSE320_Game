@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ldya24kqafli"]
+[gd_scene load_steps=19 format=3 uid="uid://ldya24kqafli"]
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
@@ -26,6 +26,11 @@ height = 28.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vhwkk"]
 size = Vector2(16, 26)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ofmfc"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 4
@@ -91,6 +96,10 @@ visible = false
 
 [node name="Dagger" parent="." instance=ExtResource("13_0ws4y")]
 enabled = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_ofmfc")
 
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]

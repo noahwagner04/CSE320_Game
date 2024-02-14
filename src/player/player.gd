@@ -1,12 +1,17 @@
 extends CharacterBody2D
 
+var syncPos := Vector2.ZERO
+
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var health_container: HealthContainer = %HealthContainer
 @onready var motion_controller: MotionController = %MotionController
+@onready var mult_sync: MultiplayerSynchronizer = %MultiplayerSynchronizer
+
 
 
 func _ready():
 	health_bar.max_value = health_container.max_health
+	mult_sync.set_multiplayer_authority(str(name).to_int())	
 
 
 func _process(_delta):
@@ -14,20 +19,25 @@ func _process(_delta):
 
 
 func move(_delta):
-	# get acceleration direction
-	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	# apply friction if no input is pressed
-	if direction.length() == 0:
-		motion_controller.stop_desired_motion()
+	# only move the player if we are the client controlling them
+	if mult_sync.get_multiplayer_authority() == multiplayer.get_unique_id():
+		# get acceleration direction
+		var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	# apply acceleration and limit velocity
-	motion_controller.acc_dir = direction
-	motion_controller.update(_delta)
+		# apply friction if no input is pressed
+		if direction.length() == 0:
+			motion_controller.stop_desired_motion()
 	
-	# move the player
-	velocity = motion_controller.get_velocity()
-	move_and_slide()
+		# apply acceleration and limit velocity
+		motion_controller.acc_dir = direction
+		motion_controller.update(_delta)
+	
+		# move the player
+		velocity = motion_controller.get_velocity()
+		move_and_slide()
+	else:
+		global_position = global_position.lerp(syncPos, 0.4)
 
 
 func _on_health_container_health_changed(_amount):
