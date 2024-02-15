@@ -9,8 +9,8 @@
 [ext_resource type="Script" path="res://src/player/player_arm.gd" id="4_agtwi"]
 [ext_resource type="PackedScene" uid="uid://dv3i37pthetip" path="res://src/weapons/mage_staff.tscn" id="6_1nqgo"]
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
-[ext_resource type="PackedScene" uid="uid://22wskpfroyx6" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
-[ext_resource type="PackedScene" uid="uid://bun6y0ddq8lx3" path="res://src/components/player_stats.tscn" id="9_10w05"]
+[ext_resource type="PackedScene" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
+[ext_resource type="PackedScene" path="res://src/components/player_stats.tscn" id="9_10w05"]
 [ext_resource type="Script" path="res://src/components/player_stats.gd" id="10_sfrx4"]
 [ext_resource type="PackedScene" uid="uid://c03lcp1vpib8k" path="res://src/weapons/dagger.tscn" id="13_0ws4y"]
 
