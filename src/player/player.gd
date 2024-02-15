@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var syncPos := Vector2.ZERO
+var sync_pos := Vector2.ZERO
 
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var health_container: HealthContainer = %HealthContainer
@@ -11,33 +11,39 @@ var syncPos := Vector2.ZERO
 
 func _ready():
 	health_bar.max_value = health_container.max_health
-	mult_sync.set_multiplayer_authority(str(name).to_int())	
+	print("client" + str(multiplayer.get_unique_id()) + ":" + str(name))
+	mult_sync.set_multiplayer_authority(str(name).to_int())
+	
+	if multiplayer.get_unique_id() == str(name).to_int():
+		$Camera2D.make_current()
 
 
 func _process(_delta):
-	move(_delta)
+	# only move the player if we are the client controlling them
+	if mult_sync.get_multiplayer_authority() == multiplayer.get_unique_id():
+		sync_pos = global_position
+		move(_delta)
+	else:
+		global_position = global_position.lerp(sync_pos, 0.4)
 
 
 func move(_delta):
 	
-	# only move the player if we are the client controlling them
-	if mult_sync.get_multiplayer_authority() == multiplayer.get_unique_id():
-		# get acceleration direction
-		var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	# get acceleration direction
+	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-		# apply friction if no input is pressed
-		if direction.length() == 0:
-			motion_controller.stop_desired_motion()
+	# apply friction if no input is pressed
+	if direction.length() == 0:
+		motion_controller.stop_desired_motion()
 	
-		# apply acceleration and limit velocity
-		motion_controller.acc_dir = direction
-		motion_controller.update(_delta)
+	# apply acceleration and limit velocity
+	motion_controller.acc_dir = direction
+	motion_controller.update(_delta)
 	
-		# move the player
-		velocity = motion_controller.get_velocity()
-		move_and_slide()
-	else:
-		global_position = global_position.lerp(syncPos, 0.4)
+	# move the player
+	velocity = motion_controller.get_velocity()
+	move_and_slide()
+	
 
 
 func _on_health_container_health_changed(_amount):

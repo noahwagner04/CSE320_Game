@@ -1229,5 +1229,5 @@ position = Vector2(368, -435)
 [node name="GiantVoleSpawner" parent="." instance=ExtResource("2_0b0rp")]
 unique_name_in_owner = true
 radius = 600
-max_spawn = 500
+max_spawn = 0
 scene = ExtResource("3_p1cuf")

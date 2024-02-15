@@ -28,7 +28,7 @@ height = 28.0
 size = Vector2(16, 26)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ofmfc"]
-properties/0/path = NodePath(".:position")
+properties/0/path = NodePath(".:sync_pos")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
