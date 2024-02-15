@@ -1,5 +1,6 @@
 extends Node
 
+# This signal is connected to player_menu - when stats are modified the changes are reflected in the UI
 signal player_leveled_up
 
 @export var health: int = 100
@@ -38,13 +39,10 @@ func _ready():
 	speed = 10
 	sp_regen = 10
 	stamina = 10
-	
-	pass # Replace with function body.
 
 
 #Call when enemy is killed or quest is completed
 func gain_xp(amount):
-	print("Gaining xp!")
 	xp += amount;
 	checkLevelUp()
 
@@ -57,7 +55,6 @@ func checkLevelUp():
 
 # level up the character
 func levelUp():
-	print("Leveling Up!")
 	health += 20
 	defense += 2
 	hp_regen += 2
