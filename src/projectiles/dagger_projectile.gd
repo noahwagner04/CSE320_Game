@@ -10,8 +10,7 @@ extends Node2D
 
 func _ready():
 	var projectile_lifetime = projectile_range / projectile_speed
-	$HitBox.damage = projectile_damage
-	$HitBox.knockback = knockback
+	$HitBox.set_basic_attributes(projectile_damage, knockback)
 	await get_tree().create_timer(projectile_lifetime).timeout
 	queue_free()
 
