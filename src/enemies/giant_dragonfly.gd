@@ -1,29 +1,27 @@
 extends CharacterBody2D
 
-@export var agro_dist: float = 300
+@export var stop_range: float = 100
 
-var home := Node2D.new()
-
-var _rand_target_mod := Vector2((randf() * 2 - 1) * 10, (randf() * 2 - 1) * 10)
 var _target: Node2D
 
 @onready var motion_controller: MotionController = %MotionController
 @onready var col_detector: Area2D = %ColliderDetector
 
-
 func _ready():
-	home.global_position = global_position
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
 
-
-func _physics_process(_delta):
+func _process(delta):
 	_target = col_detector.get_closest_collider()
-	_target = home if _target == null else _target 
+	if _target == null:
+		motion_controller.stop_desired_motion()
+		return
 	
-	var new_target = _target.global_position + _rand_target_mod
+	var new_target = _target.global_position.direction_to(global_position)
+	new_target *= stop_range
+	new_target += _target.global_position
 	
 	motion_controller.acc_dir = global_position.direction_to(new_target)
-	motion_controller.update(_delta)
+	motion_controller.update(delta)
 	velocity = motion_controller.get_velocity()
 	move_and_slide()
 

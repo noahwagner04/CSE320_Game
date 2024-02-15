@@ -60,7 +60,6 @@ damage = 2.0
 response = 2
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="HitBox"]
-unique_name_in_owner = true
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_2ohi8")
 
