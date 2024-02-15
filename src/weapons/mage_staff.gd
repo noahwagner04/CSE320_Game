@@ -14,11 +14,9 @@ var time_of_last_attack: float = 0.0
 
 func _ready():
 	set_process(enabled)
-	$ProjectileSpawner.projectile_damage = projectile_damage
-	$ProjectileSpawner.projectile_range = projectile_range
-	$ProjectileSpawner.projectile_type = projectile_type
-	$ProjectileSpawner.projectile_speed = projectile_speed
-	$ProjectileSpawner.aoe_explosion = aoe_explosion
+	$ProjectileSpawner.set_universal_projectile_attributes(projectile_damage, 
+		projectile_speed, projectile_range, projectile_type)
+	$ProjectileSpawner.projectile_aoe_explosion = aoe_explosion
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,9 +42,9 @@ func item_special():
 		return
 	# subtract mana
 	aoe_explosion = true;
-	$ProjectileSpawner.aoe_explosion = aoe_explosion
+	$ProjectileSpawner.projectile_aoe_explosion = aoe_explosion
 	print("aoe on!")
 	await get_tree().create_timer(item_special_duration).timeout
 	aoe_explosion = false;
-	$ProjectileSpawner.aoe_explosion = aoe_explosion
+	$ProjectileSpawner.projectile_aoe_explosion = aoe_explosion
 	print("aoe off!")
