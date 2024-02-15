@@ -18,11 +18,11 @@ var special_projectile_knockback: float = 0
 
 func _ready():
 	set_process(enabled)
-	$ProjectileSpawner.projectile_damage = projectile_damage
-	$ProjectileSpawner.projectile_range = projectile_range
-	$ProjectileSpawner.projectile_type = projectile_type
-	$ProjectileSpawner.projectile_speed = projectile_speed
+	$ProjectileSpawner.set_universal_projectile_attributes(projectile_damage, 
+		projectile_speed, projectile_range, projectile_type)
 	$ProjectileSpawner.projectile_knockback = knockback
+	$ProjectileSpawner.set_poison_projectile_attributes($PoisonComponent.effect_active,
+		$PoisonComponent.percent_of_max_health_per_second, $PoisonComponent.duration)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
