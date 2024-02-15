@@ -69,6 +69,8 @@ func summon_voles(ring_num):
 	var i: int = 1
 	var giant_vole_instance: Node
 	
+	ring_num = 5
+	
 	while i <= ring_num:
 		for j in range(i * 8):
 			giant_vole_instance = giant_vole_scene.instantiate()
