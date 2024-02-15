@@ -8,7 +8,7 @@ signal collision_object_exited(object: CollisionObject2D)
 @export var detect_rigidbody := false
 @export var detect_static := false
 
-var filter_func := func(col_obj: CollisionObject2D): return true
+var filter_func := func(_col_obj: CollisionObject2D): return true
 var intersecting_colliders: Array[Node2D] = []
 
 
