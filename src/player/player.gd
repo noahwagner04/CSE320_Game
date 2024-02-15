@@ -11,7 +11,6 @@ var sync_pos := Vector2.ZERO
 
 func _ready():
 	health_bar.max_value = health_container.max_health
-	print("client" + str(multiplayer.get_unique_id()) + ":" + str(name))
 	mult_sync.set_multiplayer_authority(str(name).to_int())
 	
 	if multiplayer.get_unique_id() == str(name).to_int():
