@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpubefclhtgt3"]
+
+[ext_resource type="Script" path="res://src/components/poison_component.gd" id="1_utnie"]
+
+[node name="PoisonComponent" type="Node"]
+script = ExtResource("1_utnie")

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://src/projectiles/explosion.gd" id="1_rt430"]
 [ext_resource type="Texture2D" uid="uid://cggmpm18r38xa" path="res://assets/effects/explosion_image.png" id="2_jh0mu"]
-[ext_resource type="Script" path="res://src/components/hit_box.gd" id="3_nvedc"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="3_54mb3"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xj3rh"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_58o1n"]
 
 [node name="Explosion" type="Node2D"]
 scale = Vector2(10, 10)
@@ -13,8 +13,7 @@ script = ExtResource("1_rt430")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jh0mu")
 
-[node name="HitBox" type="Area2D" parent="."]
-script = ExtResource("3_nvedc")
+[node name="HitBox" parent="." instance=ExtResource("3_54mb3")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CircleShape2D_xj3rh")
+shape = SubResource("CircleShape2D_58o1n")
