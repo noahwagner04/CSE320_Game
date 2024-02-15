@@ -1,17 +1,16 @@
 extends CharacterBody2D
 
 var sync_pos := Vector2.ZERO
+var mult_sync: MultiplayerSynchronizer
 
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var health_container: HealthContainer = %HealthContainer
 @onready var motion_controller: MotionController = %MotionController
-@onready var mult_sync: MultiplayerSynchronizer = %MultiplayerSynchronizer
 
 
 
 func _ready():
 	health_bar.max_value = health_container.max_health
-	mult_sync.set_multiplayer_authority(str(name).to_int())
 	
 	if multiplayer.get_unique_id() == str(name).to_int():
 		$Camera2D.make_current()
@@ -53,3 +52,9 @@ func _on_health_container_health_changed(_amount):
 
 func _on_health_container_health_depleted():
 	queue_free()
+
+
+func _on_tree_entered():
+	mult_sync = %MultiplayerSynchronizer
+	mult_sync.set_multiplayer_authority(str(name).to_int())
+	

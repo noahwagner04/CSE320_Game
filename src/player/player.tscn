@@ -101,5 +101,6 @@ enabled = true
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_ofmfc")
 
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
