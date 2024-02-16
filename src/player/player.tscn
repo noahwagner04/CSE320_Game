@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ldya24kqafli"]
+[gd_scene load_steps=14 format=3 uid="uid://ldya24kqafli"]
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/player/player_arm.gd" id="4_agtwi"]
 [ext_resource type="PackedScene" uid="uid://dv3i37pthetip" path="res://src/weapons/mage_staff.tscn" id="6_1nqgo"]
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
+[ext_resource type="AudioStream" uid="uid://d4ltrmmxe2fy3" path="res://assets/sfx/male-scream-in-fear-123079.mp3" id="9_nn368"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tjo2q"]
 radius = 8.0
@@ -63,11 +64,16 @@ attack_speed = 0.3
 
 [node name="swingsound" type="AudioStreamPlayer2D" parent="Arm"]
 stream = ExtResource("6_at6ld")
+max_polyphony = 10
 
 [node name="MageStaff" parent="." instance=ExtResource("6_1nqgo")]
 
 [node name="hurtsound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_cwkal")
+max_polyphony = 10
+
+[node name="deathsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_nn368")
 
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]

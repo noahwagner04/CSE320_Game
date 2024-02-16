@@ -34,7 +34,9 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _on_health_container_health_depleted():
+	
 	queue_free()
 
 func _on_hurt_box_hurt(hit_box):
 	velocity_damper.set_velocity((global_position - hit_box.global_position).normalized() * hit_box.knockback)
+	$voledeath.play()
