@@ -2,11 +2,12 @@ extends Node2D
 
 @export var projectile: PackedScene
 @export var projectile_direction: Vector2 = Vector2(0.0, 0.0)
-@export var projectile_speed: int = 0
-@export var projectile_damage: int = 0
-@export_range(5, 500, 1) var projectile_range: int = 0
+@export var projectile_damage: float = 0
+@export var projectile_speed: float = 0
+@export_range(5, 500, 1) var projectile_range: float = 0
 @export_enum("line", "swing") var projectile_type: String = "line"
-@export var aoe_explosion: bool = false
+@export var projectile_aoe_explosion: bool = false
+@export var projectile_knockback: float = 0
 	
 func spawn_projectile(direction):
 	projectile_direction = direction
@@ -16,9 +17,42 @@ func spawn_projectile(direction):
 	projectile_instance.rotation = (projectile_direction).angle()
 	projectile_instance.find_child("Sprite2D").flip_v = false if abs(projectile_instance.rotation) < PI / 2 else true
 	projectile_instance.position = global_position
+	set_projectile_instance_values(projectile_instance)
+	set_poison_projectile_instance_values(projectile_instance)
+	get_node("/root").add_child(projectile_instance)
+
+func spawn_melee_projectile(direction):
+	projectile_direction = direction
+	
+	var projectile_instance = projectile.instantiate()
+	projectile_instance.projectile_direction = projectile_direction
+	projectile_instance.rotation = (projectile_direction).angle()
+	projectile_instance.find_child("Sprite2D").flip_v = false if abs(projectile_instance.rotation) < PI / 2 else true
+	projectile_instance.position = position
+	set_projectile_instance_values(projectile_instance)
+	set_poison_projectile_instance_values(projectile_instance)
+	add_child(projectile_instance)
+	
+func set_projectile_instance_values(projectile_instance):
 	projectile_instance.projectile_speed = projectile_speed
 	projectile_instance.projectile_damage = projectile_damage
 	projectile_instance.projectile_range = projectile_range
 	projectile_instance.projectile_type = projectile_type
-	projectile_instance.aoe_explosion = aoe_explosion
-	get_node("/root").add_child(projectile_instance)
+	projectile_instance.aoe_explosion = projectile_aoe_explosion
+	projectile_instance.knockback = projectile_knockback
+	return
+	
+func set_universal_projectile_attributes(damage, speed, range, type):
+	projectile_damage = damage
+	projectile_speed = speed
+	projectile_range = range
+	projectile_type = type
+	
+func set_poison_projectile_attributes(effect_active, percent_of_max_health_per_second, duration):
+	$PoisonComponent.effect_active = effect_active
+	$PoisonComponent.percent_of_max_health_per_second = percent_of_max_health_per_second
+	$PoisonComponent.duration = duration
+
+func set_poison_projectile_instance_values(projectile_instance):
+	projectile_instance.find_child("HitBox").set_poison($PoisonComponent.effect_active,
+		$PoisonComponent.percent_of_max_health_per_second, $PoisonComponent.duration)

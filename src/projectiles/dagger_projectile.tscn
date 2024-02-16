@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbmrml7q6nj25"]
+
+[ext_resource type="Script" path="res://src/projectiles/dagger_projectile.gd" id="1_fro57"]
+[ext_resource type="Texture2D" uid="uid://sl4xr4j3dmsm" path="res://assets/effects/slash.png" id="2_fna65"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="3_24bk3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oeju4"]
+radius = 12.0
+height = 50.0
+
+[node name="DaggerProjectile" type="Node2D"]
+script = ExtResource("1_fro57")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fna65")
+
+[node name="HitBox" parent="." instance=ExtResource("3_24bk3")]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-2, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_oeju4")
