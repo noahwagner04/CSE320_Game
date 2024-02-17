@@ -34,7 +34,7 @@ acc_mag = 560.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_rebr2")]
 unique_name_in_owner = true
-max_health = 300.0
+max_health = 500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.5, 2.5)
@@ -51,7 +51,6 @@ damage = 25.0
 response = 2
 
 [node name="HitBoxShape2D" type="CollisionShape2D" parent="HitBox"]
-unique_name_in_owner = true
 position = Vector2(0, -3)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_bnrts")

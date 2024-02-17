@@ -58,18 +58,15 @@ func special_attacks():
 func spit_vomit():
 	var vomit_proj_instance: Node = vomit_proj_scene.instantiate()
 	call_deferred("add_child", vomit_proj_instance, false)
-	special_timer.stop()
 	#vomits += 1
 	#if ( vomits == total_vomit_amount ):
-		#special_timer.stop()
+	special_timer.stop()
 
 
 func summon_voles(ring_num):
 	var angle: float
 	var i: int = 1
 	var giant_vole_instance: Node
-	
-	ring_num = 5
 	
 	while i <= ring_num:
 		for j in range(i * 8):

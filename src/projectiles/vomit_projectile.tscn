@@ -18,9 +18,13 @@ texture = ExtResource("2_y2s6e")
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
 script = ExtResource("3_4cxrp")
+damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_frunk")
 
 [node name="PoisonComponent" type="Node" parent="HitBox"]
 script = ExtResource("4_jsvhh")
+effect_active = true
+percent_of_max_health_per_second = 5.0
+duration = 4.0
