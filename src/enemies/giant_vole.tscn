@@ -1,11 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://dde3h6haoynnn"]
+[gd_scene load_steps=13 format=3 uid="uid://dde3h6haoynnn"]
 
 [ext_resource type="Texture2D" uid="uid://e351ya36oghj" path="res://assets/enemies/giant_vole.png" id="1_6ruth"]
 [ext_resource type="Script" path="res://src/enemies/giant_vole.gd" id="1_36olq"]
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="2_5sn6e"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_b0mwu"]
+[ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="2_kygv0"]
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="3_afjd4"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="4_yoi8p"]
+[ext_resource type="AudioStream" uid="uid://bhm5gxj7pueps" path="res://assets/sfx/zapsplat_animals_rat_death_screech_001_72268.mp3" id="8_1gujk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bosjk"]
+radius = 200.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlx5"]
 radius = 6.0
@@ -22,6 +27,16 @@ collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_36olq")
+
+[node name="ColliderDetector" parent="." instance=ExtResource("2_kygv0")]
+unique_name_in_owner = true
+collision_layer = 0
+detect_area = false
+detect_character_body = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColliderDetector"]
+visible = false
+shape = SubResource("CircleShape2D_bosjk")
 
 [node name="MotionController" parent="." instance=ExtResource("2_b0mwu")]
 unique_name_in_owner = true
@@ -57,6 +72,10 @@ health_container = NodePath("../HealthContainer")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_olf1s")
+
+[node name="volehurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_1gujk")
+max_polyphony = 10
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
