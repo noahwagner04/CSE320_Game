@@ -1,30 +1,44 @@
 extends CharacterBody2D
 
 @export var agro_dist: float = 300
+#@export_range(0, 12, 1) var total_vomit_amount: int = 3 
 
 var _target: Node2D
+#var vomits: int = 0
 
-@onready var health_checker: HealthContainer = %HealthContainer
+@onready var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
+@onready var health_container: HealthContainer = %HealthContainer
 @onready var motion_controller: MotionController = %MotionController
 @onready var player: Node = get_tree().get_first_node_in_group("player")
 @onready var second_phase: bool = false
+@onready var special_timer:= Timer.new()
 @onready var start_position: Vector2 = global_position
+@onready var vomit_proj_scene: PackedScene = preload("res://src/projectiles/vomit_projectile.tscn")
+
+
+func _ready():
+	special_timer.timeout.connect(special_attacks)
+	add_child(special_timer)
+
 
 func _physics_process(_delta):
 	var player_dist: float
 	
-	if player != null:
-		player_dist = global_position.distance_to(player.global_position)
-		if player_dist <= agro_dist:
-			_target = player
-			agro_dist = 450
-		else:
-			_target = null
-			agro_dist = 300
-	else:
-		if (player == null):
-			player = get_tree().get_first_node_in_group("player")
+	if player == null:
+		player = get_tree().get_first_node_in_group("player")
 		return
+	
+	player_dist = global_position.distance_to(player.global_position)
+	if player_dist <= agro_dist:
+		_target = player
+		agro_dist = 450
+		#if (vomits != total_vomit_amount && special_timer.is_stopped()):
+		if (special_timer.is_stopped()):
+			special_timer.start(randf_range(1, 5))
+	else:
+		_target = null
+		agro_dist = 300
+		#vomits = 0
 	
 	if (_target != null):
 		motion_controller.acc_dir = global_position.direction_to(_target.global_position)
@@ -34,11 +48,23 @@ func _physics_process(_delta):
 	motion_controller.update(_delta)
 	velocity = motion_controller.get_velocity()
 	move_and_slide()
+
+
+func special_attacks():
+	#if ( randf() <= 0.5 ):
+	spit_vomit()
 	
 	
+func spit_vomit():
+	var vomit_proj_instance: Node = vomit_proj_scene.instantiate()
+	call_deferred("add_child", vomit_proj_instance, false)
+	#vomits += 1
+	#if ( vomits == total_vomit_amount ):
+	special_timer.stop()
+
+
 func summon_voles(ring_num):
 	var angle: float
-	var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
 	var i: int = 1
 	var giant_vole_instance: Node
 	
@@ -60,7 +86,7 @@ func _on_health_container_health_depleted():
 
 func _on_hurt_box_hurt(hit_box):
 	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * 0.7 * hit_box.knockback)
-	if (second_phase == false && health_checker.get_health() <= health_checker.max_health * 0.5):
+	if (second_phase == false && health_container.get_health() <= health_container.max_health * 0.5):
 		second_phase = true
-		var ring_num: int = 6 - health_checker.get_health() / health_checker.max_health * 10
+		var ring_num: int = 6 - health_container.get_health() / health_container.max_health * 10
 		summon_voles(ring_num)
