@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bda7mol8b1dbo"]
+[gd_scene load_steps=12 format=3 uid="uid://bda7mol8b1dbo"]
 
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_44esr"]
 [ext_resource type="Texture2D" uid="uid://dkenseujuv7a1" path="res://assets/enemies/gaint_dragonfly.png" id="1_gxes3"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://src/enemies/giant_dragonfly.gd" id="1_r1s8r"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="3_d6xc4"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="3_flpor"]
+[ext_resource type="PackedScene" uid="uid://bhgvfs2sl78bn" path="res://src/components/projectile_spawner.tscn" id="7_oa0t7"]
+[ext_resource type="PackedScene" uid="uid://bj4dfv6axl5pc" path="res://src/projectiles/dragonfly_spit.tscn" id="8_6wat5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3yxi0"]
 radius = 300.0
@@ -56,5 +58,16 @@ health_container = NodePath("../HealthContainer")
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_mio1n")
 
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.8
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("7_oa0t7")]
+unique_name_in_owner = true
+projectile = ExtResource("8_6wat5")
+projectile_damage = 10.0
+projectile_speed = 200.0
+projectile_range = 500.0
+
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

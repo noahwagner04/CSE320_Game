@@ -6,8 +6,10 @@ var _target: Node2D
 
 @onready var motion_controller: MotionController = %MotionController
 @onready var col_detector: Area2D = %ColliderDetector
+@onready var proj_spawner: Node2D = %ProjectileSpawner
 
 func _ready():
+	$AttackTimer.start()
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
 
 func _process(delta):
@@ -32,3 +34,8 @@ func _on_health_container_health_depleted():
 
 func _on_hurt_box_hurt(hit_box):
 	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * hit_box.knockback)
+
+
+func _on_attack_timer_timeout():
+	if _target:
+		proj_spawner.spawn_projectile(global_position.direction_to(_target.global_position))
