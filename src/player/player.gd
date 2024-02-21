@@ -1,8 +1,13 @@
 extends CharacterBody2D
 
+signal toggle_inventory()
+
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var health_container: HealthContainer = %HealthContainer
 @onready var motion_controller: MotionController = %MotionController
+
+@export var inventory_data: InventoryData
+
 
 
 func _ready():
@@ -11,8 +16,11 @@ func _ready():
 
 func _process(_delta):
 	move(_delta)
-
-
+	# check inventory toggle
+	if Input.is_action_just_pressed("toggle_inventory"):
+		toggle_inventory.emit()
+	
+	
 func move(_delta):
 	# get acceleration direction
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
