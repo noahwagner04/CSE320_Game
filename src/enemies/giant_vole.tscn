@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dde3h6haoynnn"]
+[gd_scene load_steps=13 format=3 uid="uid://dde3h6haoynnn"]
 
 [ext_resource type="Texture2D" uid="uid://e351ya36oghj" path="res://assets/enemies/giant_vole.png" id="1_6ruth"]
 [ext_resource type="Script" path="res://src/enemies/giant_vole.gd" id="1_36olq"]
@@ -20,6 +20,11 @@ size = Vector2(22, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_olf1s"]
 size = Vector2(22, 12)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_erfny"]
+properties/0/path = NodePath(".:sync_pos")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="GiantVole" type="CharacterBody2D"]
 collision_layer = 2
@@ -72,5 +77,10 @@ health_container = NodePath("../HealthContainer")
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_olf1s")
 
+[node name="VoleSync" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_erfny")
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

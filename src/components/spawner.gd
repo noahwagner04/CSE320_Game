@@ -25,7 +25,7 @@ var timer: Timer = Timer.new()
 
 func _ready():
 	timer.timeout.connect(spawn)
-	add_child(timer)
+	add_child(timer, true)
 
 
 func _draw():
