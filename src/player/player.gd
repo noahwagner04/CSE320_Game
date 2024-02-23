@@ -1,11 +1,16 @@
 extends CharacterBody2D
 
+signal toggle_inventory()
+
 var sync_pos := Vector2.ZERO
 var mult_sync: MultiplayerSynchronizer
 
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var health_container: HealthContainer = %HealthContainer
 @onready var motion_controller: MotionController = %MotionController
+
+@export var inventory_data: InventoryData
+
 
 
 
@@ -21,6 +26,9 @@ func _process(_delta):
 	if mult_sync.get_multiplayer_authority() == multiplayer.get_unique_id():
 		sync_pos = global_position
 		move(_delta)
+		# check inventory toggle
+		if Input.is_action_just_pressed("toggle_inventory"):
+			toggle_inventory.emit()
 	else:
 		global_position = global_position.lerp(sync_pos, 0.4)
 
