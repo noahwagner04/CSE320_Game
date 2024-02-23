@@ -3,6 +3,7 @@ extends Node
 var players = {}
 var player_name: String
 
+signal new_player_created(player: CharacterBody2D)
 
 func instantiate_player(id):
 	players[id] = {
@@ -14,7 +15,7 @@ func instantiate_player(id):
 	new_player.name = str(id)
 	new_player.global_position = Vector2.ZERO
 	get_node("/root/Main").add_child(new_player)
-
+	new_player_created.emit(new_player)
 
 func delete_player(id):
 	players.erase(id)
