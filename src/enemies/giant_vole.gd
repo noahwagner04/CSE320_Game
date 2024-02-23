@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var agro_dist: float = 300
 
 var home := Node2D.new()
+var sync_pos := Vector2.ZERO
+var mult_sync: MultiplayerSynchronizer
 
 var _rand_target_mod := Vector2((randf() * 2 - 1) * 10, (randf() * 2 - 1) * 10)
 var _target: Node2D
@@ -18,15 +20,21 @@ func _ready():
 
 
 func _physics_process(_delta):
-	_target = col_detector.get_closest_collider()
-	_target = home if _target == null else _target 
+	if mult_sync.get_multiplayer_authority() == multiplayer.get_unique_id():
+		_target = col_detector.get_closest_collider()
+		_target = home if _target == null else _target 
 	
-	var new_target = _target.global_position + _rand_target_mod
-	
-	motion_controller.acc_dir = global_position.direction_to(new_target)
-	motion_controller.update(_delta)
-	velocity = motion_controller.get_velocity()
-	move_and_slide()
+		var new_target = _target.global_position + _rand_target_mod
+		
+		motion_controller.acc_dir = global_position.direction_to(new_target)
+		motion_controller.update(_delta)
+		velocity = motion_controller.get_velocity()
+		move_and_slide()
+		
+		sync_pos = global_position
+		
+	else:
+		global_position = global_position.lerp(sync_pos, 0.4)
 
 
 func _on_health_container_health_depleted():
@@ -36,3 +44,8 @@ func _on_health_container_health_depleted():
 func _on_hurt_box_hurt(hit_box):
 	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * hit_box.knockback)
 	$volehurt.play()
+
+	
+func _on_tree_entered():
+	mult_sync = %VoleSync
+	mult_sync.set_multiplayer_authority(1)
