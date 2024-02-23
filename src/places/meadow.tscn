@@ -1231,3 +1231,7 @@ unique_name_in_owner = true
 radius = 600
 max_spawn = 500
 scene = ExtResource("3_p1cuf")
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/enemies/giant_vole.tscn")
+spawn_path = NodePath("../GiantVoleSpawner")
