@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcpd2g41uikew"]
+[gd_scene load_steps=7 format=3 uid="uid://bcpd2g41uikew"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_8asym"]
 [ext_resource type="PackedScene" uid="uid://dgi8vrclbu3ch" path="res://src/places/meadow.tscn" id="1_y2l12"]
 [ext_resource type="PackedScene" uid="uid://bs0jf15i4nj8u" path="res://src/UI/inventory.tscn" id="3_bj3aa"]
 [ext_resource type="Script" path="res://src/inventory/inventory_interface.gd" id="4_ri52f"]
 [ext_resource type="PackedScene" uid="uid://dfe5fnwrcfr36" path="res://src/UI/connection_scene.tscn" id="4_us305"]
+[ext_resource type="PackedScene" uid="uid://drbl531y5n67e" path="res://src/UI/slot.tscn" id="6_sdpfa"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8asym")
@@ -37,3 +38,8 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 50.0
+
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("6_sdpfa")]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0

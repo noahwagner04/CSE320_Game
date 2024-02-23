@@ -16,4 +16,4 @@ func on_player_created(new_player: CharacterBody2D):
 	inventory_interface.set_player_inventory_data(current_player.inventory_data)
 
 func toggle_inventory_interface():
-	inventory_interface.visible = !inventory_interface.visible
+	inventory_interface.visible = not inventory_interface.visible
