@@ -43,6 +43,8 @@ func _on_health_container_health_depleted():
 
 func _on_hurt_box_hurt(hit_box):
 	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * hit_box.knockback)
+	$volehurt.play()
+
 	
 func _on_tree_entered():
 	mult_sync = %VoleSync
