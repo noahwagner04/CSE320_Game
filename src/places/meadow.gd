@@ -5,9 +5,11 @@ extends Node2D
 
 
 func _ready():
-	giant_vole_spawner.start_spawning()
-	giant_dragonfly_spawner.start_spawning()
-	increase_difficulty()
+	if multiplayer.is_server():
+		giant_vole_spawner.start_spawning()
+		giant_dragonfly_spawner.start_spawning()
+		increase_difficulty()
+
 
 func increase_difficulty():
 	get_tree().create_timer(10).timeout.connect(increase_difficulty)
