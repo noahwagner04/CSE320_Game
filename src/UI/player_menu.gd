@@ -1,19 +1,23 @@
 extends CanvasLayer
 
-@onready var health_label : RichTextLabel = $VBoxContainer/Health
-@onready var defense_label : RichTextLabel = $VBoxContainer/Defense
-@onready var hp_regen_label : RichTextLabel = $"VBoxContainer/HP Regen"
-@onready var attack_label : RichTextLabel = $VBoxContainer/Attack
-@onready var dexterity_label : RichTextLabel = $VBoxContainer/Dexterity
-@onready var speed_label : RichTextLabel = $VBoxContainer/Speed
-@onready var sp_regen_label : RichTextLabel = $"VBoxContainer/SP Regen"
-@onready var stamina_label : RichTextLabel = $VBoxContainer/Stamina
-
+@onready var health_label : RichTextLabel = $Panel/VBoxContainer/Health
+@onready var defense_label : RichTextLabel = $Panel/VBoxContainer/Defense
+@onready var hp_regen_label : RichTextLabel = $"Panel/VBoxContainer/HP Regen"
+@onready var attack_label : RichTextLabel = $Panel/VBoxContainer/Attack
+@onready var dexterity_label : RichTextLabel = $Panel/VBoxContainer/Dexterity
+@onready var speed_label : RichTextLabel = $Panel/VBoxContainer/Speed
+@onready var sp_regen_label : RichTextLabel = $"Panel/VBoxContainer/SP Regen"
+@onready var stamina_label : RichTextLabel = $Panel/VBoxContainer/Stamina
+@onready var panel = $Panel
 
 func _ready():
 	var stats = $"../PlayerStats"
 	render_stats()
 	stats.connect("player_leveled_up", render_stats)
+	$"..".toggle_inventory.connect(toggle_player_menu)
+
+func toggle_player_menu():
+	panel.visible = not panel.visible
 
 func render_stats():
 	var stats = $"../PlayerStats"
