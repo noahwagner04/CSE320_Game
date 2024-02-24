@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dde3h6haoynnn"]
+[gd_scene load_steps=14 format=3 uid="uid://dde3h6haoynnn"]
 
 [ext_resource type="Texture2D" uid="uid://e351ya36oghj" path="res://assets/enemies/giant_vole.png" id="1_6ruth"]
 [ext_resource type="Script" path="res://src/enemies/giant_vole.gd" id="1_36olq"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="2_kygv0"]
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="3_afjd4"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="4_yoi8p"]
+[ext_resource type="AudioStream" uid="uid://bhm5gxj7pueps" path="res://assets/sfx/zapsplat_animals_rat_death_screech_001_72268.mp3" id="8_1gujk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bosjk"]
 radius = 200.0
@@ -20,6 +21,11 @@ size = Vector2(22, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_olf1s"]
 size = Vector2(22, 12)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_erfny"]
+properties/0/path = NodePath(".:sync_pos")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="GiantVole" type="CharacterBody2D"]
 collision_layer = 2
@@ -60,7 +66,6 @@ damage = 2.0
 response = 2
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="HitBox"]
-unique_name_in_owner = true
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_2ohi8")
 
@@ -72,5 +77,14 @@ health_container = NodePath("../HealthContainer")
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_olf1s")
 
+[node name="VoleSync" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_erfny")
+
+[node name="volehurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_1gujk")
+max_polyphony = 10
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

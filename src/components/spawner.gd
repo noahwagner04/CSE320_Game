@@ -25,7 +25,7 @@ var timer: Timer = Timer.new()
 
 func _ready():
 	timer.timeout.connect(spawn)
-	add_child(timer)
+	add_child(timer, true)
 
 
 func _draw():
@@ -48,7 +48,7 @@ func spawn():
 		var angle = randf() * 2 * PI
 		instance.position = Vector2(cos(angle), sin(angle)) * radius * randf()
 		instance.tree_exited.connect(_on_despawn)
-	add_child(instance)
+	add_child(instance, true)
 	spawned_count += 1
 
 

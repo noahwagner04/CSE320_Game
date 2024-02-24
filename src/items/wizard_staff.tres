@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://e0i1ioku1yan"]
+
+[ext_resource type="Script" path="res://src/inventory/item_data.gd" id="1_udlqw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2ud16"]
+load_path = "res://.godot/imported/32x32.png-e72894ccb86f36ffcb11d38e5757662e.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65g6r"]
+atlas = SubResource("CompressedTexture2D_2ud16")
+region = Rect2(352, 288, 32, 32)
+
+[resource]
+script = ExtResource("1_udlqw")
+name = "wizard staff"
+description = "wowzie"
+type = "Weapon"
+stackable = false
+texture = SubResource("AtlasTexture_65g6r")
