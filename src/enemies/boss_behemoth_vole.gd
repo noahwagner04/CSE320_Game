@@ -76,9 +76,12 @@ func summon_voles(ring_num):
 			call_deferred("add_sibling", giant_vole_instance, false)
 			
 		i += 1
+	$BearSummon.play( .32 )
 	
 	
 func _on_health_container_health_depleted():
+	$BearDeath.play( )
+	await get_tree().create_timer( 3.19 ).timeout
 	queue_free()
 
 
@@ -88,3 +91,4 @@ func _on_hurt_box_hurt(hit_box):
 		second_phase = true
 		var ring_num: int = 6 - health_container.get_health() / health_container.max_health * 10
 		summon_voles(ring_num)
+	$BearHurt.play( .42 )

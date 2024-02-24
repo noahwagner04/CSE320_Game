@@ -34,11 +34,9 @@ func _on_health_container_health_depleted():
 	queue_free()
 
 
-	
 func _on_hurt_box_hurt(hit_box):
 	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * hit_box.knockback)
 	$bughurt.play(3.3)
-
 
 
 func _on_attack_timer_timeout():
