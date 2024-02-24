@@ -51,15 +51,14 @@ func _physics_process(_delta):
 
 func special_attacks():
 	if ( vomits < total_vomit_amount ):
-		if ( randf() <= 0.3 ):
-			spit_vomit()
+		#if ( randf() <= 0.3 ):
+		spit_vomit()
 	
 	
 func spit_vomit():
 	var vomit_proj_instance: Node = vomit_proj_scene.instantiate()
-	call_deferred("add_child", vomit_proj_instance, false)
+	call_deferred("add_sibling", vomit_proj_instance, false)
 	vomits += 1
-	print(vomits)
 
 
 func summon_voles(ring_num):
