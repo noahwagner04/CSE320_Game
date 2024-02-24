@@ -37,6 +37,8 @@ func _physics_process(_delta):
 
 
 func _on_health_container_health_depleted():
+	$voledeath.play(.05)
+	await get_tree().create_timer(.3).timeout
 	queue_free()
 
 
