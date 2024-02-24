@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvlm6qi5p6cgm"]
 
 [ext_resource type="Script" path="res://src/projectiles/vomit_projectile.gd" id="1_xf2dr"]
-[ext_resource type="Texture2D" path="res://assets/effects/spit_ball.png" id="2_x6m06"]
+[ext_resource type="Texture2D" uid="uid://ct6hbpw7oti3w" path="res://assets/effects/spit_ball.png" id="2_x6m06"]
 [ext_resource type="Script" path="res://src/components/hit_box.gd" id="3_4cxrp"]
 [ext_resource type="Script" path="res://src/components/poison_component.gd" id="4_jsvhh"]
 
