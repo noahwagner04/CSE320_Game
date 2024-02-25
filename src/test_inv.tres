@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InventoryData" load_steps=7 format=3 uid="uid://dwucy1w4m07e1"]
+[gd_resource type="Resource" script_class="InventoryData" load_steps=7 format=3 uid="uid://d4macvdnkj3jo"]
 
 [ext_resource type="Script" path="res://src/inventory/inventory_data.gd" id="1_ah51f"]
 [ext_resource type="Resource" uid="uid://dmvshcsgmr6mo" path="res://src/items/apple.tres" id="2_2rnuo"]
