@@ -29,6 +29,8 @@ func _process(_delta):
 		# check inventory toggle
 		if Input.is_action_just_pressed("toggle_inventory"):
 			toggle_inventory.emit()
+		if Input.is_action_just_pressed("interact"):
+			interact()
 	else:
 		global_position = global_position.lerp(sync_pos, 0.4)
 
@@ -65,4 +67,7 @@ func _on_health_container_health_depleted():
 func _on_tree_entered():
 	mult_sync = %MultiplayerSynchronizer
 	mult_sync.set_multiplayer_authority(str(name).to_int())
+	
+func interact():
+	print("interact")
 	
