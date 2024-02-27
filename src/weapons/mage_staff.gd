@@ -11,8 +11,16 @@ var aoe_explosion: bool = false
 @export var knockback: float = 0
 var time_of_last_attack: float = 0.0
 
+# player_stats contains all player stat variables
+@onready var player_stats = $"../PlayerStats"
+
 
 func _ready():
+	
+	# setting atk speed and dmg scaling
+	attack_speed = float(player_stats.dexterity * 0.1)
+	projectile_damage = float(player_stats.attack)
+	
 	set_process(enabled)
 	$ProjectileSpawner.set_universal_projectile_attributes(projectile_damage, 
 		projectile_speed, projectile_range, projectile_type)
