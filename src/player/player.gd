@@ -19,10 +19,10 @@ func _ready():
 		$Camera2D.make_current()
 
 func set_health():
-	health_bar.value = health_container._health
 	health_container.max_health = player_stats.health
 	health_container._health = player_stats.health
 	health_bar.max_value = health_container.max_health
+	health_bar.value = health_container._health
 
 
 func _process(_delta):
