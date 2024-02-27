@@ -11,12 +11,17 @@ var mult_sync: MultiplayerSynchronizer
 
 @export var inventory_data: InventoryData
 
+@onready var player_stats = $PlayerStats
 
 func _ready():
-	health_bar.max_value = health_container.max_health
-	
+	set_health()
 	if multiplayer.get_unique_id() == str(name).to_int():
 		$Camera2D.make_current()
+
+func set_health():
+	health_container.max_health = player_stats.health
+	health_container._health = player_stats.health
+	health_bar.max_value = health_container.max_health
 
 
 func _process(_delta):

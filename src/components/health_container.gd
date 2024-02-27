@@ -10,8 +10,6 @@ var _health: float
 
 
 func _ready():
-	if $"../".has_node("PlayerStats"):
-		max_health = $"../PlayerStats".health
 	_health = max_health
 
 
