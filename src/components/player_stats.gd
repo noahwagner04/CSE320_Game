@@ -31,7 +31,7 @@ var level: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Set initial player stat values when character is created
-	health = 100
+	health = 1200
 	defense = 10
 	hp_regen = 10
 	attack = 10
