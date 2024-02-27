@@ -73,6 +73,7 @@ offset_bottom = 19.0
 theme_override_styles/background = SubResource("StyleBoxFlat_hyc80")
 theme_override_styles/fill = SubResource("StyleBoxFlat_01xff")
 value = 100.0
+exp_edit = true
 show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
