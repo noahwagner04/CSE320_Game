@@ -19,7 +19,7 @@ func _ready():
 	
 	# setting atk speed and dmg scaling
 	attack_speed = float(player_stats.dexterity * 0.1)
-	projectile_damage = float(player_stats.damage)
+	projectile_damage = float(player_stats.attack)
 	
 	set_process(enabled)
 	$ProjectileSpawner.set_universal_projectile_attributes(projectile_damage, 

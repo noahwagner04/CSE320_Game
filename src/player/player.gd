@@ -12,8 +12,6 @@ var mult_sync: MultiplayerSynchronizer
 @export var inventory_data: InventoryData
 
 
-
-
 func _ready():
 	health_bar.max_value = health_container.max_health
 	

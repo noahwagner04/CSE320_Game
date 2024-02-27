@@ -18,13 +18,11 @@ var special_projectile_knockback: float = 0
 # player_stats contains all player stat variables
 @onready var player_stats = $"../PlayerStats"
 
-
-
 func _ready():
 	
 	# Setting dagger attack speed and damage scaling
 	attack_speed = float(player_stats.dexterity * 0.4)
-	projectile_damage = float(player_stats.damage * 0.6)
+	projectile_damage = float(player_stats.attack * 0.6)
 	
 	set_process(enabled)
 	$ProjectileSpawner.set_universal_projectile_attributes(projectile_damage, 
