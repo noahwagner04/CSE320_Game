@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 @export var agro_dist: float = 300
-#@export_range(0, 12, 1) var total_vomit_amount: int = 3 
+@export_range(0, 12, 1) var total_vomit_amount: int = 3 
 
 var _target: Node2D
-#var vomits: int = 0
+var vomits: int = 0
 
 @onready var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
 @onready var health_container: HealthContainer = %HealthContainer
@@ -32,13 +32,12 @@ func _physics_process(_delta):
 	if player_dist <= agro_dist:
 		_target = player
 		agro_dist = 450
-		#if (vomits != total_vomit_amount && special_timer.is_stopped()):
-		if (special_timer.is_stopped()):
+		if (vomits < total_vomit_amount && special_timer.is_stopped()):
 			special_timer.start(randf_range(1, 5))
 	else:
 		_target = null
 		agro_dist = 300
-		#vomits = 0
+		vomits = 0
 	
 	if (_target != null):
 		motion_controller.acc_dir = global_position.direction_to(_target.global_position)
@@ -51,16 +50,15 @@ func _physics_process(_delta):
 
 
 func special_attacks():
-	#if ( randf() <= 0.5 ):
-	spit_vomit()
+	if ( vomits < total_vomit_amount ):
+		#if ( randf() <= 0.3 ):
+		spit_vomit()
 	
 	
 func spit_vomit():
 	var vomit_proj_instance: Node = vomit_proj_scene.instantiate()
-	call_deferred("add_child", vomit_proj_instance, false)
-	#vomits += 1
-	#if ( vomits == total_vomit_amount ):
-	special_timer.stop()
+	call_deferred("add_sibling", vomit_proj_instance, false)
+	vomits += 1
 
 
 func summon_voles(ring_num):
@@ -78,9 +76,12 @@ func summon_voles(ring_num):
 			call_deferred("add_sibling", giant_vole_instance, false)
 			
 		i += 1
-		
-		
+	$BearSummon.play( .32 )
+	
+	
 func _on_health_container_health_depleted():
+	$BearDeath.play( )
+	await get_tree().create_timer( 3.19 ).timeout
 	queue_free()
 
 
@@ -90,3 +91,4 @@ func _on_hurt_box_hurt(hit_box):
 		second_phase = true
 		var ring_num: int = 6 - health_container.get_health() / health_container.max_health * 10
 		summon_voles(ring_num)
+	$BearHurt.play( .42 )
