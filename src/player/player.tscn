@@ -1,16 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://ldya24kqafli"]
+[gd_scene load_steps=20 format=3 uid="uid://ldya24kqafli"]
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="2_2f0gs"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_rqy15"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="3_5ej63"]
+[ext_resource type="AudioStream" uid="uid://d4ltrmmxe2fy3" path="res://assets/sfx/male-scream-in-fear-123079.mp3" id="3_65lng"]
 [ext_resource type="AudioStream" uid="uid://bn6ncjhgcdlr0" path="res://assets/sfx/umph-47201.mp3" id="3_cwkal"]
 [ext_resource type="Script" path="res://src/player/player_arm.gd" id="4_agtwi"]
 [ext_resource type="PackedScene" uid="uid://dv3i37pthetip" path="res://src/weapons/mage_staff.tscn" id="6_1nqgo"]
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
-[ext_resource type="PackedScene" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
-[ext_resource type="PackedScene" path="res://src/components/player_stats.tscn" id="9_10w05"]
+[ext_resource type="PackedScene" uid="uid://22wskpfroyx6" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
+[ext_resource type="PackedScene" uid="uid://bun6y0ddq8lx3" path="res://src/components/player_stats.tscn" id="9_10w05"]
 [ext_resource type="Script" path="res://src/components/player_stats.gd" id="10_sfrx4"]
 [ext_resource type="PackedScene" uid="uid://c03lcp1vpib8k" path="res://src/weapons/dagger.tscn" id="13_0ws4y"]
 
@@ -42,6 +43,9 @@ unique_name_in_owner = true
 stream = ExtResource("3_cwkal")
 max_polyphony = 10
 
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_65lng")
+
 [node name="MotionController" parent="." instance=ExtResource("2_rqy15")]
 unique_name_in_owner = true
 friction = 3000.0
@@ -69,6 +73,7 @@ offset_bottom = 19.0
 theme_override_styles/background = SubResource("StyleBoxFlat_hyc80")
 theme_override_styles/fill = SubResource("StyleBoxFlat_01xff")
 value = 100.0
+exp_edit = true
 show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
