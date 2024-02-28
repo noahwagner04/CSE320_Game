@@ -38,7 +38,7 @@ offset_bottom = 522.5
 theme_override_font_sizes/font_size = 50
 text = "Name:"
 
-[node name="NameTextFeild" type="LineEdit" parent="."]
+[node name="NameTextField" type="LineEdit" parent="."]
 layout_mode = 2
 offset_left = 912.0
 offset_top = 451.0
