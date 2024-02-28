@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b6vlyexlobsos" path="res://src/components/spawner.tscn" id="2_0b0rp"]
 [ext_resource type="PackedScene" uid="uid://cic55om7hfudf" path="res://src/enemies/boss_behemoth_vole.tscn" id="3_3h4jt"]
 [ext_resource type="PackedScene" uid="uid://dde3h6haoynnn" path="res://src/enemies/giant_vole.tscn" id="3_p1cuf"]
-[ext_resource type="PackedScene" uid="uid://bda7mol8b1dbo" path="res://src/enemies/giant_dragonfly.tscn" id="6_fr1my"]
+[ext_resource type="PackedScene" uid="uid://djv6bxpkal1st" path="res://src/enemies/giant_dragonfly.tscn" id="6_fr1my"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ka513"]
 resource_name = "Ground"
@@ -1233,8 +1233,7 @@ radius = 600
 max_spawn = 150
 scene = ExtResource("3_p1cuf")
 
-
-[node name="GaintDragonflySpawner" parent="." instance=ExtResource("2_0b0rp")]
+[node name="GiantDragonflySpawner" parent="." instance=ExtResource("2_0b0rp")]
 unique_name_in_owner = true
 frequency = 4.0
 radius = 600
@@ -1244,4 +1243,3 @@ scene = ExtResource("6_fr1my")
 [node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://src/enemies/giant_vole.tscn")
 spawn_path = NodePath("../GiantVoleSpawner")
-
