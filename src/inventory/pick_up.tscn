@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://be2g6kq3kqnsm"]
 
-[ext_resource type="Script" path="res://src/items/pick_up.gd" id="1_4q1m2"]
+[ext_resource type="Script" path="res://src/inventory/pick_up.gd" id="1_4q1m2"]
 [ext_resource type="Texture2D" uid="uid://bd8ou42dk83om" path="res://src/inventory/item_atlas.tres" id="1_8wqfb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acw12"]

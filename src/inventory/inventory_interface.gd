@@ -6,6 +6,8 @@ var grabbed_slot_data: SlotData
 
 @onready var player_inventory: PanelContainer = $PlayerInventory
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
+@onready var weapon_inventory = $WeaponInventory
+
 
 func _physics_process(delta):
 	if grabbed_slot.visible:
@@ -14,17 +16,25 @@ func _physics_process(delta):
 func set_player_inventory_data(inventory_data: InventoryData):
 	inventory_data.inventory_interact.connect(on_inventory_interact)
 	player_inventory.set_inventory_data(inventory_data)
+	
+func set_weapon_inventory_data(inventory_data: InventoryData):
+	inventory_data.inventory_interact.connect(on_inventory_interact)
+	weapon_inventory.set_inventory_data(inventory_data)
 
 func on_inventory_interact(inventory_data: InventoryData, 
 		index: int, button: int):
 			
 	match [grabbed_slot_data, button]:
+		# pick up full stack
 		[null, MOUSE_BUTTON_LEFT]:
 			grabbed_slot_data = inventory_data.grab_slot_data(index)
+		# drop full stack
 		[_, MOUSE_BUTTON_LEFT]:
 			grabbed_slot_data = inventory_data.drop_slot_data(grabbed_slot_data, index)
+		# use
 		[null, MOUSE_BUTTON_RIGHT]:
 			inventory_data.use_slot_data(index)
+		# drop one
 		[_, MOUSE_BUTTON_RIGHT]:
 			grabbed_slot_data = inventory_data.drop_single_slot_data(grabbed_slot_data, index)
 			

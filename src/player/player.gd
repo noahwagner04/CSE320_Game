@@ -10,11 +10,13 @@ var mult_sync: MultiplayerSynchronizer
 @onready var motion_controller: MotionController = %MotionController
 
 @export var inventory_data: InventoryData
+@export var weapon_inventory_data: InventoryDataWeapon
 
 @onready var player_stats = $PlayerStats
 
 func _ready():
 	set_health()
+	PlayerManager.player = self
 	if multiplayer.get_unique_id() == str(name).to_int():
 		$Camera2D.make_current()
 
@@ -82,3 +84,5 @@ func get_drop_position() -> Vector2:
 	current_position += Vector2(40, -40)
 	return current_position
 	
+func heal(amount: int):
+	health_container.heal(amount)

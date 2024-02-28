@@ -4,6 +4,8 @@ class_name InventoryData
 signal inventory_updated(inventory_data: InventoryData)
 signal inventory_interact(inventory_data: InventoryData, index: int, button: int)
 
+
+
 @export var slot_datas: Array[SlotData]
 
 func grab_slot_data(index: int) -> SlotData:
@@ -55,6 +57,7 @@ func use_slot_data(index: int):
 			slot_datas[index] = null
 	
 	print(slot_data.item_data.name)
+	PlayerManager.use_slot_data(slot_data)
 	
 	inventory_updated.emit(self)
 		
