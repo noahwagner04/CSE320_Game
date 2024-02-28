@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ldya24kqafli"]
+[gd_scene load_steps=19 format=3 uid="uid://ldya24kqafli"]
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
@@ -7,19 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_rqy15"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="3_5ej63"]
 [ext_resource type="AudioStream" uid="uid://d4ltrmmxe2fy3" path="res://assets/sfx/male-scream-in-fear-123079.mp3" id="3_65lng"]
+[ext_resource type="Resource" uid="uid://di4u2ywk7efhm" path="res://src/test_weapon_inv.tres" id="3_b7onu"]
 [ext_resource type="AudioStream" uid="uid://bn6ncjhgcdlr0" path="res://assets/sfx/umph-47201.mp3" id="3_cwkal"]
-[ext_resource type="Script" path="res://src/inventory/inventory_data_weapon.gd" id="3_dpuvd"]
-[ext_resource type="Script" path="res://src/player/player_arm.gd" id="4_agtwi"]
-[ext_resource type="PackedScene" uid="uid://dv3i37pthetip" path="res://src/weapons/mage_staff.tscn" id="6_1nqgo"]
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
 [ext_resource type="PackedScene" uid="uid://22wskpfroyx6" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
 [ext_resource type="PackedScene" uid="uid://bun6y0ddq8lx3" path="res://src/components/player_stats.tscn" id="9_10w05"]
 [ext_resource type="Script" path="res://src/components/player_stats.gd" id="10_sfrx4"]
-[ext_resource type="PackedScene" uid="uid://c03lcp1vpib8k" path="res://src/weapons/dagger.tscn" id="13_0ws4y"]
-
-[sub_resource type="Resource" id="Resource_0du3y"]
-script = ExtResource("3_dpuvd")
-slot_datas = Array[Resource("res://src/inventory/slot_data.gd")]([null])
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyc80"]
 bg_color = Color(0.6, 0, 0, 1)
@@ -45,7 +38,7 @@ collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_e7sba")
 inventory_data = ExtResource("2_ccsem")
-weapon_inventory_data = SubResource("Resource_0du3y")
+weapon_inventory_data = ExtResource("3_b7onu")
 
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
@@ -54,6 +47,11 @@ max_polyphony = 10
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_65lng")
+
+[node name="SwingSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_at6ld")
+max_polyphony = 10
 
 [node name="MotionController" parent="." instance=ExtResource("2_rqy15")]
 unique_name_in_owner = true
@@ -95,20 +93,7 @@ health_container = NodePath("../HealthContainer")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_vhwkk")
 
-[node name="Arm" type="Node2D" parent="."]
-script = ExtResource("4_agtwi")
-
-[node name="SwingSound" type="AudioStreamPlayer2D" parent="Arm"]
-unique_name_in_owner = true
-stream = ExtResource("6_at6ld")
-max_polyphony = 10
-
-[node name="MageStaff" parent="." instance=ExtResource("6_1nqgo")]
-
 [node name="PlayerMenu" parent="." instance=ExtResource("8_ul1em")]
-
-[node name="Dagger" parent="." instance=ExtResource("13_0ws4y")]
-enabled = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
