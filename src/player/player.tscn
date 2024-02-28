@@ -108,7 +108,6 @@ max_polyphony = 10
 [node name="PlayerMenu" parent="." instance=ExtResource("8_ul1em")]
 
 [node name="Dagger" parent="." instance=ExtResource("13_0ws4y")]
-enabled = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true

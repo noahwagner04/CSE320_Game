@@ -11,12 +11,16 @@ var mult_sync: MultiplayerSynchronizer
 
 @export var inventory_data: InventoryData
 @export var weapon_inventory_data: InventoryDataWeapon
+var equipped_weapon: Weapon
+const EQUIP_INVENTORY_WEAPON = 0
 
 @onready var player_stats = $PlayerStats
 
 func _ready():
 	set_health()
 	PlayerManager.player = self
+	weapon_inventory_data.weapon_changed.connect(change_weapon)
+	weapon_inventory_data.weapon_removed.connect(removed_weapon)
 	if multiplayer.get_unique_id() == str(name).to_int():
 		$Camera2D.make_current()
 
@@ -37,6 +41,10 @@ func _process(_delta):
 			toggle_inventory.emit()
 		if Input.is_action_just_pressed("interact"):
 			interact()
+		if Input.is_action_pressed("basic_attack") and equipped_weapon:
+			equipped_weapon.basic_attack()
+		if Input.is_action_pressed("item_special") and equipped_weapon:
+			equipped_weapon.item_special()
 	else:
 		global_position = global_position.lerp(sync_pos, 0.4)
 
@@ -86,3 +94,13 @@ func get_drop_position() -> Vector2:
 	
 func heal(amount: int):
 	health_container.heal(amount)
+
+func change_weapon(weapon_item_data: ItemDataWeapon):
+	if equipped_weapon:
+		equipped_weapon.queue_free()
+	equipped_weapon = weapon_item_data.weapon.instantiate()
+	add_child(equipped_weapon)
+	print("equipped weapon has been changed to: %s" % weapon_item_data.name)
+
+func removed_weapon():
+	equipped_weapon = null

@@ -1,21 +1,32 @@
-extends Node2D
+extends Weapon
 
 @export var enabled: bool = false 
-@export var attack_speed: float = 1.0
-@export var projectile_damage: float = 10
-@export var projectile_speed: float = 300
+#@export var attack_speed: float = 1.0
+#@export var projectile_damage: float = 10
+#@export var projectile_speed: float = 300
+
+#@export_range(5, 500, 1) var projectile_range: float = 500
+#@export_enum("line", "swing") var projectile_type: String = "line"
 @export var item_special_duration: float = 5.0
-@export_range(5, 500, 1) var projectile_range: float = 500
-@export_enum("line", "swing") var projectile_type: String = "line"
 var aoe_explosion: bool = false
-@export var knockback: float = 0
-var time_of_last_attack: float = 0.0
+#@export var knockback: float = 0
+#var time_of_last_attack: float = 0.0
 
 # player_stats contains all player stat variables
 @onready var player_stats = $"../PlayerStats"
 
 
 func _ready():
+	
+	attack_speed = 1.0
+	projectile_damage = 10
+	projectile_speed = 300
+
+	projectile_range = 500
+	projectile_type = "line"
+	aoe_explosion = false
+	knockback = 0
+	time_of_last_attack = 0.0
 	
 	# setting atk speed and dmg scaling
 	attack_speed = float(player_stats.dexterity * 0.1)
@@ -28,11 +39,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if Input.is_action_pressed("basic_attack"):
-		basic_attack()
-	if Input.is_action_pressed("item_special"):
-		item_special()
+#func _process(_delta):
+	#if Input.is_action_pressed("basic_attack"):
+		#basic_attack()
+	#if Input.is_action_pressed("item_special"):
+		#item_special()
 
 
 func basic_attack():

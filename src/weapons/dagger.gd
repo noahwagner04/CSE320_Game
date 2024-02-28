@@ -1,14 +1,15 @@
-extends Node2D
+extends Weapon
 
-@export var enabled: bool = false 
+@export var enabled: bool = false
 
-@export var attack_speed: float = 4.0
-@export var projectile_damage: float = 6
-@export var projectile_speed: float = 500
-@export_range(5, 500, 1) var projectile_range: float = 50
-@export_enum("line", "swing") var projectile_type: String = "line"
-@export var knockback: float = 175
-var time_of_last_attack: float = 0.0
+#@export var attack_speed: float = 4.0
+#@export var projectile_damage: float = 6
+#@export var projectile_speed: float = 500
+#@export_range(5, 500, 1) var projectile_range: float = 50
+#@export_enum("line", "swing") var projectile_type: String = "line"
+#@export var knockback: float = 175
+#var time_of_last_attack: float = 0.0
+
 var time_of_last_special: float = 0.0
 var special_delay: float = 0.3
 var special_projectile_damage: float = 24
@@ -19,6 +20,13 @@ var special_projectile_knockback: float = 0
 @onready var player_stats = $"../PlayerStats"
 
 func _ready():
+	attack_speed = 4.0
+	projectile_damage = 6
+	projectile_speed = 500
+	projectile_range = 50
+	projectile_type = "line"
+	knockback = 175
+	time_of_last_attack = 0.0
 	
 	# Setting dagger attack speed and damage scaling
 	attack_speed = float(player_stats.dexterity * 0.4)
@@ -32,11 +40,11 @@ func _ready():
 		$PoisonComponent.percent_of_max_health_per_second, $PoisonComponent.duration)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_pressed("basic_attack"):
-		basic_attack()
-	if Input.is_action_pressed("item_special"):
-		item_special()
+#func _process(delta):
+	#if Input.is_action_pressed("basic_attack"):
+		#basic_attack()
+	#if Input.is_action_pressed("item_special"):
+		#item_special()
 
 func basic_attack():
 	var current_time = Time.get_ticks_msec() / 1000.0
