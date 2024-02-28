@@ -43,6 +43,7 @@ func _process(_delta):
 			interact()
 		if Input.is_action_pressed("basic_attack") and equipped_weapon:
 			equipped_weapon.basic_attack()
+			#%SwingSound.play(0.2)
 		if Input.is_action_pressed("item_special") and equipped_weapon:
 			equipped_weapon.item_special()
 	else:
