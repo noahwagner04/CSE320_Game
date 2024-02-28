@@ -8,3 +8,5 @@ extends Resource
 @export var stackable: bool = false
 @export var texture: AtlasTexture
 
+func use(target):
+	pass

@@ -33,6 +33,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 33
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_e7sba")

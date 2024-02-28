@@ -71,3 +71,8 @@ func _on_tree_entered():
 func interact():
 	print("interact")
 	
+func get_drop_position() -> Vector2:
+	var current_position = global_position
+	current_position += Vector2(40, -40)
+	return current_position
+	
