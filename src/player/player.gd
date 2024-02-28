@@ -10,15 +10,21 @@ var mult_sync: MultiplayerSynchronizer
 @onready var motion_controller: MotionController = %MotionController
 
 @export var inventory_data: InventoryData
+@export var weapon_inventory_data: InventoryDataWeapon
 
-
-
+@onready var player_stats = $PlayerStats
 
 func _ready():
-	health_bar.max_value = health_container.max_health
-	
+	set_health()
+	PlayerManager.player = self
 	if multiplayer.get_unique_id() == str(name).to_int():
 		$Camera2D.make_current()
+
+func set_health():
+	health_container.max_health = player_stats.health
+	health_container._health = player_stats.health
+	health_bar.max_value = health_container.max_health
+	health_bar.value = health_container._health
 
 
 func _process(_delta):
@@ -29,6 +35,8 @@ func _process(_delta):
 		# check inventory toggle
 		if Input.is_action_just_pressed("toggle_inventory"):
 			toggle_inventory.emit()
+		if Input.is_action_just_pressed("interact"):
+			interact()
 	else:
 		global_position = global_position.lerp(sync_pos, 0.4)
 
@@ -68,3 +76,13 @@ func _on_tree_entered():
 	mult_sync = %MultiplayerSynchronizer
 	mult_sync.set_multiplayer_authority(str(name).to_int())
 	
+func interact():
+	print("interact")
+	
+func get_drop_position() -> Vector2:
+	var current_position = global_position
+	current_position += Vector2(40, -40)
+	return current_position
+	
+func heal(amount: int):
+	health_container.heal(amount)

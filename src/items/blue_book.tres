@@ -13,6 +13,5 @@ region = Rect2(608, 192, 32, 32)
 script = ExtResource("1_hv3dn")
 name = "Blue Book"
 description = "Good reading"
-type = ""
 stackable = false
 texture = SubResource("AtlasTexture_i8cpf")

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkenseujuv7a1"
-path="res://.godot/imported/gaint_dragonfly.png-a8364fd2bb6e1e70f9227d0dd2ce28c0.ctex"
+path="res://.godot/imported/giant_dragonfly.png-ef7fe251cd9632e0082c2b8800161550.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/gaint_dragonfly.png"
-dest_files=["res://.godot/imported/gaint_dragonfly.png-a8364fd2bb6e1e70f9227d0dd2ce28c0.ctex"]
+source_file="res://assets/enemies/giant_dragonfly.png"
+dest_files=["res://.godot/imported/giant_dragonfly.png-ef7fe251cd9632e0082c2b8800161550.ctex"]
 
 [params]
 
