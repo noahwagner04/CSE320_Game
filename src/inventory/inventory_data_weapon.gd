@@ -36,3 +36,4 @@ func grab_slot_data(index: int) -> SlotData:
 		return slot_data
 	else:
 		return null
+
