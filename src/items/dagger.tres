@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemDataWeapon" load_steps=4 format=3 uid="uid://cv41b4o3k80ve"]
+
+[ext_resource type="Script" path="res://src/inventory/item_data_weapon.gd" id="1_y88cl"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5d6jf"]
+load_path = "res://.godot/imported/32x32.png-e72894ccb86f36ffcb11d38e5757662e.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekf3a"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(96, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_y88cl")
+dagger = 1
+name = "Dagger"
+description = "Pointy dagger!"
+stackable = false
+texture = SubResource("AtlasTexture_ekf3a")
