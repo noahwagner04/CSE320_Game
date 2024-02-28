@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var agro_dist: float = 300
-@export_range(0, 12, 1) var total_vomit_amount: int = 3 
+@export_range(0, 12, 1) var total_vomit_amount: int = 8
 
 var _target: Node2D
 var vomits: int = 0
@@ -18,6 +18,7 @@ var vomits: int = 0
 
 func _ready():
 	special_timer.timeout.connect(special_attacks)
+	special_timer.one_shot = true
 	add_child(special_timer)
 
 
@@ -38,6 +39,7 @@ func _physics_process(_delta):
 		_target = null
 		agro_dist = 300
 		vomits = 0
+		health_container._health = health_container.max_health
 	
 	if (_target != null):
 		motion_controller.acc_dir = global_position.direction_to(_target.global_position)
