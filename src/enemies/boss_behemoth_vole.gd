@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
 @export var agro_dist: float = 300
-@export_range(0, 12, 1) var total_vomit_amount: int = 3 
+@export_range(0, 12, 1) var total_vomit_amount: int = 8
 
 var _target: Node2D
 var vomits: int = 0
+var player_dist: float
 
 @onready var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
 @onready var health_container: HealthContainer = %HealthContainer
@@ -18,12 +19,11 @@ var vomits: int = 0
 
 func _ready():
 	special_timer.timeout.connect(special_attacks)
+	special_timer.one_shot = true
 	add_child(special_timer)
 
 
 func _physics_process(_delta):
-	var player_dist: float
-	
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
 		return
@@ -38,6 +38,7 @@ func _physics_process(_delta):
 		_target = null
 		agro_dist = 300
 		vomits = 0
+		health_container._health = health_container.max_health
 	
 	if (_target != null):
 		motion_controller.acc_dir = global_position.direction_to(_target.global_position)
@@ -76,9 +77,12 @@ func summon_voles(ring_num):
 			call_deferred("add_sibling", giant_vole_instance, false)
 			
 		i += 1
+	$BearSummon.play( .32 )
 	
 	
 func _on_health_container_health_depleted():
+	$BearDeath.play( )
+	await get_tree().create_timer( 3.19 ).timeout
 	queue_free()
 
 
@@ -88,3 +92,4 @@ func _on_hurt_box_hurt(hit_box):
 		second_phase = true
 		var ring_num: int = 6 - health_container.get_health() / health_container.max_health * 10
 		summon_voles(ring_num)
+	$BearHurt.play( .42 )

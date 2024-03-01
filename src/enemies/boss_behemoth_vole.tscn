@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cic55om7hfudf"]
+[gd_scene load_steps=13 format=3 uid="uid://cic55om7hfudf"]
 
 [ext_resource type="Script" path="res://src/enemies/boss_behemoth_vole.gd" id="1_y2xdq"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_43mtr"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://e351ya36oghj" path="res://assets/enemies/giant_vole.png" id="3_d8euk"]
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="4_onvm4"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="5_8ttyp"]
+[ext_resource type="AudioStream" uid="uid://d1rcwk6f4ckue" path="res://assets/sfx/bear-191995.mp3" id="7_sgxui"]
+[ext_resource type="AudioStream" uid="uid://bpur0gxpcjuf4" path="res://assets/sfx/didgeridoo-monster-roar-6962.mp3" id="8_comgt"]
+[ext_resource type="AudioStream" uid="uid://bo160wmkk6oxl" path="res://assets/sfx/bearbark.mp3" id="9_7sex8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wb35t"]
 radius = 19.0
@@ -20,6 +23,7 @@ radius = 19.0
 height = 62.0
 
 [node name="behemoth_vole_boss" type="CharacterBody2D"]
+top_level = true
 collision_layer = 2
 collision_mask = 4
 motion_mode = 1
@@ -63,6 +67,20 @@ health_container = NodePath("../HealthContainer")
 position = Vector2(0, -3)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_4fh4u")
+
+[node name="BearDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_sgxui")
+volume_db = 2.971
+max_polyphony = 10
+
+[node name="BearSummon" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_comgt")
+max_polyphony = 10
+
+[node name="BearHurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_7sex8")
+volume_db = -11.243
+max_polyphony = 10
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
