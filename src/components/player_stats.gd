@@ -3,7 +3,7 @@ extends Node
 # This signal is connected to player_menu - when stats are modified the changes are reflected in the UI
 signal player_leveled_up
 
-@export var health: int = 100
+@export var health: int
 
 # Player base stats
 @export var defense: int

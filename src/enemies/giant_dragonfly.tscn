@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://bda7mol8b1dbo"]
+[gd_scene load_steps=14 format=3 uid="uid://djv6bxpkal1st"]
 
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_44esr"]
-[ext_resource type="Texture2D" uid="uid://dkenseujuv7a1" path="res://assets/enemies/gaint_dragonfly.png" id="1_gxes3"]
+[ext_resource type="Texture2D" uid="uid://dkenseujuv7a1" path="res://assets/enemies/giant_dragonfly.png" id="1_gxes3"]
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="1_itf72"]
 [ext_resource type="Script" path="res://src/enemies/giant_dragonfly.gd" id="1_r1s8r"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="3_d6xc4"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="3_flpor"]
 [ext_resource type="PackedScene" uid="uid://bhgvfs2sl78bn" path="res://src/components/projectile_spawner.tscn" id="7_oa0t7"]
 [ext_resource type="PackedScene" uid="uid://bj4dfv6axl5pc" path="res://src/projectiles/dragonfly_spit.tscn" id="8_6wat5"]
+[ext_resource type="AudioStream" uid="uid://dp41ha8binalc" path="res://assets/sfx/splattt-6295.mp3" id="9_ayftr"]
+[ext_resource type="AudioStream" uid="uid://4gm8rvv20s56" path="res://assets/sfx/bumblebee-45600.mp3" id="10_b15yy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3yxi0"]
 radius = 300.0
@@ -67,6 +69,13 @@ projectile = ExtResource("8_6wat5")
 projectile_damage = 10.0
 projectile_speed = 200.0
 projectile_range = 500.0
+
+[node name="bugsplat" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ayftr")
+
+[node name="bughurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_b15yy")
+max_polyphony = 10
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

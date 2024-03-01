@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var giant_vole_spawner: Spawner = %GiantVoleSpawner
-@onready var giant_dragonfly_spawner: Spawner = %GaintDragonflySpawner
+@onready var giant_dragonfly_spawner: Spawner = %GiantDragonflySpawner
 
 
 func _ready():
