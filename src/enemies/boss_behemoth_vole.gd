@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 var _target: Node2D
 var vomits: int = 0
+var player_dist: float
 
 @onready var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
 @onready var health_container: HealthContainer = %HealthContainer
@@ -23,8 +24,6 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var player_dist: float
-	
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
 		return

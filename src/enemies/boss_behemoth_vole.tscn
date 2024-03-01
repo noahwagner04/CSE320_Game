@@ -52,7 +52,6 @@ shape = SubResource("CapsuleShape2D_wb35t")
 [node name="HitBox" parent="." instance=ExtResource("4_onvm4")]
 collision_layer = 2
 damage = 25.0
-knockback = 1.0
 response = 2
 
 [node name="HitBoxShape2D" type="CollisionShape2D" parent="HitBox"]
