@@ -28,9 +28,9 @@ script = ExtResource("1_kyvox")
 
 [node name="MotionController" parent="." instance=ExtResource("3_517op")]
 unique_name_in_owner = true
-friction = 1000.0
-max_speed = 125.0
-acc_mag = 900.0
+friction = 1200.0
+max_speed = 200.0
+acc_mag = 1000.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("4_vq134")]
 unique_name_in_owner = true
@@ -58,8 +58,9 @@ rotation = -0.546103
 scale = Vector2(0.436957, 1.07207)
 shape = SubResource("CapsuleShape2D_2181d")
 
-[node name="HurtBox" parent="." instance=ExtResource("6_mw65k")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("6_mw65k")]
 collision_layer = 0
+health_container = NodePath("../HealthContainer")
 
 [node name="HurtBoxShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(4, 1)

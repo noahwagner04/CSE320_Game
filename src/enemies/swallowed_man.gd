@@ -36,4 +36,4 @@ func _on_health_container_health_depleted():
 
 
 func _on_hurt_box_hurt(hit_box):
-	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * hit_box.knockback)
+	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * 3.5 * hit_box.knockback)

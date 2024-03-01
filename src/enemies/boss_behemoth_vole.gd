@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var agro_dist: float = 300
-@export_range(0, 12, 1) var total_vomit_amount: int = 8
+@export_range(0, 12, 1) var total_vomit_amount: int = 5
 
 var _target: Node2D
 var vomits: int = 0
