@@ -29,7 +29,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="GiantVole" type="CharacterBody2D"]
-top_level = true
+z_index = 1
 collision_layer = 2
 collision_mask = 4
 motion_mode = 1
