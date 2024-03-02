@@ -23,6 +23,7 @@ radius = 19.0
 height = 62.0
 
 [node name="behemoth_vole_boss" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 4
 motion_mode = 1
@@ -30,13 +31,11 @@ script = ExtResource("1_y2xdq")
 metadata/_edit_group_ = true
 
 [node name="MotionController" parent="." instance=ExtResource("2_43mtr")]
-unique_name_in_owner = true
 friction = 900.0
 max_speed = 70.0
 acc_mag = 560.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_rebr2")]
-unique_name_in_owner = true
 max_health = 500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
