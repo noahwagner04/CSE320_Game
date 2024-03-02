@@ -1,14 +1,15 @@
 extends CharacterBody2D
 
 @export var agro_dist: float = 300
-@export_range(0, 12, 1) var total_vomit_amount: int = 3 
+@export_range(0, 12, 1) var total_vomit_amount: int = 5
 
 var _target: Node2D
 var vomits: int = 0
+var player_dist: float
 
 @onready var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
-@onready var health_container: HealthContainer = %HealthContainer
-@onready var motion_controller: MotionController = %MotionController
+@onready var health_container: HealthContainer = $HealthContainer
+@onready var motion_controller: MotionController = $MotionController
 @onready var player: Node = get_tree().get_first_node_in_group("player")
 @onready var second_phase: bool = false
 @onready var special_timer:= Timer.new()
@@ -18,12 +19,11 @@ var vomits: int = 0
 
 func _ready():
 	special_timer.timeout.connect(special_attacks)
+	special_timer.one_shot = true
 	add_child(special_timer)
 
 
 func _physics_process(_delta):
-	var player_dist: float
-	
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
 		return
@@ -38,6 +38,7 @@ func _physics_process(_delta):
 		_target = null
 		agro_dist = 300
 		vomits = 0
+		health_container._health = health_container.max_health
 	
 	if (_target != null):
 		motion_controller.acc_dir = global_position.direction_to(_target.global_position)
