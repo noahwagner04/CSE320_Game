@@ -4,14 +4,9 @@ extends CharacterBody2D
 
 var player_dist: float
 
-@onready var health_container: HealthContainer = %HealthContainer
-@onready var motion_controller: MotionController = %MotionController
+@onready var health_container: HealthContainer = $HealthContainer
+@onready var motion_controller: MotionController = $MotionController
 @onready var player: Node = get_tree().get_first_node_in_group("player")
-#@onready var vom_puddle_position: Vector2 = get_node("../vomit_projectile").global_position
-
-
-#func _ready():
-#	global_position = vom_puddle_position
 
 
 func _physics_process(delta):

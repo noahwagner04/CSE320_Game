@@ -27,13 +27,11 @@ motion_mode = 1
 script = ExtResource("1_kyvox")
 
 [node name="MotionController" parent="." instance=ExtResource("3_517op")]
-unique_name_in_owner = true
 friction = 1200.0
 max_speed = 200.0
 acc_mag = 1000.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("4_vq134")]
-unique_name_in_owner = true
 max_health = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

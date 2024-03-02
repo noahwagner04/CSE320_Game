@@ -14,7 +14,6 @@ z_index = 1
 script = ExtResource("1_xf2dr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-unique_name_in_owner = true
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("2_1e1ai")
 

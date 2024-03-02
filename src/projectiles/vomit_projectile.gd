@@ -4,7 +4,7 @@ extends Node2D
 @export_range(5, 500, 1) var projectile_range: float = 150
 @export var knockback: float = 0
 
-@onready var sprite: Sprite2D = %Sprite2D
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var puddle_sprite: CompressedTexture2D = preload("res://assets/effects/vomit_puddle.png")
 @onready var start_velocity: Vector2 = get_node("../behemoth_vole_boss").velocity
 @onready var behemoth_vole_position: Vector2 = get_node("../behemoth_vole_boss").global_position

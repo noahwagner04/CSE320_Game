@@ -8,8 +8,8 @@ var vomits: int = 0
 var player_dist: float
 
 @onready var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
-@onready var health_container: HealthContainer = %HealthContainer
-@onready var motion_controller: MotionController = %MotionController
+@onready var health_container: HealthContainer = $HealthContainer
+@onready var motion_controller: MotionController = $MotionController
 @onready var player: Node = get_tree().get_first_node_in_group("player")
 @onready var second_phase: bool = false
 @onready var special_timer:= Timer.new()
