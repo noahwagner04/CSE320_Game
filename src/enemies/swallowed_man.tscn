@@ -45,14 +45,19 @@ shape = SubResource("CapsuleShape2D_6ejrx")
 
 [node name="HitBox" parent="." instance=ExtResource("5_gn7li")]
 collision_layer = 2
-damage = 15.0
+damage = 2.0
 response = 2
 
 [node name="BodyHitBox" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(4, 1)
 shape = SubResource("CapsuleShape2D_6ejrx")
 
-[node name="SwordHitBox" type="CollisionShape2D" parent="HitBox"]
+[node name="HitBox2" parent="." instance=ExtResource("5_gn7li")]
+collision_layer = 2
+damage = 15.0
+response = 2
+
+[node name="SwordHitBox" type="CollisionShape2D" parent="HitBox2"]
 position = Vector2(-10, -4)
 rotation = -0.546103
 scale = Vector2(0.436957, 1.07207)
