@@ -3,7 +3,7 @@ class_name InventoryData
 
 signal inventory_updated(inventory_data: InventoryData)
 signal inventory_interact(inventory_data: InventoryData, index: int, button: int)
-
+signal weapon_changed(weapon_item_data: ItemDataWeapon)
 
 
 @export var slot_datas: Array[SlotData]
@@ -55,7 +55,7 @@ func use_slot_data(index: int):
 		slot_data.quantity -= 1
 		if slot_data.quantity < 1:
 			slot_datas[index] = null
-	
+
 	print(slot_data.item_data.name)
 	PlayerManager.use_slot_data(slot_data)
 	

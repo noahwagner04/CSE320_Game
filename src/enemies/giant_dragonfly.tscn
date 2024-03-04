@@ -22,6 +22,7 @@ height = 20.0
 size = Vector2(13, 19)
 
 [node name="GiantDragonfly" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_r1s8r")
