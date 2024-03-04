@@ -1,9 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcpd2g41uikew"]
+[gd_scene load_steps=12 format=3 uid="uid://bcpd2g41uikew"]
 
+[ext_resource type="Script" path="res://src/main.gd" id="1_8asym"]
 [ext_resource type="PackedScene" uid="uid://dgi8vrclbu3ch" path="res://src/places/meadow.tscn" id="1_y2l12"]
+[ext_resource type="PackedScene" uid="uid://bs0jf15i4nj8u" path="res://src/UI/inventory.tscn" id="3_bj3aa"]
+[ext_resource type="Script" path="res://src/inventory/inventory_interface.gd" id="4_ri52f"]
 [ext_resource type="PackedScene" uid="uid://dfe5fnwrcfr36" path="res://src/UI/connection_scene.tscn" id="4_us305"]
+[ext_resource type="Resource" uid="uid://dmvshcsgmr6mo" path="res://src/items/apple.tres" id="5_tepee"]
+[ext_resource type="PackedScene" uid="uid://drbl531y5n67e" path="res://src/UI/slot.tscn" id="6_sdpfa"]
+[ext_resource type="Script" path="res://src/inventory/slot_data.gd" id="6_tv362"]
+[ext_resource type="PackedScene" uid="uid://be2g6kq3kqnsm" path="res://src/inventory/pick_up.tscn" id="7_y6bi7"]
+[ext_resource type="PackedScene" uid="uid://cao0gknxyrwn1" path="res://src/UI/hot_bar_inventory.tscn" id="10_3kks7"]
+
+[sub_resource type="Resource" id="Resource_4yse5"]
+script = ExtResource("6_tv362")
+item_data = ExtResource("5_tepee")
+quantity = 5
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_8asym")
 
 [node name="Meadow" parent="." instance=ExtResource("1_y2l12")]
 
@@ -13,3 +27,52 @@
 _spawnable_scenes = PackedStringArray("res://src/player/player.tscn")
 spawn_path = NodePath("..")
 spawn_limit = 32
+
+[node name="PickUp" parent="." instance=ExtResource("7_y6bi7")]
+position = Vector2(110, -198)
+slot_data = SubResource("Resource_4yse5")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+script = ExtResource("4_ri52f")
+
+[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("3_bj3aa")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="WeaponInventory" parent="UI/InventoryInterface" instance=ExtResource("3_bj3aa")]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 10.0
+offset_right = 490.0
+offset_bottom = 50.0
+
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("6_sdpfa")]
+visible = false
+modulate = Color(1, 1, 1, 0.490196)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="HotBarInventory" parent="UI" instance=ExtResource("10_3kks7")]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 294.0
+offset_bottom = 82.0
+
+[connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
+[connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
+[connection signal="visibility_changed" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_visibility_changed"]
