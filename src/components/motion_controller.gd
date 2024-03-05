@@ -4,7 +4,6 @@ extends Node
 @export var friction: float = 0
 @export var max_speed: float = INF
 @export var acc_mag: float = 1
-@export_range(0, 100, 1, "suffix: %") var knockback_resistance: float = 0
 
 var acc_dir := Vector2.ZERO:
 	set(direction):

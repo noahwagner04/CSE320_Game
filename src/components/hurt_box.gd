@@ -5,6 +5,7 @@ signal hurt(hit_box)
 
 @export var health_container: HealthContainer
 @export var motion_controller: MotionController
+@export_range(0, 100, 1, "suffix: %") var knockback_resistance: float = 0
 var is_poisoned: bool = false
 
 @onready var poison_component: Node = $PoisonComponent
@@ -49,4 +50,4 @@ func resolve_poison():
 func resolve_knockback(hit_box):
 	if (motion_controller != null):
 		motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() 
-		* knockback_component.knockback * (1-(motion_controller.knockback_resistance / 100)))
+		* knockback_component.knockback * (1-(knockback_resistance / 100)))
