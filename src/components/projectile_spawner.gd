@@ -8,6 +8,8 @@ extends Node2D
 @export_enum("line", "swing") var projectile_type: String = "line"
 @export var projectile_aoe_explosion: bool = false
 @export var projectile_knockback: float = 0
+@onready var poison_component = $PoisonComponent
+
 	
 func spawn_projectile(direction):
 	projectile_direction = direction
@@ -49,10 +51,10 @@ func set_universal_projectile_attributes(damage, speed, range, type):
 	projectile_type = type
 	
 func set_poison_projectile_attributes(effect_active, percent_of_max_health_per_second, duration):
-	$PoisonComponent.effect_active = effect_active
-	$PoisonComponent.percent_of_max_health_per_second = percent_of_max_health_per_second
-	$PoisonComponent.duration = duration
+	poison_component.effect_active = effect_active
+	poison_component.percent_of_max_health_per_second = percent_of_max_health_per_second
+	poison_component.duration = duration
 
 func set_poison_projectile_instance_values(projectile_instance):
-	projectile_instance.find_child("HitBox").set_poison($PoisonComponent.effect_active,
-		$PoisonComponent.percent_of_max_health_per_second, $PoisonComponent.duration)
+	projectile_instance.find_child("HitBox").set_poison(poison_component.effect_active,
+		poison_component.percent_of_max_health_per_second, poison_component.duration)
