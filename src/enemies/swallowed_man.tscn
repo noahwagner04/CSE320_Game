@@ -61,9 +61,10 @@ rotation = -0.546103
 scale = Vector2(0.436957, 1.07207)
 shape = SubResource("CapsuleShape2D_2181d")
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("6_mw65k")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("6_mw65k")]
 collision_layer = 0
 health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
 
 [node name="HurtBoxShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(4, 1)

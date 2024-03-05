@@ -87,7 +87,6 @@ func _on_health_container_health_depleted():
 
 
 func _on_hurt_box_hurt(hit_box):
-	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * 0.7 * hit_box.knockback)
 	if (second_phase == false && health_container.health <= health_container.max_health * 0.5):
 		second_phase = true
 		var ring_num: int = 6 - health_container.health / health_container.max_health * 10

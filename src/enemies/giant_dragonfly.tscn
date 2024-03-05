@@ -53,9 +53,10 @@ texture = ExtResource("1_gxes3")
 position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_uf1rn")
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("3_d6xc4")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("3_d6xc4")]
 collision_layer = 0
 health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -4)
