@@ -1232,7 +1232,6 @@ unique_name_in_owner = true
 radius = 600
 max_spawn = 150
 scene = ExtResource("3_p1cuf")
-spawn_as_child = null
 
 [node name="GiantDragonflySpawner" parent="." instance=ExtResource("2_0b0rp")]
 unique_name_in_owner = true
@@ -1240,7 +1239,6 @@ frequency = 4.0
 radius = 600
 max_spawn = 25
 scene = ExtResource("6_fr1my")
-spawn_as_child = null
 
 [node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://src/enemies/giant_vole.tscn")
