@@ -36,9 +36,9 @@ func _ready():
 
 func set_health():
 	health_container.max_health = player_stats.health
-	health_container._health = player_stats.health
+	health_container.health = player_stats.health
 	health_bar.max_value = health_container.max_health
-	health_bar.value = health_container._health
+	health_bar.value = health_container.health
 
 
 func _process(_delta):
@@ -80,7 +80,7 @@ func move(_delta):
 
 
 func _on_health_container_health_changed(_amount):
-	health_bar.value = health_container.get_health()
+	health_bar.value = health_container.health
 	if _amount < 0:
 		%HurtSound.play(0.75)
 
