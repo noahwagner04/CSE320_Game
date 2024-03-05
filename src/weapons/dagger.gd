@@ -7,6 +7,9 @@ var special_projectile_range: float = 300
 var special_projectile_knockback: float = 0
 
 @onready var poison_component = $PoisonComponent
+@onready var knockback_component = $KnockbackComponent
+
+
 
 func _ready():
 	base_attack_speed = 4.0
@@ -14,7 +17,6 @@ func _ready():
 	projectile_speed = 500
 	projectile_range = 50
 	projectile_type = "line"
-	knockback = 175
 	dex_ratio = 0.4
 	atk_ratio = 0.6
 	set_base_values()
@@ -23,7 +25,8 @@ func _ready():
 	
 	projectile_spawner.set_universal_projectile_attributes(projectile_damage, 
 		projectile_speed, projectile_range, projectile_type)
-	projectile_spawner.projectile_knockback = knockback
+	projectile_spawner.set_knockback_projectile_attributes(knockback_component.effect_active,
+	knockback_component.knockback)
 	projectile_spawner.set_poison_projectile_attributes(poison_component.effect_active,
 		poison_component.percent_of_max_health_per_second, poison_component.duration)
 
@@ -44,10 +47,11 @@ func item_special():
 	time_of_last_special = current_time
 	projectile_spawner.projectile_damage = special_projectile_damage
 	projectile_spawner.projectile_range = special_projectile_range
-	projectile_spawner.projectile_knockback = special_projectile_knockback
+	projectile_spawner.set_knockback_projectile_attributes(false, special_projectile_knockback)
 	var direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
 	projectile_spawner.spawn_projectile(direction)
 	projectile_spawner.projectile_damage = projectile_damage
 	projectile_spawner.projectile_range = projectile_range
-	projectile_spawner.projectile_knockback = knockback
+	projectile_spawner.set_knockback_projectile_attributes(knockback_component.effect_active,
+	knockback_component.knockback)
 	

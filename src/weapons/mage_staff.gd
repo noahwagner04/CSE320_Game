@@ -12,7 +12,6 @@ func _ready():
 	projectile_range = 500
 	projectile_type = "line"
 	aoe_explosion = false
-	knockback = 0
 	dex_ratio = 0.1
 	atk_ratio = 1.0
 	set_base_values()

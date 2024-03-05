@@ -4,8 +4,11 @@ extends Area2D
 signal hurt(hit_box)
 
 @export var health_container: HealthContainer
-@onready var poison_component: Node = $PoisonComponent
+@export var motion_controller: MotionController
 var is_poisoned: bool = false
+
+@onready var poison_component: Node = $PoisonComponent
+@onready var knockback_component: Node = $KnockbackComponent
 
 
 func _on_area_entered(area):
@@ -20,6 +23,11 @@ func _on_area_entered(area):
 		poison_component.percent_of_max_health_per_second = area.poison_component.percent_of_max_health_per_second
 		poison_component.duration = area.poison_component.duration
 		resolve_poison()
+		
+	if area.knockback_component.effect_active == true:
+		knockback_component.effect_active = true
+		knockback_component.knockback = area.knockback_component.knockback
+		resolve_knockback(area)
 	
 	emit_signal("hurt", area)
 
@@ -37,3 +45,8 @@ func resolve_poison():
 		#print("Did one tick of damage! Current Health = ", health_container.get_health())
 		await get_tree().create_timer(1.0).timeout
 	is_poisoned = false
+
+func resolve_knockback(hit_box):
+	if (motion_controller != null):
+		motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() 
+		* knockback_component.knockback * (1-(motion_controller.knockback_resistance / 100)))

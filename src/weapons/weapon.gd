@@ -9,11 +9,10 @@ var projectile_damage: float = 10
 @export var projectile_speed: float = 300
 @export_range(5, 500, 1) var projectile_range: float = 500
 @export_enum("line", "swing") var projectile_type: String = "line"
-@export var knockback: float = 0
 @onready var player_stats = $"../PlayerStats"
 @onready var projectile_spawner = $ProjectileSpawner
 var time_of_last_attack: float = 0.0
-var rarity_ratio: float = weapon_rarity * 0.2 + 1
+var rarity_ratio: float = 1
 @export var dex_ratio: float = 0.4
 @export var atk_ratio: float = 0.6
 
@@ -25,6 +24,7 @@ func set_base_values():
 	projectile_damage = base_projectile_damage
 	
 func set_rarity_bonuses():
+	rarity_ratio = weapon_rarity * 0.2 + 1
 	attack_speed *= rarity_ratio
 	projectile_damage *= rarity_ratio
 	

@@ -34,6 +34,7 @@ metadata/_edit_group_ = true
 friction = 900.0
 max_speed = 70.0
 acc_mag = 560.0
+knockback_resistance = 30.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_rebr2")]
 max_health = 500.0
@@ -57,9 +58,10 @@ position = Vector2(0, -3)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_bnrts")
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("5_8ttyp")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("5_8ttyp")]
 collision_layer = 0
 health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
 
 [node name="HurtBoxShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -3)
