@@ -2,6 +2,9 @@
 class_name Spawner
 extends Marker2D
 
+signal scene_spawned(scene: Node2D)
+
+# Make the user provide a timer node as a child instead of this
 @export_range(0.001, 60, 0.001, "or_greater", "suffix:s") 
 var frequency: float = 1
 @export_range(0, 1000, 1, "or_greater", "suffix:px") 
@@ -18,10 +21,13 @@ var radius: int = 32:
 	set(new_scene):
 		scene = new_scene
 		update_configuration_warnings()
+@export var spawn_as_child: bool = true
 
 var spawned_count: int = 0
+# Make the user provide a timer node as a child instead of this
 var timer: Timer = Timer.new()
 
+@onready var _root = $/root
 
 func _ready():
 	timer.timeout.connect(spawn)
@@ -47,9 +53,13 @@ func spawn():
 	if instance is Node2D:
 		var angle = randf() * 2 * PI
 		instance.position = Vector2(cos(angle), sin(angle)) * radius * randf()
-		instance.tree_exited.connect(_on_despawn)
-	add_child(instance, true)
+	instance.tree_exited.connect(_on_despawn)
+	if(spawn_as_child):
+		add_child(instance, true)
+	else:
+		_root.add_child(instance, true)
 	spawned_count += 1
+	emit_signal("scene_spawned", instance)
 
 
 func start_spawning(new_frequency : float = frequency):
