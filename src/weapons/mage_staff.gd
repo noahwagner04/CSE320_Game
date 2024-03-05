@@ -1,32 +1,24 @@
 extends Weapon
 
-@export var enabled: bool = false 
-@export var item_special_duration: float = 5.0
+var item_special_duration: float = 5.0
 var aoe_explosion: bool = false
-
-#@onready var projectile_spawner = $ProjectileSpawner
-
-
-# player_stats contains all player stat variables
-#@onready var player_stats = $"../PlayerStats"
 
 
 func _ready():
 	
-	attack_speed = 1.0
-	projectile_damage = 10
+	base_attack_speed = 1.0
+	base_projectile_damage = 10
 	projectile_speed = 300
-
 	projectile_range = 500
 	projectile_type = "line"
 	aoe_explosion = false
 	knockback = 0
-	time_of_last_attack = 0.0
 	dex_ratio = 0.1
 	atk_ratio = 1.0
+	set_base_values()
+	set_rarity_bonuses()
+	set_stat_bonuses()
 	
-	
-	set_process(enabled)
 	projectile_spawner.set_universal_projectile_attributes(projectile_damage, 
 		projectile_speed, projectile_range, projectile_type)
 	projectile_spawner.projectile_aoe_explosion = aoe_explosion
