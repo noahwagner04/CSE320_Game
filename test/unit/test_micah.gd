@@ -43,6 +43,7 @@ func before_each():
 	add_child_autofree(test_enemy)
 
 
+#acceptance test
 func test_spawn_new_player():
 	GameManager.instantiate_player(2)
 	var scene_players = get_tree().get_nodes_in_group("player")
@@ -53,12 +54,14 @@ func test_spawn_new_player():
 	assert_false(true, "player should spawn in scene with the name equal to its id")
 
 
+#acceptance test
 func test_spawn_existing_player():
 	GameManager.instantiate_player(1)
 	assert_eq(GameManager.players[1].name, "test_player", "spawning a player with the same id should not be possible")
 	print(get_tree().get_nodes_in_group("player"))
 
 
+#acceptance test
 func test_delete_existing_player():
 	GameManager.delete_player(1)
 	await get_tree().process_frame
@@ -70,33 +73,52 @@ func test_delete_existing_player():
 	assert_true(true, "player does not exist in scene tree")
 
 
+#acceptance test
 func test_closest_collider():
 	var closet_collider = collider_test.get_closest_collider()
 	assert_eq(closet_collider, close, "closest collision object is 'close' ")
 
 
+#acceptance test
 func test_invalid_add_collision():
 	collider_test.add_collision_object(invalid_name_test)
 	assert_eq(collider_test.intersecting_colliders.has(invalid_name_test), false, "colliders array must not contain entries filtered by the specified filter function")
 
 
+#acceptance test
 func test_join_botton():
 	connection_scene._on_join_button_pressed()
 	assert_not_same(multiplayer.get_unique_id(), 1, "when pressing join, peer object should be instantiated and not set to 1 (1 means server)")
 
 
+#acceptance test
 func test_host_botton():
 	connection_scene._on_host_button_pressed()
 	assert_eq(multiplayer.is_server(), true, "pressing host sets the peer object to server")
 
 
-#maybe? make better
+#White Box Test: function provided below
+#func set_peer_host():
+#	peer = ENetMultiplayerPeer.new()
+#	var error = peer.create_server(port, 32)
+#	if error != OK:
+#		print("cannot host" + str(error))
+#		return
+#		
+#	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
+#	multiplayer.set_multiplayer_peer(peer)
+#	print("Waiting for players...")
+#			
+#	if not OS.has_feature("dedicated_server"):
+#		GameManager.instantiate_player(1)
+# receives 100% coverage. First set_peer_call sets the multiplayer peer object and spawns player. Second runs the error catch
 func test_hosting_error():
 	ConnectionHandler.set_peer_host()
 	connection_scene._on_host_button_pressed()
 	assert_eq(multiplayer.is_server(), true, "pressing host when already hosting should not change the peer object")
 
 
+#Integration testing, Big Bang Approach (testing the player and enemy objects)
 func test_enemy_agro():
 	ConnectionHandler.set_peer_host()
 	test_enemy.global_position = Vector2(100, 100)
@@ -104,12 +126,14 @@ func test_enemy_agro():
 	assert_eq(test_enemy._target, test_player, "when the player is in agro range of enemy, the enemies target is the player")
 
 
+#Integration testing, Big Bang Approach (testing the player and enemy objects)
 func test_enemy_attack():
 	test_enemy.global_position = Vector2(10, 10)
 	await get_tree().create_timer(0.5).timeout
 	assert_lt(test_player.health_container.health, 100, "player must be damaged when enemy intersects its collision box")
 
 
+#acceptance test
 func test_authoritative_player_movement():
 	ConnectionHandler.set_peer_host()
 	Input.action_press("move_up")
@@ -118,6 +142,7 @@ func test_authoritative_player_movement():
 	assert_lt(test_player.global_position.y, 0, "when we press the up key, the player should move")
 
 
+#Integration testing, Big Bang Approach (testing the player and enemy objects)
 func test_player_attack():
 	test_enemy.global_position = Vector2(0, 0)
 	Input.action_press("basic_attack")
