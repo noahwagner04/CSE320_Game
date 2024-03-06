@@ -16,7 +16,7 @@ func before_each():
 	health_container = children.filter(func(obj): return obj is HealthContainer)[0]
 
 
-# Bottom-Up test of HurtBox and HealthContainer components
+# Bottom-Up test of HurtBox and HealthContainer classes
 func test_damage_health_on_hurt():
 	watch_signals(hurt_box)
 	hit_box.position = Vector2.ZERO
