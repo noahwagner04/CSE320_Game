@@ -40,8 +40,11 @@ func test_host_botton():
 #			
 #	if not OS.has_feature("dedicated_server"):
 #		GameManager.instantiate_player(1)
-# receives 100% coverage. First set_peer_call sets the multiplayer peer object and spawns player. Second runs the error catch
+# receives 100% branch coverage. 
+# this is testing if a host on a given machine is already taken, peer should remane unchanged
 func test_hosting_error():
 	ConnectionHandler.set_peer_host()
+	var prev_peer = multiplayer.multiplayer_peer
 	connection_scene._on_host_button_pressed()
-	assert_eq(multiplayer.is_server(), true, "pressing host when already hosting should not change the peer object")
+	var cur_peer = multiplayer.multiplayer_peer
+	assert_eq(prev_peer, cur_peer, "pressing host when already hosting should not change the peer object")
