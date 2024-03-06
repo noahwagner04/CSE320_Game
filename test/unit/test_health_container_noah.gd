@@ -2,6 +2,7 @@ extends GutTest
 
 var health_container: HealthContainer
 
+
 func before_each():
 	health_container = preload("res://src/components/health_container.tscn").instantiate()
 	add_child_autofree(health_container)
