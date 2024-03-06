@@ -107,7 +107,7 @@ func test_enemy_agro():
 func test_enemy_attack():
 	test_enemy.global_position = Vector2(10, 10)
 	await get_tree().create_timer(0.5).timeout
-	assert_lt(test_player.health_bar.value, 100, "player must be damaged when enemy intersects its collision box")
+	assert_lt(test_player.health_container.health, 100, "player must be damaged when enemy intersects its collision box")
 
 
 func test_authoritative_player_movement():
@@ -123,4 +123,5 @@ func test_player_attack():
 	Input.action_press("basic_attack")
 	await get_tree().create_timer(0.5).timeout
 	Input.action_release("basic_attack")
-	assert_lt(test_enemy.health_container.health, test_enemy.health_container.max_health, "when we press the up key, the player should move")
+	var enemy_health = test_enemy.get_children().filter(func (child): return child is HealthContainer)[0]
+	assert_lt(enemy_health.health, enemy_health.max_health, "when we press the up key, the player should move")
