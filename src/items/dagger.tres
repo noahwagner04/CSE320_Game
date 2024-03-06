@@ -13,6 +13,7 @@ region = Rect2(96, 320, 32, 32)
 [resource]
 script = ExtResource("1_y88cl")
 weapon = ExtResource("2_w4vca")
+weapon_rarity = 1
 name = "Dagger"
 description = "Pointy dagger!"
 stackable = false
