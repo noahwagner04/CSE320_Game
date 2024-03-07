@@ -14,6 +14,8 @@ func before_each():
 	add_child_autofree(stats_instance)
 	add_child_autofree(menu_instance)
 
+#Bottom Up test of PlayerStats scene and PlayerMenu scene
+#Checking if data is pulled from PlayerStats and accurately displayed through PlayerMenu
 func test_health_rendering():
 	assert_true(menu_instance.health_label.text == "Health 100", "Initial rendering should get 100 health from player_stats and display it accurately")
 
