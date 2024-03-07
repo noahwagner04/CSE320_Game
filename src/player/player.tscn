@@ -81,15 +81,15 @@ offset_bottom = 19.0
 theme_override_styles/background = SubResource("StyleBoxFlat_hyc80")
 theme_override_styles/fill = SubResource("StyleBoxFlat_01xff")
 value = 100.0
-exp_edit = true
 show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_tjo2q")
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("3_5ej63")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("3_5ej63")]
 collision_mask = 2
 health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_vhwkk")

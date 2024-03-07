@@ -38,7 +38,7 @@ func _physics_process(_delta):
 		_target = null
 		agro_dist = 300
 		vomits = 0
-		health_container._health = health_container.max_health
+		health_container.health = health_container.max_health
 	
 	if (_target != null):
 		motion_controller.acc_dir = global_position.direction_to(_target.global_position)
@@ -87,9 +87,8 @@ func _on_health_container_health_depleted():
 
 
 func _on_hurt_box_hurt(hit_box):
-	motion_controller.apply_impulse((global_position - hit_box.global_position).normalized() * 0.7 * hit_box.knockback)
-	if (second_phase == false && health_container.get_health() <= health_container.max_health * 0.5):
+	if (second_phase == false && health_container.health <= health_container.max_health * 0.5):
 		second_phase = true
-		var ring_num: int = 6 - health_container.get_health() / health_container.max_health * 10
+		var ring_num: int = 6 - health_container.health / health_container.max_health * 10
 		summon_voles(ring_num)
 	$BearHurt.play( .42 )

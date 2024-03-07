@@ -4,13 +4,12 @@ extends Area2D
 enum ResponseType {NO_RESPONSE, DISABLE, TEMPORARY_DISABLE}
 
 @export var damage: float = 1
-@export var knockback: float = 0
 @export var response := ResponseType.NO_RESPONSE
 @export_range(0.001, 60, 0.001, "or_greater", "suffix:s")
 var disable_time: float = 1
 
-@onready var poison_component: Node = $PoisonComponent
-
+@onready var knockback_component = $KnockbackComponent
+@onready var poison_component = $PoisonComponent
 
 func _on_area_entered(_area):
 	match response:
@@ -23,11 +22,14 @@ func _on_area_entered(_area):
 		_:
 			return
 			
-func set_basic_attributes(damage_param, knockback_param):
+func set_damage(damage_param):
 	damage = damage_param
-	knockback = knockback_param
 
 func set_poison(active_param, percent_param, duration_param):
-	$PoisonComponent.effect_active = active_param
-	$PoisonComponent.percent_of_max_health_per_second = percent_param
-	$PoisonComponent.duration = duration_param
+	poison_component.effect_active = active_param
+	poison_component.percent_of_max_health_per_second = percent_param
+	poison_component.duration = duration_param
+	
+func set_knockback(active_param, knockback_param):
+	knockback_component.effect_active = active_param
+	knockback_component.knockback = knockback_param
