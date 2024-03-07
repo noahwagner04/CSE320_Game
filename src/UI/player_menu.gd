@@ -14,7 +14,7 @@ func _ready():
 	var stats = $"../PlayerStats"
 	render_stats()
 	stats.connect("player_leveled_up", render_stats)
-	$"..".toggle_inventory.connect(toggle_player_menu)
+	#$"..".toggle_inventory.connect(toggle_player_menu)
 
 func toggle_player_menu():
 	panel.visible = not panel.visible
