@@ -13,6 +13,7 @@ region = Rect2(2144, 288, 32, 32)
 [resource]
 script = ExtResource("1_mdwpw")
 weapon = ExtResource("2_4gcxg")
+weapon_rarity = 1
 name = "Mage Staff"
 description = "Sparkly!"
 stackable = false

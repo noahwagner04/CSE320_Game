@@ -39,7 +39,6 @@ func apply_acceleration(external_acc: Vector2, delta_time: float):
 func apply_impulse(delta_velocity: Vector2):
 	_external_velocity += delta_velocity
 
-
 func apply_friction(delta_time: float):
 	apply_acceleration(-_external_velocity.normalized() * friction, delta_time)
 	if _external_velocity.length() < friction * delta_time:
