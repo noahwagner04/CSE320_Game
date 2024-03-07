@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://1hm5okc808am"]
+
+[ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="1_104a0"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="2_ikuag"]
+[ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="3_1v0pq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ons73"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mgqg8"]
+
+[node name="HitHurtBoxTest" type="Node2D"]
+
+[node name="HealthContainer" parent="." instance=ExtResource("1_104a0")]
+
+[node name="HitBox" parent="." instance=ExtResource("2_ikuag")]
+position = Vector2(-50, 2.08165e-12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_ons73")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("3_1v0pq")]
+health_container = NodePath("../HealthContainer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_mgqg8")
