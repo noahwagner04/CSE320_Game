@@ -1,3 +1,4 @@
+#class_name PlayerStats
 extends Node
 
 # This signal is connected to player_menu - when stats are modified the changes are reflected in the UI
