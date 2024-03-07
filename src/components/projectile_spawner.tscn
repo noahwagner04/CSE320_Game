@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhgvfs2sl78bn"]
+[gd_scene load_steps=4 format=3 uid="uid://bhgvfs2sl78bn"]
 
 [ext_resource type="Script" path="res://src/components/projectile_spawner.gd" id="1_o8sb7"]
 [ext_resource type="Script" path="res://src/components/poison_component.gd" id="2_k2j8q"]
+[ext_resource type="Script" path="res://src/components/knockback_component.gd" id="3_l60ps"]
 
 [node name="ProjectileSpawner" type="Node2D"]
 script = ExtResource("1_o8sb7")
 
 [node name="PoisonComponent" type="Node" parent="."]
 script = ExtResource("2_k2j8q")
+
+[node name="KnockbackComponent" type="Node" parent="."]
+script = ExtResource("3_l60ps")
