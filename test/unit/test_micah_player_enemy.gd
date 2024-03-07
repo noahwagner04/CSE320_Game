@@ -30,14 +30,14 @@ func before_each():
 	add_child_autofree(test_enemy)
 
 
-#Integration testing, Big Bang Approach (testing the player and enemy objects)
+#Integration testing, Bottom-up Approach (testing the player and enemy units)
 func test_enemy_agro():
 	test_enemy.global_position = Vector2(100, 100)
 	await get_tree().process_frame
 	assert_eq(test_enemy._target, test_player, "when the player is in agro range of enemy, the enemies target is the player")
 
 
-#Integration testing, Big Bang Approach (testing the player and enemy objects)
+#Integration testing, Bottom-up Approach (testing the player and enemy units)
 func test_enemy_attack():
 	test_enemy.global_position = Vector2(10, 10)
 	await get_tree().create_timer(0.5).timeout
@@ -52,7 +52,7 @@ func test_authoritative_player_movement():
 	assert_lt(test_player.global_position.y, 0, "when we press the up key, the player should move")
 
 
-#Integration testing, Big Bang Approach (testing the player and enemy objects)
+#Integration testing, Bottom-up Approach (testing the player and enemy units)
 func test_player_attack():
 	test_enemy.global_position = Vector2(0, 0)
 	Input.action_press("basic_attack")
