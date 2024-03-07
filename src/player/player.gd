@@ -110,6 +110,7 @@ func change_weapon(weapon_item_data: ItemDataWeapon):
 	if equipped_weapon:
 		equipped_weapon.queue_free()
 	equipped_weapon = weapon_item_data.weapon.instantiate()
+	equipped_weapon.weapon_rarity = weapon_item_data.weapon_rarity
 	add_child(equipped_weapon)
 	print("equipped weapon has been changed to: %s" % weapon_item_data.name)
 
