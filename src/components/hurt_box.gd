@@ -2,6 +2,7 @@ class_name HurtBox
 extends Area2D
 
 signal hurt(hit_box)
+signal just_poisoned()
 
 @export var health_container: HealthContainer
 @export var motion_controller: MotionController
@@ -36,6 +37,7 @@ func resolve_poison():
 	if (health_container == null) || (is_poisoned == true):
 		return
 	is_poisoned = true
+	emit_signal("just_poisoned")
 	var damage_per_second: float = health_container.max_health * poison_component.percent_of_max_health_per_second / 100.0
 	#print("max health = ", health_container.max_health)
 	#print("damage_per_second = ", damage_per_second)
