@@ -9,6 +9,7 @@ var daggerSlotData: SlotData = inventory_data.slot_datas[daggerIndex]
 var grabbed_slot_data: SlotData
 var initialQuantity: int = 2
 
+
 func before_each():
 	# reset index 10
 	inventory_data.slot_datas[emptyIndex] = null
@@ -16,8 +17,10 @@ func before_each():
 	# reset ten apples
 	inventory_data.slot_datas[tenApplesIndex].set_quantity(10)
 	assert_true(inventory_data.slot_datas[tenApplesIndex].item_data.name == "Apple" && inventory_data.slot_datas[tenApplesIndex].quantity == 10,  "index 2 contains ten apples")
+	# reset grabbed slot data
 	grabbed_slot_data = inventory_data.slot_datas[twoApplesIndex]
 	assert_true(grabbed_slot_data.item_data.name == "Apple" && grabbed_slot_data.quantity == initialQuantity, "item_data = apple.tres, quantity = 2")
+
 
 # the three tests below are testing this drop_slot_data function from inventory_data.gd
 '''

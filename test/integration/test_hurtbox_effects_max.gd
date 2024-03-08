@@ -40,12 +40,14 @@ func test_is_poisoned():
 	await wait_for_signal(hurt_box.hurt, 1)
 	assert_true(hurt_box.is_poisoned, "is_poisoned must be active when poisoned")
 	
+	
 func test_just_poisoned_signal():
 	hit_box.set_poison(true, 10, 10)
 	watch_signals(hurt_box)
 	hit_box.position = Vector2.ZERO
 	await wait_for_signal(hurt_box.just_poisoned, 1)
 	assert_true(hurt_box.is_poisoned, "just_poisoned should only be emitted when hurt_box is poisoned")
+
 
 func test_just_poisoned_signal2():
 	watch_signals(hurt_box)

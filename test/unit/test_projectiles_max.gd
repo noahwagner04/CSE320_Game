@@ -48,6 +48,7 @@ func test_hit_box_set_poison():
 	hit_box.set_poison(true, 3, 3)
 	assert_true(is_equal_approx(hit_box.poison_component.duration, 3), "hit_box's poison component should be able to be changed at any point")
 
+
 # acceptance test
 func test_hit_box_set_knockback():
 	hit_box.set_knockback(true, 6)
