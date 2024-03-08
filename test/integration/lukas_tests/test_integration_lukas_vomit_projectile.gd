@@ -7,6 +7,7 @@ var player: CharacterBody2D
 var skeleton: Node
 
 
+# Bottom-up Integration
 func before_each():
 	player = preload("res://src/player/player.tscn").instantiate()
 	add_child_autofree(player)
