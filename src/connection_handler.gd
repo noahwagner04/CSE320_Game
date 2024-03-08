@@ -49,7 +49,6 @@ func set_peer_host():
 			
 	if not OS.has_feature("dedicated_server"):
 		GameManager.instantiate_player(1)
-		
 
 
 func set_peer_client():
