@@ -9,7 +9,7 @@ var menu_instance: Node
 func before_each():
 	player_stats = preload("res://src/components/player_stats.tscn")
 	stats_instance = player_stats.instantiate()
-	player_menu = preload("res://src/UI/player_menu.tscn")
+	player_menu = preload("res://test/scenes/player_menu_test.tscn")
 	menu_instance = player_menu.instantiate()
 	add_child_autofree(stats_instance)
 	add_child_autofree(menu_instance)
