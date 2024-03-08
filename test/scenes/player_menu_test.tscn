@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8pv7jnmuk0w0"]
+
+[ext_resource type="Script" path="res://test/scenes/player_menu_test.gd" id="1_4ld02"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qc2h"]
+bg_color = Color(0.266667, 0.188235, 0.188235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k5pfn"]
+content_margin_left = 5.0
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.87451, 0.792157, 0.498039, 1)
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.501961, 0.454902, 0.286275, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_lxtyf"]
+Panel/styles/panel = SubResource("StyleBoxFlat_5qc2h")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_k5pfn")
+
+[node name="PlayerMenu" type="CanvasLayer"]
+script = ExtResource("1_4ld02")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = 1617.0
+offset_top = 10.0
+offset_right = 1914.0
+offset_bottom = 280.0
+theme = SubResource("Theme_lxtyf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Health" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Health "
+fit_content = true
+
+[node name="Defense" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Defense "
+fit_content = true
+
+[node name="HP Regen" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "HP Regen"
+fit_content = true
+
+[node name="Attack" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Attack "
+fit_content = true
+
+[node name="Dexterity" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Dexterity "
+fit_content = true
+
+[node name="Speed" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Speed "
+fit_content = true
+
+[node name="SP Regen" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "SP Regen "
+fit_content = true
+
+[node name="Stamina" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Stamina "
+fit_content = true
