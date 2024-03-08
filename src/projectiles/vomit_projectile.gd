@@ -11,6 +11,7 @@ extends Node2D
 @onready var poison_component = $PoisonComponent
 
 var projectile_direction: Vector2 
+var projectile_lifetime
 
 
 func _ready():
@@ -19,7 +20,7 @@ func _ready():
 	global_position = behemoth_vole_position# + start_velocity
 	$HitBox.set_poison(poison_component.effect_active, poison_component.percent_of_max_health_per_second, poison_component.duration)
 	projectile_direction = to_local(player.global_position).normalized()
-	var projectile_lifetime = projectile_range / projectile_speed
+	projectile_lifetime = projectile_range / projectile_speed
 	await get_tree().create_timer(projectile_lifetime).timeout
 	sprite.texture = puddle_sprite
 	sprite.scale = Vector2(2,2)
