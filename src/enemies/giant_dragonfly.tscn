@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=3 uid="uid://djv6bxpkal1st"]
 
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_44esr"]
-[ext_resource type="Texture2D" uid="uid://dkenseujuv7a1" path="res://assets/enemies/gaint_dragonfly.png" id="1_gxes3"]
+[ext_resource type="Texture2D" uid="uid://dkenseujuv7a1" path="res://assets/enemies/giant_dragonfly.png" id="1_gxes3"]
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="1_itf72"]
 [ext_resource type="Script" path="res://src/enemies/giant_dragonfly.gd" id="1_r1s8r"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="3_d6xc4"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="3_flpor"]
 [ext_resource type="PackedScene" uid="uid://bhgvfs2sl78bn" path="res://src/components/projectile_spawner.tscn" id="7_oa0t7"]
-[ext_resource type="PackedScene" path="res://src/projectiles/dragonfly_spit.tscn" id="8_6wat5"]
+[ext_resource type="PackedScene" uid="uid://bj4dfv6axl5pc" path="res://src/projectiles/dragonfly_spit.tscn" id="8_6wat5"]
 [ext_resource type="AudioStream" uid="uid://dp41ha8binalc" path="res://assets/sfx/splattt-6295.mp3" id="9_ayftr"]
 [ext_resource type="AudioStream" uid="uid://4gm8rvv20s56" path="res://assets/sfx/bumblebee-45600.mp3" id="10_b15yy"]
 
@@ -22,6 +22,7 @@ height = 20.0
 size = Vector2(13, 19)
 
 [node name="GiantDragonfly" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_r1s8r")
@@ -52,9 +53,10 @@ texture = ExtResource("1_gxes3")
 position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_uf1rn")
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("3_d6xc4")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("3_d6xc4")]
 collision_layer = 0
 health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -4)

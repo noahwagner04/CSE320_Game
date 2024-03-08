@@ -29,6 +29,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="GiantVole" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 4
 motion_mode = 1
@@ -70,9 +71,10 @@ response = 2
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_2ohi8")
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("4_yoi8p")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("4_yoi8p")]
 collision_layer = 0
 health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -3)

@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://d0flc8682bqiw"]
+
+[ext_resource type="Texture2D" uid="uid://c2tihctaoj8bd" path="res://assets/inventory_items/32x32.png" id="1_dblfl"]
+[ext_resource type="Script" path="res://src/enemies/swallowed_man.gd" id="1_kyvox"]
+[ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="3_517op"]
+[ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="4_vq134"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="5_gn7li"]
+[ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="6_mw65k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyugy"]
+atlas = ExtResource("1_dblfl")
+region = Rect2(1792, 640, 32, 32)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ejrx"]
+radius = 9.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2181d"]
+radius = 4.0
+height = 13.3708
+
+[node name="swallowed_man" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 2
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("1_kyvox")
+
+[node name="MotionController" parent="." instance=ExtResource("3_517op")]
+friction = 1200.0
+max_speed = 200.0
+acc_mag = 1000.0
+
+[node name="HealthContainer" parent="." instance=ExtResource("4_vq134")]
+max_health = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_uyugy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 1)
+shape = SubResource("CapsuleShape2D_6ejrx")
+
+[node name="HitBox" parent="." instance=ExtResource("5_gn7li")]
+collision_layer = 2
+damage = 2.0
+response = 2
+
+[node name="BodyHitBox" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(4, 1)
+shape = SubResource("CapsuleShape2D_6ejrx")
+
+[node name="HitBox2" parent="." instance=ExtResource("5_gn7li")]
+collision_layer = 2
+damage = 15.0
+response = 2
+
+[node name="SwordHitBox" type="CollisionShape2D" parent="HitBox2"]
+position = Vector2(-10, -4)
+rotation = -0.546103
+scale = Vector2(0.436957, 1.07207)
+shape = SubResource("CapsuleShape2D_2181d")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("6_mw65k")]
+collision_layer = 0
+health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
+
+[node name="HurtBoxShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(4, 1)
+shape = SubResource("CapsuleShape2D_6ejrx")
+
+[connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
