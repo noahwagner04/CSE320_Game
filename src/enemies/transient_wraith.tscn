@@ -88,3 +88,4 @@ projectile_speed = 120.0
 projectile_range = 500.0
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

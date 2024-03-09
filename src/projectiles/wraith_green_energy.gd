@@ -1,12 +1,4 @@
-extends Node2D
-
-
-var projectile_direction: Vector2
-var projectile_speed: float
-var projectile_damage: float 
-var projectile_range: float
-var projectile_type: String
-var aoe_explosion: bool
+extends Projectile
 
 
 # Called when the node enters the scene tree for the first time.
