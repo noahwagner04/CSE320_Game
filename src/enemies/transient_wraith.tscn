@@ -86,3 +86,5 @@ projectile = ExtResource("8_w2jq2")
 projectile_damage = 15.0
 projectile_speed = 50.0
 projectile_range = 500.0
+
+[connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
