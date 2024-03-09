@@ -1,3 +1,4 @@
+#class_name PlayerStats
 extends Node
 
 # This signal is connected to player_menu - when stats are modified the changes are reflected in the UI
@@ -25,7 +26,7 @@ signal player_leveled_up
 
 var xp_level_thresholds: Array[int] = [100, 300, 700, 1300, 2000]
 var xp: int = 0
-var level: int = 0
+var level: int = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -49,7 +50,7 @@ func gain_xp(amount):
 
 # Checks if a character meets a threshold requried for leveling up
 func checkLevelUp():
-	if xp > xp_level_thresholds[level]:
+	if xp >= xp_level_thresholds[level - 1]:
 		levelUp()
 
 

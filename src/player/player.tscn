@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ldya24kqafli"]
+[gd_scene load_steps=18 format=3 uid="uid://ldya24kqafli"]
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
@@ -12,7 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
 [ext_resource type="PackedScene" uid="uid://22wskpfroyx6" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
 [ext_resource type="PackedScene" uid="uid://bun6y0ddq8lx3" path="res://src/components/player_stats.tscn" id="9_10w05"]
-[ext_resource type="Script" path="res://src/components/player_stats.gd" id="10_sfrx4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyc80"]
 bg_color = Color(0.6, 0, 0, 1)
@@ -64,7 +63,6 @@ acc_mag = 3000.0
 unique_name_in_owner = true
 
 [node name="PlayerStats" parent="." instance=ExtResource("9_10w05")]
-script = ExtResource("10_sfrx4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
