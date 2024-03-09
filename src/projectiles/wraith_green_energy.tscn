@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6y45sooyea0y"]
+
+[ext_resource type="Texture2D" uid="uid://c2tihctaoj8bd" path="res://assets/inventory_items/32x32.png" id="1_kp0tc"]
+[ext_resource type="Script" path="res://src/projectiles/wraith_green_energy.gd" id="1_wyw6e"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="3_e0yme"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m51op"]
+atlas = ExtResource("1_kp0tc")
+region = Rect2(3296, 32, 32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0gd1q"]
+radius = 13.0
+
+[node name="WraithGreenEnergy" type="Node2D"]
+z_index = 1
+script = ExtResource("1_wyw6e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_m51op")
+
+[node name="HitBox" parent="." instance=ExtResource("3_e0yme")]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_0gd1q")
