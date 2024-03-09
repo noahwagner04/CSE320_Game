@@ -1,0 +1,88 @@
+[gd_scene load_steps=15 format=3 uid="uid://bcq2upb3df7xk"]
+
+[ext_resource type="Script" path="res://src/enemies/transient_wraith.gd" id="1_nb65q"]
+[ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="1_rmsyv"]
+[ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="2_ohq7i"]
+[ext_resource type="Texture2D" uid="uid://c2tihctaoj8bd" path="res://assets/inventory_items/32x32.png" id="3_1575g"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="4_ru11o"]
+[ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="5_fjf0u"]
+[ext_resource type="PackedScene" uid="uid://bhgvfs2sl78bn" path="res://src/components/projectile_spawner.tscn" id="7_rbhy7"]
+[ext_resource type="PackedScene" uid="uid://c6y45sooyea0y" path="res://src/projectiles/wraith_green_energy.tscn" id="8_w2jq2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a822r"]
+size = Vector2(30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3lfg"]
+atlas = ExtResource("3_1575g")
+region = Rect2(2400, 640, 32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3cutb"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fyrqf"]
+radius = 6.08276
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7igus"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ecmyk"]
+radius = 5.0
+
+[node name="TransientWraith" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 2
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("1_nb65q")
+
+[node name="MotionController" parent="." instance=ExtResource("1_rmsyv")]
+friction = 1500.0
+max_speed = 500.0
+acc_mag = 1500.0
+
+[node name="HealthContainer" parent="." instance=ExtResource("2_ohq7i")]
+max_health = 1500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_a822r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_w3lfg")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("5_fjf0u")]
+collision_layer = 0
+health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
+
+[node name="HurtBoxShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_3cutb")
+
+[node name="HitBox2" parent="." instance=ExtResource("4_ru11o")]
+collision_layer = 2
+damage = 10.0
+response = 2
+
+[node name="CenterBody" type="CollisionShape2D" parent="HitBox2"]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_fyrqf")
+
+[node name="HitBox" parent="." instance=ExtResource("4_ru11o")]
+collision_layer = 2
+damage = 15.0
+response = 2
+
+[node name="LeftHand" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-9, -9)
+shape = SubResource("CircleShape2D_7igus")
+
+[node name="RightHand" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(10, -9)
+shape = SubResource("CircleShape2D_ecmyk")
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("7_rbhy7")]
+projectile = ExtResource("8_w2jq2")
+projectile_damage = 15.0
+projectile_speed = 50.0
+projectile_range = 500.0
