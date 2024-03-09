@@ -84,7 +84,7 @@ shape = SubResource("CircleShape2D_ecmyk")
 [node name="ProjectileSpawner" parent="." instance=ExtResource("7_rbhy7")]
 projectile = ExtResource("8_w2jq2")
 projectile_damage = 15.0
-projectile_speed = 50.0
+projectile_speed = 120.0
 projectile_range = 500.0
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]

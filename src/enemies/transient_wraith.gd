@@ -16,7 +16,7 @@ func _ready():
 	add_child(teleport_timer)
 	add_child(projectile_timer)
 	teleport_timer.start(3)
-	projectile_timer.start(1)
+	projectile_timer.start(0.5)
 
 
 func _physics_process(delta):
@@ -37,23 +37,41 @@ func fire_projectile():
 func teleport():
 	if (player == null):
 		return
-	if (to_local(player.global_position) <= Vector2(15,15)):
-		var global_x: float = global_position.x
-		var global_y: float = global_position.y
 		
-		var new_x_pos: float = randf_range(-250,250)
-		while  (new_x_pos + global_x > 640 || new_x_pos + global_x < -640):
-			new_x_pos = randf_range(-250, 250)
+	var global_x: float
+	var global_y: float
+	var rand_pos: float
+	var new_x_pos: float
+	var new_y_pos: float
 		
-		var new_y_pos: float = randf_range(-250,250)
-		while (new_y_pos + global_y > 640 || new_y_pos + global_y < -640):
-			new_y_pos = randf_range(-250, 250)
+	if (global_position.distance_to(player.global_position) <= 150):
+		global_x = global_position.x
+		global_y = global_position.y
 		
-		global_position += Vector2(new_x_pos, new_y_pos)
+		rand_pos  = randf_range(-250,250)
+		new_x_pos = rand_pos + global_x
+		
+		if (new_x_pos > 640):
+			new_x_pos = 640 
+		elif (new_x_pos < -640):
+			new_x_pos = -640
+		
+		rand_pos  = randf_range(-250,250)
+		new_y_pos = rand_pos + global_y
+		
+		if (new_y_pos > 640):
+			new_y_pos = 640
+		elif (new_y_pos < -640):
+			new_y_pos = -640
+		
+		global_position = Vector2(new_x_pos, new_y_pos)
+		
 		teleport_timer.start(3)
+		
 	else:
 		teleport_timer.start(1)
 
 
 func _on_health_container_health_depleted():
+	print("freeing wraith boss")
 	queue_free()
