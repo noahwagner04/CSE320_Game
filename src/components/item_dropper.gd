@@ -31,6 +31,8 @@ func _ready():
 	pass
 	
 func on_death():
+	if randf() < 0.8:
+		return
 	slot_data = SlotData.new()
 	slot_data.item_data = healing_potion
 	slot_data.quantity = 1
