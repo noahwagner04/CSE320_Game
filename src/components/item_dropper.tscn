@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddm4ytlgshday"]
+
+[ext_resource type="Script" path="res://src/components/item_dropper.gd" id="1_lmtat"]
+
+[node name="ItemDropper" type="Node2D"]
+script = ExtResource("1_lmtat")
+mage_staff_rarities = 0

@@ -14,7 +14,6 @@ projectile = ExtResource("3_wn77i")
 
 [node name="PoisonComponent" type="Node" parent="."]
 script = ExtResource("4_6iu0b")
-effect_active = true
 percent_of_max_health_per_second = 5.0
 duration = 5.0
 
