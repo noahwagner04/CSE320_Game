@@ -25,7 +25,7 @@ func _ready():
 	# exported inventories: would likely start based on class selection
 	# based on class, select starting weapon
 	# for now, using a default starting_weapon resource of dagger
-	starting_item_data_weapon = preload("res://src/items/dagger.tres")
+	starting_item_data_weapon = preload("res://src/items/dagger1.tres")
 	# again, this is based off of the test_weapon_inventory.tres having
 		# a dagger. 
 	change_weapon(starting_item_data_weapon)
@@ -67,14 +67,13 @@ func move(_delta):
 	
 	# apply friction if no input is pressed
 	if direction.length() == 0:
-		motion_controller.stop_desired_motion()
+		motion_controller.apply_friction(_delta)
 	
 	# apply acceleration and limit velocity
-	motion_controller.acc_dir = direction
-	motion_controller.update(_delta)
+	motion_controller.move(direction, _delta)
 	
 	# move the player
-	velocity = motion_controller.get_velocity()
+	velocity = motion_controller.velocity
 	move_and_slide()
 	
 

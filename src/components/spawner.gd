@@ -4,9 +4,6 @@ extends Marker2D
 
 signal scene_spawned(scene: Node2D)
 
-# Make the user provide a timer node as a child instead of this
-@export_range(0.001, 60, 0.001, "or_greater", "suffix:s") 
-var frequency: float = 1
 @export_range(0, 1000, 1, "or_greater", "suffix:px") 
 var radius: int = 32:
 	set(new_radius):
@@ -24,14 +21,17 @@ var radius: int = 32:
 @export var spawn_as_child: bool = true
 
 var spawned_count: int = 0
-# Make the user provide a timer node as a child instead of this
-var timer: Timer = Timer.new()
+
+var _timer: Timer
 
 @onready var _root = $/root
 
 func _ready():
-	timer.timeout.connect(spawn)
-	add_child(timer, true)
+	for child in get_children():
+		if child is Timer:
+			_timer = child
+			_timer.timeout.connect(spawn)
+			break
 
 
 func _draw():
@@ -44,6 +44,14 @@ func _get_configuration_warnings():
 		return ["Scene to spawn is not set!"]
 	elif not (scene.instantiate() is Node2D):
 		return ["Provided scene must extend Node2D for Spawner to work."]
+	
+	var has_timer: bool = false
+	for child in get_children():
+		if child is Timer:
+			has_timer = true
+			break
+	if not has_timer:
+		return ["Add a child Timer node to spawn on an interval."]
 
 
 func spawn():
@@ -60,16 +68,6 @@ func spawn():
 		_root.add_child(instance, true)
 	spawned_count += 1
 	emit_signal("scene_spawned", instance)
-
-
-func start_spawning(new_frequency : float = frequency):
-	if new_frequency != frequency:
-		frequency = new_frequency
-	timer.start(frequency)
-
-
-func stop_spawning():
-	timer.stop()
 
 
 func _on_despawn():
