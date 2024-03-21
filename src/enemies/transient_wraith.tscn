@@ -36,9 +36,7 @@ motion_mode = 1
 script = ExtResource("1_nb65q")
 
 [node name="MotionController" parent="." instance=ExtResource("1_rmsyv")]
-friction = 1500.0
 max_speed = 500.0
-acc_mag = 1500.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_ohq7i")]
 max_health = 1500.0

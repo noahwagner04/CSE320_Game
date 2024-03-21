@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgi8vrclbu3ch"]
+[gd_scene load_steps=10 format=3 uid="uid://dgi8vrclbu3ch"]
 
 [ext_resource type="Texture2D" uid="uid://de2ulp5npb6s3" path="res://assets/environment/Ground.png" id="1_dr88d"]
 [ext_resource type="Script" path="res://src/places/meadow.gd" id="1_x36d5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cic55om7hfudf" path="res://src/enemies/boss_behemoth_vole.tscn" id="3_3h4jt"]
 [ext_resource type="PackedScene" uid="uid://dde3h6haoynnn" path="res://src/enemies/giant_vole.tscn" id="3_p1cuf"]
 [ext_resource type="PackedScene" uid="uid://djv6bxpkal1st" path="res://src/enemies/giant_dragonfly.tscn" id="6_fr1my"]
+[ext_resource type="PackedScene" uid="uid://cgfapgytdyy0e" path="res://src/enemies/bat.tscn" id="7_pwqxa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ka513"]
 resource_name = "Ground"
@@ -1228,18 +1229,29 @@ layer_0/tile_data = PackedInt32Array(-1245204, 1048576, 12, -1179668, 1048576, 1
 position = Vector2(6, -532)
 
 [node name="GiantVoleSpawner" parent="." instance=ExtResource("2_0b0rp")]
-unique_name_in_owner = true
 radius = 600
 max_spawn = 150
 scene = ExtResource("3_p1cuf")
 
+[node name="Timer" type="Timer" parent="GiantVoleSpawner"]
+
 [node name="GiantDragonflySpawner" parent="." instance=ExtResource("2_0b0rp")]
-unique_name_in_owner = true
-frequency = 4.0
 radius = 600
 max_spawn = 25
 scene = ExtResource("6_fr1my")
 
+[node name="Timer" type="Timer" parent="GiantDragonflySpawner"]
+wait_time = 4.0
+
 [node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://src/enemies/giant_vole.tscn")
 spawn_path = NodePath("../GiantVoleSpawner")
+
+[node name="Spawner" parent="." instance=ExtResource("2_0b0rp")]
+radius = 600
+max_spawn = 5
+scene = ExtResource("7_pwqxa")
+
+[node name="Timer" type="Timer" parent="Spawner"]
+wait_time = 6.0
+autostart = true
