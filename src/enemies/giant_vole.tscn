@@ -49,9 +49,9 @@ shape = SubResource("CircleShape2D_bosjk")
 
 [node name="MotionController" parent="." instance=ExtResource("2_b0mwu")]
 unique_name_in_owner = true
-friction = 900.0
 max_speed = 100.0
-acc_mag = 800.0
+move_force_mag = 800.0
+friction_mag = 900.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_5sn6e")]
 max_health = 20.0

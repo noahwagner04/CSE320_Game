@@ -34,9 +34,9 @@ max_health = 15.0
 
 [node name="MotionController" parent="." instance=ExtResource("3_flpor")]
 unique_name_in_owner = true
-friction = 2000.0
 max_speed = 150.0
-acc_mag = 2000.0
+move_force_mag = 2000.0
+friction_mag = 2000.0
 
 [node name="ColliderDetector" parent="." instance=ExtResource("1_44esr")]
 unique_name_in_owner = true

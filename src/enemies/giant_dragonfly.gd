@@ -8,23 +8,24 @@ var _target: Node2D
 @onready var col_detector: Area2D = %ColliderDetector
 @onready var proj_spawner: Node2D = %ProjectileSpawner
 
+
 func _ready():
 	$AttackTimer.start()
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
 
-func _process(delta):
+
+func _physics_process(delta):
 	_target = col_detector.get_closest_collider()
 	if _target == null:
-		motion_controller.stop_desired_motion()
+		motion_controller.apply_friction(delta)
 		return
 	
 	var new_target = _target.global_position.direction_to(global_position)
 	new_target *= stop_range
 	new_target += _target.global_position
 	
-	motion_controller.acc_dir = global_position.direction_to(new_target)
-	motion_controller.update(delta)
-	velocity = motion_controller.get_velocity()
+	motion_controller.move(global_position.direction_to(new_target), delta)
+	velocity = motion_controller.velocity
 	move_and_slide()
 
 
