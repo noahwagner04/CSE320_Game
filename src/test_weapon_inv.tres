@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InventoryDataWeapon" load_steps=5 format=3 uid="uid://di4u2ywk7efhm"]
+
+[ext_resource type="Script" path="res://src/inventory/inventory_data_weapon.gd" id="1_fbeic"]
+[ext_resource type="Resource" uid="uid://cv41b4o3k80ve" path="res://src/items/dagger1.tres" id="2_nu2j2"]
+[ext_resource type="Script" path="res://src/inventory/slot_data.gd" id="3_14wqy"]
+
+[sub_resource type="Resource" id="Resource_viefj"]
+script = ExtResource("3_14wqy")
+item_data = ExtResource("2_nu2j2")
+quantity = 1
+
+[resource]
+script = ExtResource("1_fbeic")
+slot_datas = Array[ExtResource("3_14wqy")]([SubResource("Resource_viefj")])

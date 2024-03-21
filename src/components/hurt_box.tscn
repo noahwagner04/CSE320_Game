@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnmy034x62h8s"]
+[gd_scene load_steps=4 format=3 uid="uid://cnmy034x62h8s"]
 
 [ext_resource type="Script" path="res://src/components/hurt_box.gd" id="1_145hh"]
+[ext_resource type="Script" path="res://src/components/poison_component.gd" id="2_vedwb"]
+[ext_resource type="Script" path="res://src/components/knockback_component.gd" id="3_py2si"]
 
 [node name="HurtBox" type="Area2D"]
 script = ExtResource("1_145hh")
+
+[node name="PoisonComponent" type="Node" parent="."]
+script = ExtResource("2_vedwb")
+
+[node name="KnockbackComponent" type="Node" parent="."]
+script = ExtResource("3_py2si")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

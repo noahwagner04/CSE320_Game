@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj4dfv6axl5pc"]
+
+[ext_resource type="Texture2D" uid="uid://boqhjrio5oaqy" path="res://assets/icon.svg" id="1_khqn8"]
+[ext_resource type="Script" path="res://src/projectiles/dragonfly_spit.gd" id="1_svq86"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="2_xaw8d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7wei"]
+size = Vector2(10, 10)
+
+[node name="DragonflySpit" type="Node2D"]
+script = ExtResource("1_svq86")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.09375, 0.09375)
+texture = ExtResource("1_khqn8")
+
+[node name="HitBox" parent="." instance=ExtResource("2_xaw8d")]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_g7wei")

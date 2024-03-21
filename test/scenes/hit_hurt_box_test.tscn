@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://1hm5okc808am"]
+
+[ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="1_104a0"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="2_ikuag"]
+[ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="3_1v0pq"]
+[ext_resource type="Script" path="res://src/components/motion_controller.gd" id="4_khjk5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ons73"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mgqg8"]
+
+[node name="HitHurtBoxTest" type="Node2D"]
+
+[node name="HealthContainer" parent="." instance=ExtResource("1_104a0")]
+
+[node name="HitBox" parent="." instance=ExtResource("2_ikuag")]
+position = Vector2(-50, 2.08165e-12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_ons73")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("3_1v0pq")]
+health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
+knockback_resistance = 30.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_mgqg8")
+
+[node name="MotionController" type="Node" parent="."]
+script = ExtResource("4_khjk5")
