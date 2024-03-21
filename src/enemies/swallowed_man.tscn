@@ -27,9 +27,9 @@ motion_mode = 1
 script = ExtResource("1_kyvox")
 
 [node name="MotionController" parent="." instance=ExtResource("3_517op")]
-friction = 1200.0
 max_speed = 200.0
-acc_mag = 1000.0
+move_force_mag = 1000.0
+friction_mag = 1200.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("4_vq134")]
 max_health = 50.0
