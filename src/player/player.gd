@@ -25,7 +25,7 @@ func _ready():
 	# exported inventories: would likely start based on class selection
 	# based on class, select starting weapon
 	# for now, using a default starting_weapon resource of dagger
-	starting_item_data_weapon = preload("res://src/items/dagger.tres")
+	starting_item_data_weapon = preload("res://src/items/dagger1.tres")
 	# again, this is based off of the test_weapon_inventory.tres having
 		# a dagger. 
 	change_weapon(starting_item_data_weapon)

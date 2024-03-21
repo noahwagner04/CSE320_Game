@@ -52,6 +52,8 @@ func _on_gui_input(event):
 	if event is InputEventMouseButton \
 			and event.is_pressed() \
 			and grabbed_slot_data:
+		# accept_event()
+		# above is useless until we refactor all Input code to use unhandled
 		
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
