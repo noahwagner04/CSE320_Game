@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-@export var agro_dist: float = 300
-
 var home := Node2D.new()
 var sync_pos := Vector2.ZERO
 var mult_sync: MultiplayerSynchronizer
@@ -25,9 +23,8 @@ func _physics_process(_delta):
 	
 		var new_target = _target.global_position + _rand_target_mod
 		
-		motion_controller.acc_dir = global_position.direction_to(new_target)
-		motion_controller.update(_delta)
-		velocity = motion_controller.get_velocity()
+		motion_controller.move(global_position.direction_to(new_target), _delta)
+		velocity = motion_controller.velocity
 		move_and_slide()
 		
 		sync_pos = global_position
@@ -37,8 +34,10 @@ func _physics_process(_delta):
 
 
 func _on_health_container_health_depleted():
+
 	$voledeath.play(.05)
 	await get_tree().create_timer(.3).timeout
+	$ItemDropper.on_death()
 	queue_free()
 
 

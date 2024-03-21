@@ -13,8 +13,10 @@ var projectile_damage: float = 10
 @onready var projectile_spawner = $ProjectileSpawner
 var time_of_last_attack: float = 0.0
 var rarity_ratio: float = 1
-@export var dex_ratio: float = 0.4
-@export var atk_ratio: float = 0.6
+@export var base_dex_ratio: float = 0.4
+@export var base_atk_ratio: float = 0.6
+var dex_ratio: float = 0.4
+var atk_ratio: float = 0.6
 
 func _ready():
 	pass
@@ -22,11 +24,13 @@ func _ready():
 func set_base_values():
 	attack_speed = base_attack_speed
 	projectile_damage = base_projectile_damage
+	dex_ratio = base_dex_ratio
+	atk_ratio = base_atk_ratio
 	
 func set_rarity_bonuses():
 	rarity_ratio = weapon_rarity * 0.2 + 1
-	attack_speed *= rarity_ratio
-	projectile_damage *= rarity_ratio
+	dex_ratio *= rarity_ratio
+	atk_ratio *= rarity_ratio
 	
 func set_stat_bonuses():
 	attack_speed = float(player_stats.dexterity * dex_ratio)

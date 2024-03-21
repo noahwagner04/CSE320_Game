@@ -10,7 +10,6 @@ var special_projectile_knockback: float = 0
 @onready var knockback_component = $KnockbackComponent
 
 
-
 func _ready():
 	base_attack_speed = 4.0
 	base_projectile_damage = 6

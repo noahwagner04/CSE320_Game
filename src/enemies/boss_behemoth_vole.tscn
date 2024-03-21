@@ -31,9 +31,9 @@ script = ExtResource("1_y2xdq")
 metadata/_edit_group_ = true
 
 [node name="MotionController" parent="." instance=ExtResource("2_43mtr")]
-friction = 900.0
 max_speed = 70.0
-acc_mag = 560.0
+move_force_mag = 560.0
+friction_mag = 900.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_rebr2")]
 max_health = 500.0
