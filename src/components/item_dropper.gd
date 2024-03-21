@@ -30,36 +30,15 @@ const weapon_resource_dict: Dictionary = {
 var valid_weapons: Array[String] = []
 
 # Consumables
+const health_potion = preload("res://src/items/health_potion.tres")
+
 var valid_consumables: Array[String] = []
 
-const health_potion = preload("res://src/items/health_potion.tres")
 
 
 func _ready():
 	loot_table.set_non_exported_vals()
-	# determine drops when enemy spawns
-	# go by category
-	# do consumable drops
-	# determine valid consumables
-	# determine range of possible drops
-	# if max is 0, then skip to next category
-	# otherwise call do_consumables randf compared to range times in a loop
-	# for weapons:
-	# determine range, blah blah blah, call range times, determining random weapon
-	# determine valid weapons
-	for weapon in loot_table.weapons_dict:
-		if loot_table.weapons_dict[weapon]:
-			valid_weapons.append(weapon)
-	
-	if loot_table.max_weapon_drops != 0:
-		for ii in loot_table.max_weapon_drops:
-			# check if weapon will drop
-			if randf_range(0, 100) > loot_table.weapon_drop_chance:
-				continue
-			# find random weapon
-			var weapon_name = valid_weapons[randi() % valid_weapons.size()]
-			do_weapon(weapon_name)	
-	
+
 func do_weapon(weapon_name: String):
 	# determine tier
 	var total_probability: float = 0
@@ -74,38 +53,44 @@ func do_weapon(weapon_name: String):
 		print("Developer should make sure all weapon drop rates add to 100%")
 		return
 	var resource_dict_key = "%s%s" % [weapon_name, weapon_tier]
-	var slot_data = SlotData.new()
-	slot_data.item_data = weapon_resource_dict[resource_dict_key]
-	drop_item(slot_data)
+	var item_data = weapon_resource_dict[resource_dict_key]
+	drop_item(item_data)
+	
+	
+func do_health_potion():
+	drop_item(health_potion)
+	
 			
 		
-func drop_item(slot_data: SlotData):
+func drop_item(item_data: ItemData):
+	var slot_data = SlotData.new()
+	slot_data.item_data = item_data
 	var pick_up = PickUp.instantiate()
 	pick_up.slot_data = slot_data
 	pick_up.position = global_position
 	get_node("/root").add_child(pick_up)
 
-	
-#func do_consumables():
-	#for consumable in loot_table.consumables:
-		#var drop_chance = consumable_drop_rate / 100
-		#print(drop_chance)
-		#if randf() < drop_chance:
-			#continue
-		#print("dropped")
-		#match consumable_drop_rate:
-			#healing_potion:
-				#print("healing potion")
-	#pass
 	
 func on_death():
-	if randf() < 0.8:
-		return
-	var slot_data = SlotData.new()
-	slot_data.item_data = health_potion
-	slot_data.quantity = 1
-	var pick_up = PickUp.instantiate()
-	pick_up.slot_data = slot_data
-	pick_up.position = global_position
-	get_node("/root").add_child(pick_up)
-
+	# health potion drops
+	if loot_table.max_health_potion_drops != 0:
+		for ii in loot_table.max_health_potion_drops:
+			# check if health potion will drop
+			if randf_range(0, 100) > loot_table.health_potion_drop_rate:
+				continue
+			do_health_potion()
+			
+	# determine valid weapon drops
+	for weapon in loot_table.weapons_dict:
+		if loot_table.weapons_dict[weapon]:
+			valid_weapons.append(weapon)
+	
+	# weapon drops
+	if loot_table.max_weapon_drops != 0:
+		for ii in loot_table.max_weapon_drops:
+			# check if weapon will drop
+			if randf_range(0, 100) > loot_table.weapon_drop_chance:
+				continue
+			# find random weapon
+			var weapon_name = valid_weapons[randi() % valid_weapons.size()]
+			do_weapon(weapon_name)	

@@ -26,14 +26,12 @@ var weapons_dict
 
 
 @export_category("Consumables")
-@export var min_healing_potion_drops: int = 0
-@export var max_healing_potion_drops: int = 1
-@export_group("Healing Potion")
-@export var healing_potion_drop: bool
-@export_range(0, 100, 0.1, "suffix: %") var healing_potion_drop_rate: float = 0
-var healing_potion = preload("res://src/items/health_potion.tres")
-var healing_potion_dict
-var consumables
+@export_group("Health Potion")
+@export var min_health_potion_drops: int = 0
+@export var max_health_potion_drops: int = 1
+@export_range(0, 100, 0.1, "suffix: %") var health_potion_drop_rate: float = 0
+@export var health_potion_drop: bool
+
 
 func set_non_exported_vals():
 	weapon_t1_dict = {
@@ -64,11 +62,6 @@ func set_non_exported_vals():
 		"mage_staff": mage_staff_drop
 	}
 	
-	healing_potion_dict = {
-		"name": "healing_potion", 
-		"drop_rate": healing_potion_drop_rate
-	}
-	consumables = [healing_potion_dict]
 	
 	
 func custom_dict_array_sort(dict_a: Dictionary, dict_b: Dictionary) -> bool:
