@@ -25,9 +25,8 @@ func _physics_process(_delta):
 	
 		var new_target = _target.global_position + _rand_target_mod
 		
-		motion_controller.acc_dir = global_position.direction_to(new_target)
-		motion_controller.update(_delta)
-		velocity = motion_controller.get_velocity()
+		motion_controller.move(global_position.direction_to(new_target), _delta)
+		velocity = motion_controller.velocity
 		move_and_slide()
 		
 		sync_pos = global_position

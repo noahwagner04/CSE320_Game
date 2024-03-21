@@ -1228,17 +1228,19 @@ layer_0/tile_data = PackedInt32Array(-1245204, 1048576, 12, -1179668, 1048576, 1
 position = Vector2(6, -532)
 
 [node name="GiantVoleSpawner" parent="." instance=ExtResource("2_0b0rp")]
-unique_name_in_owner = true
 radius = 600
 max_spawn = 150
 scene = ExtResource("3_p1cuf")
 
+[node name="Timer" type="Timer" parent="GiantVoleSpawner"]
+
 [node name="GiantDragonflySpawner" parent="." instance=ExtResource("2_0b0rp")]
-unique_name_in_owner = true
-frequency = 4.0
 radius = 600
 max_spawn = 25
 scene = ExtResource("6_fr1my")
+
+[node name="Timer" type="Timer" parent="GiantDragonflySpawner"]
+wait_time = 4.0
 
 [node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://src/enemies/giant_vole.tscn")
