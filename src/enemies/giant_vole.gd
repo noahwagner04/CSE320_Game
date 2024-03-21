@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-@export var agro_dist: float = 300
-
 var home := Node2D.new()
 var sync_pos := Vector2.ZERO
 var mult_sync: MultiplayerSynchronizer
