@@ -32,6 +32,7 @@ func _physics_process(delta):
 func _on_health_container_health_depleted():
 	$bugsplat.play()
 	await get_tree().create_timer(.27).timeout
+	$ItemDropper.on_death()
 	queue_free()
 
 

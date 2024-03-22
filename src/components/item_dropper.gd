@@ -1,42 +1,96 @@
 extends Node2D
 
-@export_category("Enemy")
-@export_enum("Minor", "Major", "Boss") var enemy_type
-@export_range(1, 5, 1) var enemy_tier: int
 const PickUp = preload("res://src/inventory/pick_up.tscn")
-var slot_data: SlotData
+@export var loot_table: LootTable
+
+# Weapons
+const dagger1 = preload("res://src/items/dagger1.tres")
+const dagger2 = preload("res://src/items/dagger2.tres")
+const dagger3 = preload("res://src/items/dagger3.tres")
+const dagger4 = preload("res://src/items/dagger4.tres")
+const dagger5 = preload("res://src/items/dagger5.tres")
+const mage_staff1 = preload("res://src/items/mage_staff1.tres")
+const mage_staff2 = preload("res://src/items/mage_staff2.tres")
+const mage_staff3 = preload("res://src/items/mage_staff3.tres")
+const mage_staff4 = preload("res://src/items/mage_staff4.tres")
+const mage_staff5 = preload("res://src/items/mage_staff5.tres")
+const weapon_resource_dict: Dictionary = {
+	"dagger1": dagger1,
+	"dagger2": dagger2,
+	"dagger3": dagger3,
+	"dagger4": dagger4,
+	"dagger5": dagger5,
+	"mage_staff1": mage_staff1,
+	"mage_staff2": mage_staff2,
+	"mage_staff3": mage_staff3,
+	"mage_staff4": mage_staff4,
+	"mage_staff5": mage_staff5
+}
+
+var valid_weapons: Array[String] = []
+
+# Consumables
+const health_potion = preload("res://src/items/health_potion.tres")
+
+var valid_consumables: Array[String] = []
 
 
-@export_category("Weapons")
-@export_group("Dagger")
-@export var dagger_drop: bool
-@export_flags("1", "2", "3", "4", "5") var dagger_rarities
-var dagger1 = preload("res://src/items/dagger1.tres")
-
-@export_group("Mage Staff")
-@export var mage_staff_drop: bool
-@export_flags("1", "2", "3", "4", "5") var mage_staff_rarities
-
-
-@export_category("Consumables")
-@export_group("Healing Potion")
-@export var healing_potion_drop: bool
-var healing_potion = preload("res://src/items/health_potion.tres")
 
 func _ready():
-	# do math or whatever.
-	# this can be changed to whatever. Either we can pick individual rarities and items
-	# or we can use a pre-determined set loadout for things like rank and file enemies.
-	# I don't mind any way.
-	pass
-	
-func on_death():
-	if randf() < 0.8:
+	loot_table.set_non_exported_vals()
+
+func do_weapon(weapon_name: String):
+	# determine tier
+	var total_probability: float = 0
+	var rand_float = randf()
+	var weapon_tier: int = 0
+	for weapon_dict in loot_table.weapon_dict_array:
+		total_probability += (weapon_dict.drop_rate / 100)
+		if rand_float < total_probability:
+			weapon_tier = weapon_dict.tier
+			break
+	if weapon_tier == 0:
+		print("Developer should make sure all weapon drop rates add to 100%")
 		return
-	slot_data = SlotData.new()
-	slot_data.item_data = healing_potion
-	slot_data.quantity = 1
+	var resource_dict_key = "%s%s" % [weapon_name, weapon_tier]
+	var item_data = weapon_resource_dict[resource_dict_key]
+	drop_item(item_data)
+	
+	
+func do_health_potion():
+	drop_item(health_potion)
+	
+			
+		
+func drop_item(item_data: ItemData):
+	var slot_data = SlotData.new()
+	slot_data.item_data = item_data
 	var pick_up = PickUp.instantiate()
 	pick_up.slot_data = slot_data
 	pick_up.position = global_position
 	get_node("/root").add_child(pick_up)
+
+	
+func on_death():
+	# health potion drops
+	if loot_table.max_health_potion_drops != 0:
+		for ii in loot_table.max_health_potion_drops:
+			# check if health potion will drop
+			if randf_range(0, 100) > loot_table.health_potion_drop_rate:
+				continue
+			do_health_potion()
+			
+	# determine valid weapon drops
+	for weapon in loot_table.weapons_dict:
+		if loot_table.weapons_dict[weapon]:
+			valid_weapons.append(weapon)
+	
+	# weapon drops
+	if loot_table.max_weapon_drops != 0:
+		for ii in loot_table.max_weapon_drops:
+			# check if weapon will drop
+			if randf_range(0, 100) > loot_table.weapon_drop_chance:
+				continue
+			# find random weapon
+			var weapon_name = valid_weapons[randi() % valid_weapons.size()]
+			do_weapon(weapon_name)	
