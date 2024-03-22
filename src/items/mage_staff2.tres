@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemDataWeapon" load_steps=5 format=3 uid="uid://5uhva82os5yo"]
+
+[ext_resource type="Script" path="res://src/inventory/item_data_weapon.gd" id="1_3bm83"]
+[ext_resource type="PackedScene" uid="uid://dv3i37pthetip" path="res://src/weapons/mage_staff.tscn" id="2_5pmag"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5d6jf"]
+load_path = "res://.godot/imported/32x32.png-e72894ccb86f36ffcb11d38e5757662e.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pofht"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(2144, 288, 32, 32)
+
+[resource]
+script = ExtResource("1_3bm83")
+weapon = ExtResource("2_5pmag")
+weapon_rarity = 2
+name = "Mage Staff"
+description = "Sparkly!!"
+stackable = false
+texture = SubResource("AtlasTexture_pofht")
