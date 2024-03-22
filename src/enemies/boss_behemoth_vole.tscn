@@ -61,7 +61,7 @@ shape = SubResource("CapsuleShape2D_bnrts")
 collision_layer = 0
 health_container = NodePath("../HealthContainer")
 motion_controller = NodePath("../MotionController")
-knockback_resistance = 30.0
+knockback_resistance = 50.0
 
 [node name="HurtBoxShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -3)

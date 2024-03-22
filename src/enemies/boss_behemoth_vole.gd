@@ -1,20 +1,20 @@
 extends CharacterBody2D
 
 @export var agro_dist: float = 300
-@export_range(0, 12, 1) var total_vomit_amount: int = 5
+@export_range(0, 12, 1) var total_vomit_amount: int = 8
 
-var _target: Node2D
-var vomits: int = 0
+var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
 var player_dist: float
+var second_phase: bool = false
+var special_timer:= Timer.new()
+var start_position: Vector2 = global_position
+var vomit_proj_scene: PackedScene = preload("res://src/projectiles/vomit_projectile.tscn")
+var vomits: int = 0
+var _target: Node2D
 
-@onready var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
 @onready var health_container: HealthContainer = $HealthContainer
 @onready var motion_controller: MotionController = $MotionController
 @onready var player: Node = get_tree().get_first_node_in_group("player")
-@onready var second_phase: bool = false
-@onready var special_timer:= Timer.new()
-@onready var start_position: Vector2 = global_position
-@onready var vomit_proj_scene: PackedScene = preload("res://src/projectiles/vomit_projectile.tscn")
 
 
 func _ready():
@@ -25,11 +25,11 @@ func _ready():
 
 func _physics_process(_delta):
 	if player == null:
-		player = get_tree().get_first_node_in_group("player")
+		queue_free()
 		return
 	
 	player_dist = global_position.distance_to(player.global_position)
-	if player_dist <= agro_dist:
+	if (player_dist <= agro_dist):
 		_target = player
 		agro_dist = 450
 		if (vomits < total_vomit_amount && special_timer.is_stopped()):
