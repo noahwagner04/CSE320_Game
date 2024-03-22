@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=2 format=3 uid="uid://docfjrqajlcs8"]
+
+[ext_resource type="Script" path="res://src/loot_tables/loot_table.gd" id="1_mxxgg"]
+
+[resource]
+script = ExtResource("1_mxxgg")
+min_weapon_drops = 0
+max_weapon_drops = 1
+weapon_drop_chance = 20.0
+weapon_t1_drop_rate = 60.0
+weapon_t2_drop_rate = 35.0
+weapon_t3_drop_rate = 5.0
+weapon_t4_drop_rate = 0.0
+weapon_t5_drop_rate = 0.0
+dagger_drop = true
+mage_staff_drop = true
+min_health_potion_drops = 0
+max_health_potion_drops = 1
+health_potion_drop_rate = 20.0
+health_potion_drop = true

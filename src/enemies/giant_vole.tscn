@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dde3h6haoynnn"]
+[gd_scene load_steps=17 format=3 uid="uid://dde3h6haoynnn"]
 
 [ext_resource type="Texture2D" uid="uid://e351ya36oghj" path="res://assets/enemies/giant_vole.png" id="1_6ruth"]
 [ext_resource type="Script" path="res://src/enemies/giant_vole.gd" id="1_36olq"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bhm5gxj7pueps" path="res://assets/sfx/zapsplat_animals_rat_death_screech_001_72268.mp3" id="8_1gujk"]
 [ext_resource type="AudioStream" uid="uid://bljjukfod8ct2" path="res://assets/sfx/Screaming-Rat-www.fesliyanstudios.com.mp3" id="9_6qna4"]
 [ext_resource type="PackedScene" uid="uid://ddm4ytlgshday" path="res://src/components/item_dropper.tscn" id="10_7dwiv"]
+[ext_resource type="Resource" uid="uid://docfjrqajlcs8" path="res://src/loot_tables/minorL1.tres" id="11_gi4jm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bosjk"]
 radius = 200.0
@@ -48,9 +49,9 @@ shape = SubResource("CircleShape2D_bosjk")
 
 [node name="MotionController" parent="." instance=ExtResource("2_b0mwu")]
 unique_name_in_owner = true
-friction = 900.0
 max_speed = 100.0
-acc_mag = 800.0
+move_force_mag = 800.0
+friction_mag = 900.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_5sn6e")]
 max_health = 20.0
@@ -94,8 +95,7 @@ stream = ExtResource("9_6qna4")
 max_polyphony = 10
 
 [node name="ItemDropper" parent="." instance=ExtResource("10_7dwiv")]
-enemy_type = 0
-dagger_drop = true
+loot_table = ExtResource("11_gi4jm")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]

@@ -40,13 +40,14 @@ func _physics_process(_delta):
 		vomits = 0
 		health_container.health = health_container.max_health
 	
+	var move_dir: Vector2
 	if (_target != null):
-		motion_controller.acc_dir = global_position.direction_to(_target.global_position)
+		move_dir = global_position.direction_to(_target.global_position)
 	else:
-		motion_controller.acc_dir = global_position.direction_to(start_position)
+		move_dir = global_position.direction_to(start_position)
 	
-	motion_controller.update(_delta)
-	velocity = motion_controller.get_velocity()
+	motion_controller.move(move_dir, _delta)
+	velocity = motion_controller.velocity
 	move_and_slide()
 
 
@@ -83,6 +84,7 @@ func summon_voles(ring_num):
 func _on_health_container_health_depleted():
 	$BearDeath.play( )
 	await get_tree().create_timer( 3.19 ).timeout
+	$ItemDropper.on_death()
 	queue_free()
 
 
