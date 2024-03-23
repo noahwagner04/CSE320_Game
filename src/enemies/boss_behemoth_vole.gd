@@ -1,54 +1,70 @@
 extends CharacterBody2D
 
-@export var agro_dist: float = 300
-@export_range(0, 12, 1) var total_vomit_amount: int = 5
+@export var agro_dist: float = 450
+@export_range(0, 12, 1) var total_vomit_amount: int = 8
 
-var _target: Node2D
+var back_step_timer:= Timer.new()
+var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
+var second_phase: bool = false
+var special_timer:= Timer.new()
+var vomit_proj_scene: PackedScene = preload("res://src/projectiles/vomit_projectile.tscn")
 var vomits: int = 0
-var player_dist: float
 
-@onready var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
+@onready var head_hit_box_shape: CollisionShape2D = %HeadHitBoxShape2D
 @onready var health_container: HealthContainer = $HealthContainer
+@onready var max_hp: float = health_container.max_health
 @onready var motion_controller: MotionController = $MotionController
 @onready var player: Node = get_tree().get_first_node_in_group("player")
-@onready var second_phase: bool = false
-@onready var special_timer:= Timer.new()
 @onready var start_position: Vector2 = global_position
-@onready var vomit_proj_scene: PackedScene = preload("res://src/projectiles/vomit_projectile.tscn")
 
 
 func _ready():
 	special_timer.timeout.connect(special_attacks)
 	special_timer.one_shot = true
 	add_child(special_timer)
+	
+	back_step_timer.timeout.connect(back_step)
+	back_step_timer.one_shot = true
+	add_child(back_step_timer)
 
 
 func _physics_process(_delta):
-	if player == null:
-		player = get_tree().get_first_node_in_group("player")
+	if (player == null):
+		queue_free()
 		return
 	
-	player_dist = global_position.distance_to(player.global_position)
-	if player_dist <= agro_dist:
-		_target = player
-		agro_dist = 450
-		if (vomits < total_vomit_amount && special_timer.is_stopped()):
+	var player_dist: float = global_position.distance_to(player.global_position)
+	var _boss_head_pos: Vector2 = head_hit_box_shape.global_position
+	var _target: Vector2
+	
+	if (player_dist <= agro_dist):
+		_target = player.global_position
+		if (special_timer.is_stopped()):
 			special_timer.start(randf_range(1, 5))
 	else:
-		_target = null
-		agro_dist = 300
-		vomits = 0
-		health_container.health = health_container.max_health
+		if (global_position == start_position):
+			health_container.heal(_delta) 
+			if (vomits != 0 && health_container.health == max_hp):
+				second_phase = false
+				vomits = 0
+			return
+		else:
+			_target = start_position
 	
-	var move_dir: Vector2
-	if (_target != null):
-		move_dir = global_position.direction_to(_target.global_position)
-	else:
-		move_dir = global_position.direction_to(start_position)
+	var move_dir: Vector2 = _boss_head_pos.direction_to(_target)
 	
 	motion_controller.move(move_dir, _delta)
 	velocity = motion_controller.velocity
 	move_and_slide()
+
+
+func back_step():
+	#print("in back_step()")
+	pass
+	#var move_dir: Vector2 = -global_position.direction_to(player.global_position)
+	#motion_controller.move(move_dir, get_physics_process_delta_time())
+	#velocity = motion_controller.velocity * 10
+	#move_and_slide()
 
 
 func special_attacks():
@@ -88,9 +104,18 @@ func _on_health_container_health_depleted():
 	queue_free()
 
 
-func _on_hurt_box_hurt(hit_box):
-	if (second_phase == false && health_container.health <= health_container.max_health * 0.5):
+func _on_hurt_box_hurt(_hit_box):
+	var curr_health: float = health_container.health
+	var player_dist: float = player.global_position.x - global_position.x 
+	
+	if (!back_step_timer.is_stopped() && player_dist > 75):
+		back_step_timer.stop() 
+	elif (back_step_timer.is_stopped() && player_dist <= 75):
+		back_step_timer.start(2)
+	
+	if (second_phase == false && curr_health <= max_hp * 0.5):
 		second_phase = true
-		var ring_num: int = 6 - health_container.health / health_container.max_health * 10
+		var ring_num := int(6 - curr_health / max_hp * 10)
 		summon_voles(ring_num)
+		
 	$BearHurt.play( .42 )
