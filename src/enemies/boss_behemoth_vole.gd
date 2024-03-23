@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var agro_dist: float = 450
 @export_range(0, 12, 1) var total_vomit_amount: int = 8
+@onready var xp_dropper = $xp_dropper
 
 var back_step_timer:= Timer.new()
 var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
@@ -98,6 +99,7 @@ func summon_voles(ring_num):
 	
 	
 func _on_health_container_health_depleted():
+	xp_dropper.drop_xp()
 	$BearDeath.play( )
 	await get_tree().create_timer( 3.19 ).timeout
 	$ItemDropper.on_death()
