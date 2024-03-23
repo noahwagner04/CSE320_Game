@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://src/inventory/slot_data.gd" id="3_vs5n0"]
 [ext_resource type="Resource" uid="uid://cv41b4o3k80ve" path="res://src/items/dagger1.tres" id="4_3v4dn"]
 [ext_resource type="Resource" uid="uid://bdu1xp6s0e62j" path="res://src/items/blue_book.tres" id="4_gh3qc"]
-[ext_resource type="Resource" uid="uid://bcmho2m5pcfkk" path="res://src/items/mage_staff1.tres" id="6_tgfhc"]
+[ext_resource type="Resource" uid="uid://dhgpje7w7l1de" path="res://src/items/mage_staff1.tres" id="6_tgfhc"]
 
 [sub_resource type="Resource" id="Resource_mj22m"]
 script = ExtResource("3_vs5n0")
