@@ -9,8 +9,7 @@ var _target: Node2D
 
 @onready var motion_controller: MotionController = %MotionController
 @onready var col_detector: Area2D = %ColliderDetector
-@onready var xp_dropper = $Xp_Dropper
-
+@onready var xp_dropper = $xp_dropper
 func _ready():
 	home.global_position = global_position
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
