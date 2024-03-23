@@ -58,14 +58,17 @@ func spawn():
 	if spawned_count >= max_spawn:
 		return
 	var instance = scene.instantiate()
-	if instance is Node2D:
-		var angle = randf() * 2 * PI
-		instance.position = Vector2(cos(angle), sin(angle)) * radius * randf()
+	if not instance is Node2D:
+		instance.queue_free()
+		return
+	var angle = randf() * 2 * PI
+	instance.global_position = Vector2(cos(angle), sin(angle)) * radius * randf()
+	instance.global_position += global_position
 	instance.tree_exited.connect(_on_despawn)
 	if(spawn_as_child):
 		add_child(instance, true)
 	else:
-		_root.add_child(instance, true)
+		_root.call_deferred("add_child", instance, true)
 	spawned_count += 1
 	emit_signal("scene_spawned", instance)
 
