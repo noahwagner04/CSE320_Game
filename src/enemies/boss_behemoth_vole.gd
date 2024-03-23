@@ -9,6 +9,7 @@ var back_step_timer:= Timer.new()
 var giant_vole_scene: PackedScene = preload("res://src/enemies/giant_vole.tscn")
 var is_too_close: bool = false
 var move_dir: Vector2
+var player_dist: float
 var second_phase: bool = false
 var special_timer:= Timer.new()
 var vomit_proj_scene: PackedScene = preload("res://src/projectiles/vomit_projectile.tscn")
@@ -33,6 +34,23 @@ func _ready():
 	add_child(back_step_timer)
 
 
+func _process(_delta):
+	if (player == null):
+		queue_free()
+		return
+		
+	var player_x_dist: float = player.to_local(global_position).x
+	
+	player_dist = global_position.distance_to(player.global_position)
+	
+	if ( !is_too_close && player_x_dist < 0 && player_dist <= max_too_close_dist ):
+		is_too_close = true
+	elif ( player_x_dist >= 0 || player_dist > max_too_close_dist ):
+		is_too_close = false
+		if ( !back_step && !back_step_timer.is_stopped() ):
+			back_step_timer.stop()
+
+
 func _physics_process(_delta):
 	if (player == null):
 		queue_free()
@@ -48,17 +66,8 @@ func _physics_process(_delta):
 		
 		return
 	
-	var player_dist: float = global_position.distance_to(player.global_position)
 	var _boss_head_pos: Vector2 = head_hit_box_shape.global_position
 	var _target: Vector2
-	var player_x_dist: float = player.to_local(global_position).x
-	
-	if ( !is_too_close && player_x_dist < 0 && (player_dist >= 0 && player_dist <= max_too_close_dist) ):
-		is_too_close = true
-	elif ( player_x_dist >= 0 || player_dist < 0 || player_dist > max_too_close_dist ):
-		is_too_close = false
-		if (!back_step_timer.is_stopped()):
-			back_step_timer.stop()
 	
 	if (player_dist <= agro_dist):
 		_target = player.global_position
@@ -85,7 +94,6 @@ func set_back_step():
 	back_step = !back_step
 	if (back_step):
 		move_dir = -(global_position.direction_to(player.global_position).normalized())
-	print("back step set")
 
 
 func special_attacks():
@@ -119,9 +127,9 @@ func summon_voles(ring_num):
 	
 	
 func _on_health_container_health_depleted():
-	xp_dropper.drop_xp()
 	$BearDeath.play( )
 	await get_tree().create_timer( 3.19 ).timeout
+	xp_dropper.drop_xp()
 	$ItemDropper.on_death()
 	queue_free()
 
