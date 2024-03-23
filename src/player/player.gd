@@ -67,14 +67,13 @@ func move(_delta):
 	
 	# apply friction if no input is pressed
 	if direction.length() == 0:
-		motion_controller.stop_desired_motion()
+		motion_controller.apply_friction(_delta)
 	
 	# apply acceleration and limit velocity
-	motion_controller.acc_dir = direction
-	motion_controller.update(_delta)
+	motion_controller.move(direction, _delta)
 	
 	# move the player
-	velocity = motion_controller.get_velocity()
+	velocity = motion_controller.velocity
 	move_and_slide()
 	
 

@@ -15,14 +15,15 @@ func _physics_process(delta):
 		return
 		
 	player_dist = global_position.distance_to(player.global_position)
+	var move_dir: Vector2
 	if player_dist <= agro_dist:
-		motion_controller.acc_dir = global_position.direction_to(player.global_position)
+		move_dir = global_position.direction_to(player.global_position)
 	else:
 		queue_free()
 		return
 	
-	motion_controller.update(delta)
-	velocity = motion_controller.get_velocity()
+	motion_controller.move(move_dir, delta)
+	velocity = motion_controller.velocity
 	move_and_slide()
 
 
@@ -30,6 +31,6 @@ func _on_health_container_health_depleted():
 	queue_free()
 
 
-func _on_hurt_box_hurt(hit_box):
+func _on_hurt_box_hurt(_hit_box):
 	#play sound?
 	pass
