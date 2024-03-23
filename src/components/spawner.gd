@@ -68,7 +68,7 @@ func spawn():
 	if(spawn_as_child):
 		add_child(instance, true)
 	else:
-		_root.add_child(instance, true)
+		_root.call_deferred("add_child", instance, true)
 	spawned_count += 1
 	emit_signal("scene_spawned", instance)
 
