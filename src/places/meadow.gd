@@ -20,7 +20,7 @@ func increase_difficulty():
 			giant_dragonfly_timer.wait_time - giant_dragonfly_timer.wait_time * 0.1)
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
 	var collision_shape: Node = $Area2D/CollisionShape2D
 	collision_shape.set_deferred("disabled", true)
 	
