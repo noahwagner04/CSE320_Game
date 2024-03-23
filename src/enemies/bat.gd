@@ -5,7 +5,7 @@ var _target: Node2D
 
 @onready var motion_controller: MotionController = %MotionController
 @onready var col_detector: Area2D = %ColliderDetector
-#@onready var xp_dropper = $xp_dropper
+@onready var xp_dropper = $xp_dropper
 
 
 func _ready():
@@ -23,5 +23,5 @@ func _physics_process(_delta):
 
 
 func _on_health_container_health_depleted():
-	#xp_dropper.drop_xp()
+	xp_dropper.drop_xp()
 	queue_free()
