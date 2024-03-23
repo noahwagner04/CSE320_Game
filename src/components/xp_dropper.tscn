@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://e176aonvgywl"]
+
+[ext_resource type="PackedScene" uid="uid://e176aonvgywl" path="res://src/components/xp_dropper.tscn" id="1_3kh40"]
+
+[node name="xp_dropper" instance=ExtResource("1_3kh40")]

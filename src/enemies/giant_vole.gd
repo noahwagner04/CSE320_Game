@@ -9,7 +9,7 @@ var _target: Node2D
 
 @onready var motion_controller: MotionController = %MotionController
 @onready var col_detector: Area2D = %ColliderDetector
-
+@onready var xp_dropper = $Xp_Dropper
 
 func _ready():
 	home.global_position = global_position
@@ -34,7 +34,8 @@ func _physics_process(_delta):
 
 
 func _on_health_container_health_depleted():
-
+	xp_dropper.drop_xp()
+	print("after drop_xp() in vole")
 	$voledeath.play(.05)
 	await get_tree().create_timer(.3).timeout
 	$ItemDropper.on_death()
