@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bo160wmkk6oxl" path="res://assets/sfx/bearbark.mp3" id="9_7sex8"]
 [ext_resource type="PackedScene" uid="uid://ddm4ytlgshday" path="res://src/components/item_dropper.tscn" id="10_arlgo"]
 [ext_resource type="Resource" uid="uid://ba3u61uxxnlru" path="res://src/loot_tables/bossL1.tres" id="11_byorn"]
-[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="12_xvlsu"]
+[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="12_xvlsu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wb35t"]
 radius = 19.0

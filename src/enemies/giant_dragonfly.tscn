@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://4gm8rvv20s56" path="res://assets/sfx/bumblebee-45600.mp3" id="10_b15yy"]
 [ext_resource type="PackedScene" uid="uid://ddm4ytlgshday" path="res://src/components/item_dropper.tscn" id="11_1mbjk"]
 [ext_resource type="Resource" uid="uid://docfjrqajlcs8" path="res://src/loot_tables/minorL1.tres" id="12_av2mh"]
-[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
+[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3yxi0"]
 radius = 300.0
