@@ -17,8 +17,8 @@ radius = 19.0
 height = 62.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bnrts"]
-radius = 19.0
-height = 62.0
+radius = 4.97694
+height = 30.3022
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4fh4u"]
 radius = 19.0
@@ -30,7 +30,6 @@ collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_y2xdq")
-metadata/_edit_group_ = true
 
 [node name="MotionController" parent="." instance=ExtResource("2_43mtr")]
 max_speed = 70.0
@@ -49,21 +48,23 @@ position = Vector2(0, -3)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_wb35t")
 
-[node name="HitBox" parent="." instance=ExtResource("4_onvm4")]
+[node name="HeadHitBox" parent="." instance=ExtResource("4_onvm4")]
 collision_layer = 2
 damage = 25.0
 response = 2
 
-[node name="HitBoxShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, -3)
-rotation = 4.71239
+[node name="HeadHitBoxShape2D" type="CollisionShape2D" parent="HeadHitBox"]
+unique_name_in_owner = true
+position = Vector2(18, -13)
+rotation = 4.62355
+scale = Vector2(1.21896, 0.746816)
 shape = SubResource("CapsuleShape2D_bnrts")
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("5_8ttyp")]
 collision_layer = 0
 health_container = NodePath("../HealthContainer")
 motion_controller = NodePath("../MotionController")
-knockback_resistance = 30.0
+knockback_resistance = 50.0
 
 [node name="HurtBoxShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -3)
