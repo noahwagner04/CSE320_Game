@@ -7,6 +7,7 @@ var player_dist: float
 @onready var health_container: HealthContainer = $HealthContainer
 @onready var motion_controller: MotionController = $MotionController
 @onready var player: Node = get_tree().get_first_node_in_group("player")
+@onready var xp_dropper = $xp_dropper
 
 
 func _physics_process(delta):
@@ -28,6 +29,7 @@ func _physics_process(delta):
 
 
 func _on_health_container_health_depleted():
+	xp_dropper.drop_xp()
 	queue_free()
 
 

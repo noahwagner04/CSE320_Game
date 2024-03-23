@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cic55om7hfudf"]
+[gd_scene load_steps=16 format=3 uid="uid://cic55om7hfudf"]
 
 [ext_resource type="Script" path="res://src/enemies/boss_behemoth_vole.gd" id="1_y2xdq"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_43mtr"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bo160wmkk6oxl" path="res://assets/sfx/bearbark.mp3" id="9_7sex8"]
 [ext_resource type="PackedScene" uid="uid://ddm4ytlgshday" path="res://src/components/item_dropper.tscn" id="10_arlgo"]
 [ext_resource type="Resource" uid="uid://ba3u61uxxnlru" path="res://src/loot_tables/bossL1.tres" id="11_byorn"]
+[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="12_xvlsu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wb35t"]
 radius = 19.0
@@ -87,6 +88,9 @@ max_polyphony = 10
 
 [node name="ItemDropper" parent="." instance=ExtResource("10_arlgo")]
 loot_table = ExtResource("11_byorn")
+
+[node name="xp_dropper" parent="." instance=ExtResource("12_xvlsu")]
+xp_drop_amount = 200
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
