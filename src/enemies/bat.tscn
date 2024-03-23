@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgfapgytdyy0e"]
+[gd_scene load_steps=12 format=3 uid="uid://cgfapgytdyy0e"]
 
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="1_6lb5e"]
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_40erc"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_u4sh8"]
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="5_nghf6"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="6_sqlyv"]
-[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="8_uxnep"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5sefs"]
 radius = 250.0
@@ -74,8 +73,5 @@ motion_controller = NodePath("../MotionController")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_um2o4")
-
-[node name="xp_dropper" parent="." instance=ExtResource("8_uxnep")]
-xp_drop_amount = 30
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
