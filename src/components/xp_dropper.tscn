@@ -9,3 +9,4 @@ script = ExtResource("1_v14wt")
 
 [node name="Spawner" parent="." instance=ExtResource("2_g4u8b")]
 scene = ExtResource("3_sd3qv")
+spawn_as_child = false
