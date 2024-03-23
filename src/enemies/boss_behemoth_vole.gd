@@ -38,10 +38,13 @@ func _process(_delta):
 	if (player == null):
 		queue_free()
 		return
-		
-	var player_x_dist: float = player.to_local(global_position).x
-	
+
 	player_dist = global_position.distance_to(player.global_position)
+	
+	if (player_dist > agro_dist):
+		return
+	
+	var player_x_dist: float = player.to_local(global_position).x
 	
 	if ( !is_too_close && player_x_dist < 0 && player_dist <= max_too_close_dist ):
 		is_too_close = true
