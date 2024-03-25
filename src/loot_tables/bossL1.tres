@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_e0ul7")
-min_weapon_drops = 0
-max_weapon_drops = 2
-weapon_drop_chance = 90.0
+min_weapon_drops = 2
+max_weapon_drops = 4
+weapon_drop_chance = 50.0
 weapon_t1_drop_rate = 20.0
 weapon_t2_drop_rate = 20.0
 weapon_t3_drop_rate = 50.0

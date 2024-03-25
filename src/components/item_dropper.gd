@@ -31,6 +31,8 @@ var valid_weapons: Array[String] = []
 
 # Consumables
 const health_potion = preload("res://src/items/health_potion.tres")
+const stamina_potion = preload("res://src/items/stamina_potion.tres")
+const monsters_energy = preload("res://src/items/monster's_energy.tres")
 
 var valid_consumables: Array[String] = []
 
@@ -73,8 +75,14 @@ func drop_item(item_data: ItemData):
 	
 func on_death():
 	# health potion drops
-	if loot_table.max_health_potion_drops != 0:
-		for ii in loot_table.max_health_potion_drops:
+	var min_health_potion_drops = loot_table.min_health_potion_drops
+	var max_health_potion_drops = loot_table.max_health_potion_drops
+	while min_health_potion_drops > 0:
+		do_health_potion()
+		min_health_potion_drops -= 1
+		max_health_potion_drops -= 1
+	if max_health_potion_drops > 0:
+		for ii in max_health_potion_drops:
 			# check if health potion will drop
 			if randf_range(0, 100) > loot_table.health_potion_drop_rate:
 				continue
@@ -86,11 +94,18 @@ func on_death():
 			valid_weapons.append(weapon)
 	
 	# weapon drops
-	if loot_table.max_weapon_drops != 0:
-		for ii in loot_table.max_weapon_drops:
+	var min_weapon_drops = loot_table.min_weapon_drops
+	var max_weapon_drops = loot_table.max_weapon_drops
+	while min_weapon_drops > 0:
+		var weapon_name = valid_weapons[randi() % valid_weapons.size()]
+		do_weapon(weapon_name)
+		min_weapon_drops -= 1
+		max_weapon_drops -= 1
+	if max_weapon_drops > 0: 
+		for ii in max_weapon_drops:
 			# check if weapon will drop
 			if randf_range(0, 100) > loot_table.weapon_drop_chance:
 				continue
 			# find random weapon
 			var weapon_name = valid_weapons[randi() % valid_weapons.size()]
-			do_weapon(weapon_name)	
+			do_weapon(weapon_name)
