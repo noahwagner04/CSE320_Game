@@ -24,7 +24,7 @@ signal player_leveled_up
 @export var sp_regen_mod: int = 1
 @export var stamina_mod: int = 1000
 
-var xp_level_thresholds: Array[int] = [100, 300, 700, 1300, 2000]
+var xp_level_thresholds: Array[int] = [100, 300, 700, 1300, 2000, 3000]
 var xp: int = 0
 var level: int = 1
 
@@ -50,6 +50,9 @@ func gain_xp(amount):
 
 # Checks if a character meets a threshold requried for leveling up
 func checkLevelUp():
+	var max_level = len(xp_level_thresholds)
+	if level > max_level:
+		return
 	if xp >= xp_level_thresholds[level - 1]:
 		levelUp()
 

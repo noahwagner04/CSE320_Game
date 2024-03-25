@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cic55om7hfudf"]
+[gd_scene load_steps=16 format=3 uid="uid://cic55om7hfudf"]
 
 [ext_resource type="Script" path="res://src/enemies/boss_behemoth_vole.gd" id="1_y2xdq"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_43mtr"]
@@ -11,14 +11,15 @@
 [ext_resource type="AudioStream" uid="uid://bo160wmkk6oxl" path="res://assets/sfx/bearbark.mp3" id="9_7sex8"]
 [ext_resource type="PackedScene" uid="uid://ddm4ytlgshday" path="res://src/components/item_dropper.tscn" id="10_arlgo"]
 [ext_resource type="Resource" uid="uid://ba3u61uxxnlru" path="res://src/loot_tables/bossL1.tres" id="11_byorn"]
+[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="12_xvlsu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wb35t"]
 radius = 19.0
 height = 62.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bnrts"]
-radius = 19.0
-height = 62.0
+radius = 4.97694
+height = 30.3022
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4fh4u"]
 radius = 19.0
@@ -30,7 +31,6 @@ collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_y2xdq")
-metadata/_edit_group_ = true
 
 [node name="MotionController" parent="." instance=ExtResource("2_43mtr")]
 max_speed = 70.0
@@ -49,21 +49,23 @@ position = Vector2(0, -3)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_wb35t")
 
-[node name="HitBox" parent="." instance=ExtResource("4_onvm4")]
+[node name="HeadHitBox" parent="." instance=ExtResource("4_onvm4")]
 collision_layer = 2
 damage = 25.0
 response = 2
 
-[node name="HitBoxShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, -3)
-rotation = 4.71239
+[node name="HeadHitBoxShape2D" type="CollisionShape2D" parent="HeadHitBox"]
+unique_name_in_owner = true
+position = Vector2(18, -13)
+rotation = 4.62355
+scale = Vector2(1.21896, 0.746816)
 shape = SubResource("CapsuleShape2D_bnrts")
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("5_8ttyp")]
 collision_layer = 0
 health_container = NodePath("../HealthContainer")
 motion_controller = NodePath("../MotionController")
-knockback_resistance = 30.0
+knockback_resistance = 50.0
 
 [node name="HurtBoxShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -3)
@@ -86,6 +88,9 @@ max_polyphony = 10
 
 [node name="ItemDropper" parent="." instance=ExtResource("10_arlgo")]
 loot_table = ExtResource("11_byorn")
+
+[node name="xp_dropper" parent="." instance=ExtResource("12_xvlsu")]
+xp_drop_amount = 200
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

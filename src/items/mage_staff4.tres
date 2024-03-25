@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemDataWeapon" load_steps=5 format=3 uid="uid://m2ilwhji1udh"]
+[gd_resource type="Resource" script_class="ItemDataWeapon" load_steps=5 format=3 uid="uid://cwq33xfxi866j"]
 
 [ext_resource type="Script" path="res://src/inventory/item_data_weapon.gd" id="1_yuu41"]
 [ext_resource type="PackedScene" uid="uid://dv3i37pthetip" path="res://src/weapons/mage_staff.tscn" id="2_mdd6w"]
