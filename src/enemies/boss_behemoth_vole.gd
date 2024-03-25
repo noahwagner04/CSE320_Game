@@ -133,7 +133,7 @@ func _on_health_container_health_depleted():
 	$BearDeath.play( )
 	await get_tree().create_timer( 3.19 ).timeout
 	_xp_dropper.drop_xp()
-	$ItemDropper.on_death()
+	$ItemDropper.drop()
 	queue_free()
 
 

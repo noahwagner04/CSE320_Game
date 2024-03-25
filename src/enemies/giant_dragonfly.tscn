@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://djv6bxpkal1st"]
+[gd_scene load_steps=15 format=3 uid="uid://djv6bxpkal1st"]
 
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_44esr"]
 [ext_resource type="Texture2D" uid="uid://dkenseujuv7a1" path="res://assets/enemies/giant_dragonfly.png" id="1_gxes3"]
@@ -10,9 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bj4dfv6axl5pc" path="res://src/projectiles/dragonfly_spit.tscn" id="8_6wat5"]
 [ext_resource type="AudioStream" uid="uid://dp41ha8binalc" path="res://assets/sfx/splattt-6295.mp3" id="9_ayftr"]
 [ext_resource type="AudioStream" uid="uid://4gm8rvv20s56" path="res://assets/sfx/bumblebee-45600.mp3" id="10_b15yy"]
-[ext_resource type="PackedScene" uid="uid://ddm4ytlgshday" path="res://src/components/item_dropper.tscn" id="11_1mbjk"]
-[ext_resource type="Resource" uid="uid://docfjrqajlcs8" path="res://src/loot_tables/minorL1.tres" id="12_av2mh"]
-[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
+[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3yxi0"]
 radius = 300.0
@@ -81,9 +79,6 @@ stream = ExtResource("9_ayftr")
 [node name="bughurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_b15yy")
 max_polyphony = 10
-
-[node name="ItemDropper" parent="." instance=ExtResource("11_1mbjk")]
-loot_table = ExtResource("12_av2mh")
 
 [node name="xp_dropper" parent="." instance=ExtResource("13_vykgy")]
 xp_drop_amount = 20
