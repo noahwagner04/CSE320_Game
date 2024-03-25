@@ -34,9 +34,11 @@ var weapons_dict
 
 
 func set_non_exported_vals():
-	# minimum drops is not yet supported but I don't want to remove it yet
-	min_weapon_drops = 0
-	min_health_potion_drops = 0
+	# ensure max >= min
+	if max_weapon_drops < min_weapon_drops:
+		max_weapon_drops = min_weapon_drops
+	if max_health_potion_drops < min_health_potion_drops:
+		max_health_potion_drops = min_health_potion_drops
 	weapon_t1_dict = {
 		"tier": 1, 
 		"drop_rate": weapon_t1_drop_rate
