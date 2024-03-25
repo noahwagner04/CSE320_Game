@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddm4ytlgshday"]
+[gd_scene load_steps=2 format=3 uid="uid://bufu6hk0opx26"]
 
 [ext_resource type="Script" path="res://src/components/item_dropper.gd" id="1_lmtat"]
 
