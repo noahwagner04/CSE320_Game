@@ -6,6 +6,7 @@ class_name ItemDropper
 const PICK_UP = preload("res://src/inventory/pick_up.tscn")
 
 var pools: Array[Pool]
+var total_weight: int = 0
 
 # unpack all the loot table scene entries here, probably put them in some data structure like an array or dictionary
 func _ready():
@@ -16,9 +17,8 @@ func _ready():
 # this function would be called when the enemy dies, chest gets looted, wall gets mined, etc.
 func drop():
 	for pool in pools:
-		# handle a duplicated pool
-		var pool_copy = pool.duplicate()
-		handle_pool(pool_copy)
+		# handle a pool
+		handle_pool(pool)
 		
 		
 func handle_pool(pool: Pool):
@@ -26,10 +26,11 @@ func handle_pool(pool: Pool):
 	pool.entries.sort_custom(custom_entry_array_sort)
 	
 	# find total weight
+	total_weight = 0
 	for entry in pool.entries:
 		if entry == null:
 			continue
-		pool.total_weight += entry.weight
+		total_weight += entry.weight
 	
 	for ii in pool.rolls:
 		# check if pool will actually roll
@@ -44,7 +45,7 @@ func roll_pool(pool: Pool):
 	var rand_float = randf()
 	var item: ItemData
 	for entry in pool.entries:
-		total_probability += (float(entry.weight) / float(pool.total_weight))
+		total_probability += (float(entry.weight) / float(total_weight))
 		if rand_float < total_probability:
 			item = entry.item
 			break
