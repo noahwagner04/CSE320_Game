@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bj4dfv6axl5pc" path="res://src/projectiles/dragonfly_spit.tscn" id="8_6wat5"]
 [ext_resource type="AudioStream" uid="uid://dp41ha8binalc" path="res://assets/sfx/splattt-6295.mp3" id="9_ayftr"]
 [ext_resource type="AudioStream" uid="uid://4gm8rvv20s56" path="res://assets/sfx/bumblebee-45600.mp3" id="10_b15yy"]
-[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
+[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3yxi0"]
 radius = 300.0

@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://di4u2ywk7efhm" path="res://src/test_weapon_inv.tres" id="3_b7onu"]
 [ext_resource type="AudioStream" uid="uid://bn6ncjhgcdlr0" path="res://assets/sfx/umph-47201.mp3" id="3_cwkal"]
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
-[ext_resource type="PackedScene" uid="uid://22wskpfroyx6" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
+[ext_resource type="PackedScene" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
 [ext_resource type="PackedScene" uid="uid://bun6y0ddq8lx3" path="res://src/components/player_stats.tscn" id="9_10w05"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyc80"]
