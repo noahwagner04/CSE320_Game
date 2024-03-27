@@ -34,7 +34,7 @@ func _on_health_container_health_depleted():
 	xp_dropper.drop_xp()
 	$bugsplat.play()
 	await get_tree().create_timer(.27).timeout
-	$ItemDropper.on_death()
+	#$ItemDropper.drop()
 	queue_free()
 
 
