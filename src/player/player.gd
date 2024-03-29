@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 signal toggle_inventory()
 
@@ -104,6 +105,9 @@ func get_drop_position() -> Vector2:
 	
 func heal(amount: int):
 	health_container.heal(amount)
+	
+func energize(amount: int):
+	print("stamina recovered by %s" % amount)
 
 func change_weapon(weapon_item_data: ItemDataWeapon):
 	if equipped_weapon:

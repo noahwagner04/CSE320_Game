@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://cgfapgytdyy0e"]
+
+[ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="1_6lb5e"]
+[ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_40erc"]
+[ext_resource type="Script" path="res://src/enemies/bat.gd" id="1_enplw"]
+[ext_resource type="Texture2D" uid="uid://05iwbpekr1wa" path="res://assets/enemies/Bat.png" id="2_pv8gb"]
+[ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_u4sh8"]
+[ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="5_nghf6"]
+[ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="6_sqlyv"]
+[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="8_uxnep"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5sefs"]
+radius = 250.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vio5g"]
+radius = 5.0
+height = 26.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pseuq"]
+size = Vector2(22, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_um2o4"]
+size = Vector2(22, 10)
+
+[node name="Bat" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("1_enplw")
+
+[node name="ColliderDetector" parent="." instance=ExtResource("1_40erc")]
+unique_name_in_owner = true
+collision_layer = 0
+detect_area = false
+detect_character_body = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColliderDetector"]
+visible = false
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_5sefs")
+
+[node name="MotionController" parent="." instance=ExtResource("2_u4sh8")]
+unique_name_in_owner = true
+max_speed = 400.0
+move_force_mag = 475.0
+mass = 0.25
+
+[node name="HealthContainer" parent="." instance=ExtResource("1_6lb5e")]
+max_health = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pv8gb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.10543e-15, -8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vio5g")
+
+[node name="HitBox" parent="." instance=ExtResource("5_nghf6")]
+collision_layer = 2
+damage = 15.0
+response = 2
+disable_time = 0.6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_pseuq")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("6_sqlyv")]
+collision_layer = 0
+health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_um2o4")
+
+[node name="xp_dropper" parent="." instance=ExtResource("8_uxnep")]
+xp_drop_amount = 30
+
+[connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]

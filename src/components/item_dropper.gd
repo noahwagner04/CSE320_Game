@@ -1,42 +1,69 @@
 extends Node2D
+class_name ItemDropper
 
-@export_category("Enemy")
-@export_enum("Minor", "Major", "Boss") var enemy_type
-@export_range(1, 5, 1) var enemy_tier: int
-const PickUp = preload("res://src/inventory/pick_up.tscn")
-var slot_data: SlotData
+# more settings for how to spawn the loot (as a child, globally, with an initial random position / rotation, etc)
+@export var loot_table: LootTable
+const PICK_UP = preload("res://src/inventory/pick_up.tscn")
 
+var pools: Array[Pool]
+var total_weight: int = 0
 
-@export_category("Weapons")
-@export_group("Dagger")
-@export var dagger_drop: bool
-@export_flags("1", "2", "3", "4", "5") var dagger_rarities
-var dagger1 = preload("res://src/items/dagger1.tres")
-
-@export_group("Mage Staff")
-@export var mage_staff_drop: bool
-@export_flags("1", "2", "3", "4", "5") var mage_staff_rarities
-
-
-@export_category("Consumables")
-@export_group("Healing Potion")
-@export var healing_potion_drop: bool
-var healing_potion = preload("res://src/items/health_potion.tres")
-
+# unpack all the loot table scene entries here, probably put them in some data structure like an array or dictionary
 func _ready():
-	# do math or whatever.
-	# this can be changed to whatever. Either we can pick individual rarities and items
-	# or we can use a pre-determined set loadout for things like rank and file enemies.
-	# I don't mind any way.
+	pools = loot_table.pools
 	pass
+
+# uses loot table information to drop the correct amount of items (from each pool using weights of each item)
+# this function would be called when the enemy dies, chest gets looted, wall gets mined, etc.
+func drop():
+	for pool in pools:
+		# handle a pool
+		handle_pool(pool)
+		
+		
+func handle_pool(pool: Pool):
+	# sort in descending order
+	pool.entries.sort_custom(custom_entry_array_sort)
 	
-func on_death():
-	if randf() < 0.8:
+	# find total weight
+	total_weight = 0
+	for entry in pool.entries:
+		if entry == null:
+			continue
+		total_weight += entry.weight
+	
+	for ii in pool.rolls:
+		# check if pool will actually roll
+		if randf_range(0, 100) > pool.chance_to_roll:
+			continue
+		# roll pool
+		roll_pool(pool)
+		
+		
+func roll_pool(pool: Pool):
+	var total_probability: float = 0
+	var rand_float = randf()
+	var item: ItemData
+	for entry in pool.entries:
+		total_probability += (float(entry.weight) / float(total_weight))
+		if rand_float < total_probability:
+			item = entry.item
+			break
+	if item == null:
+		print("ERROR HAS OCCURRED")
 		return
-	slot_data = SlotData.new()
-	slot_data.item_data = healing_potion
-	slot_data.quantity = 1
-	var pick_up = PickUp.instantiate()
+	drop_item(item)
+	
+
+func drop_item(item_data: ItemData):
+	var slot_data = SlotData.new()
+	slot_data.item_data = item_data
+	var pick_up = PICK_UP.instantiate()
 	pick_up.slot_data = slot_data
 	pick_up.position = global_position
 	get_node("/root").add_child(pick_up)
+	
+
+func custom_entry_array_sort(entry_a: Entry, entry_b: Entry) -> bool:
+	return entry_a.weight > entry_b.weight
+	

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var stop_range: float = 100
+@onready var xp_dropper = $xp_dropper
 
 var _target: Node2D
 
@@ -30,8 +31,10 @@ func _physics_process(delta):
 
 
 func _on_health_container_health_depleted():
+	xp_dropper.drop_xp()
 	$bugsplat.play()
 	await get_tree().create_timer(.27).timeout
+	#$ItemDropper.drop()
 	queue_free()
 
 

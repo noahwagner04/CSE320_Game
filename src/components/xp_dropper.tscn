@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbcgu24ydlycu"]
+
+[ext_resource type="Script" path="res://src/components/xp_dropper.gd" id="1_v14wt"]
+[ext_resource type="PackedScene" uid="uid://b6vlyexlobsos" path="res://src/components/spawner.tscn" id="2_g4u8b"]
+[ext_resource type="PackedScene" uid="uid://bhaepfhg5q4dv" path="res://src/components/xp_orb.tscn" id="3_sd3qv"]
+
+[node name="xp_dropper" type="Node2D"]
+script = ExtResource("1_v14wt")
+
+[node name="Spawner" parent="." instance=ExtResource("2_g4u8b")]
+max_spawn = 20
+scene = ExtResource("3_sd3qv")
+spawn_as_child = false
