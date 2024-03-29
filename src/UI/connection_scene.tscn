@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfe5fnwrcfr36"]
+[gd_scene load_steps=2 format=3 uid="uid://dt3psalqn3k43"]
 
-[ext_resource type="Script" path="res://src/UI/connection_scene.gd" id="1_lyrlr"]
+[sub_resource type="GDScript" id="GDScript_1mug0"]
+script/source = "extends Control
+
+
+func _on_host_button_pressed():
+	#ConnectionHandler.set_peer_host()
+	#GameManager.player_name = $NameTextField.text
+	#visible = false
+	pass
+
+
+func _on_join_button_pressed():
+	#ConnectionHandler.set_peer_client()
+	#GameManager.player_name = $NameTextField.text
+	#visible = false
+	pass
+"
 
 [node name="ConnectionScene" type="Control"]
 layout_mode = 3
@@ -9,7 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lyrlr")
+script = SubResource("GDScript_1mug0")
 
 [node name="HostButton" type="Button" parent="."]
 layout_mode = 2

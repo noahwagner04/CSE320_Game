@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmfwyf735i3ii"]
+[gd_scene load_steps=2 format=3 uid="uid://bx7udfyxuxq4x"]
 
-[ext_resource type="Script" path="res://src/UI/main_menu.gd" id="1_rhcux"]
+[sub_resource type="GDScript" id="GDScript_f2qm2"]
+script/source = "extends Control
+
+func _on_play_button_pressed():
+	get_tree().change_scene_to_file(\"res://src/main.tscn\")
+
+
+func _on_settings_button_pressed():
+	pass 
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()
+"
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,7 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-script = ExtResource("1_rhcux")
+script = SubResource("GDScript_f2qm2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
