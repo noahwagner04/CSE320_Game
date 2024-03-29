@@ -25,3 +25,7 @@ func _physics_process(_delta):
 func _on_health_container_health_depleted():
 	xp_dropper.drop_xp()
 	queue_free()
+
+
+func _on_health_container_health_changed(amount):
+	$HitEffectPlayer.play("hit")
