@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 signal toggle_inventory()
 
@@ -25,7 +26,7 @@ func _ready():
 	# exported inventories: would likely start based on class selection
 	# based on class, select starting weapon
 	# for now, using a default starting_weapon resource of dagger
-	starting_item_data_weapon = preload("res://src/items/dagger.tres")
+	starting_item_data_weapon = preload("res://src/items/dagger1.tres")
 	# again, this is based off of the test_weapon_inventory.tres having
 		# a dagger. 
 	change_weapon(starting_item_data_weapon)
@@ -36,9 +37,9 @@ func _ready():
 
 func set_health():
 	health_container.max_health = player_stats.health
-	health_container._health = player_stats.health
+	health_container.health = player_stats.health
 	health_bar.max_value = health_container.max_health
-	health_bar.value = health_container._health
+	health_bar.value = health_container.health
 
 
 func _process(_delta):
@@ -67,20 +68,19 @@ func move(_delta):
 	
 	# apply friction if no input is pressed
 	if direction.length() == 0:
-		motion_controller.stop_desired_motion()
+		motion_controller.apply_friction(_delta)
 	
 	# apply acceleration and limit velocity
-	motion_controller.acc_dir = direction
-	motion_controller.update(_delta)
+	motion_controller.move(direction, _delta)
 	
 	# move the player
-	velocity = motion_controller.get_velocity()
+	velocity = motion_controller.velocity
 	move_and_slide()
 	
 
 
 func _on_health_container_health_changed(_amount):
-	health_bar.value = health_container.get_health()
+	health_bar.value = health_container.health
 	if _amount < 0:
 		%HurtSound.play(0.75)
 
@@ -105,11 +105,15 @@ func get_drop_position() -> Vector2:
 	
 func heal(amount: int):
 	health_container.heal(amount)
+	
+func energize(amount: int):
+	print("stamina recovered by %s" % amount)
 
 func change_weapon(weapon_item_data: ItemDataWeapon):
 	if equipped_weapon:
 		equipped_weapon.queue_free()
 	equipped_weapon = weapon_item_data.weapon.instantiate()
+	equipped_weapon.weapon_rarity = weapon_item_data.weapon_rarity
 	add_child(equipped_weapon)
 	print("equipped weapon has been changed to: %s" % weapon_item_data.name)
 

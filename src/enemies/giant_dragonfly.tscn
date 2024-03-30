@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djv6bxpkal1st"]
+[gd_scene load_steps=16 format=3 uid="uid://djv6bxpkal1st"]
 
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_44esr"]
 [ext_resource type="Texture2D" uid="uid://dkenseujuv7a1" path="res://assets/enemies/giant_dragonfly.png" id="1_gxes3"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bj4dfv6axl5pc" path="res://src/projectiles/dragonfly_spit.tscn" id="8_6wat5"]
 [ext_resource type="AudioStream" uid="uid://dp41ha8binalc" path="res://assets/sfx/splattt-6295.mp3" id="9_ayftr"]
 [ext_resource type="AudioStream" uid="uid://4gm8rvv20s56" path="res://assets/sfx/bumblebee-45600.mp3" id="10_b15yy"]
+[ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="12_8fnxu"]
+[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3yxi0"]
 radius = 300.0
@@ -22,6 +24,7 @@ height = 20.0
 size = Vector2(13, 19)
 
 [node name="GiantDragonfly" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_r1s8r")
@@ -31,9 +34,9 @@ max_health = 15.0
 
 [node name="MotionController" parent="." instance=ExtResource("3_flpor")]
 unique_name_in_owner = true
-friction = 2000.0
 max_speed = 150.0
-acc_mag = 2000.0
+move_force_mag = 2000.0
+friction_mag = 2000.0
 
 [node name="ColliderDetector" parent="." instance=ExtResource("1_44esr")]
 unique_name_in_owner = true
@@ -52,9 +55,10 @@ texture = ExtResource("1_gxes3")
 position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_uf1rn")
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container") instance=ExtResource("3_d6xc4")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health_container", "motion_controller") instance=ExtResource("3_d6xc4")]
 collision_layer = 0
 health_container = NodePath("../HealthContainer")
+motion_controller = NodePath("../MotionController")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -4)
@@ -76,6 +80,13 @@ stream = ExtResource("9_ayftr")
 [node name="bughurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_b15yy")
 max_polyphony = 10
+
+[node name="xp_dropper" parent="." instance=ExtResource("13_vykgy")]
+xp_drop_amount = 20
+
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("12_8fnxu")]
+root_node = NodePath("../Sprite2D")
+sprite = NodePath("../Sprite2D")
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

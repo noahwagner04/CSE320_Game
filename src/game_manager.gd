@@ -14,12 +14,6 @@ func instantiate_player(id):
 	var new_player = preload("res://src/player/player.tscn").instantiate()
 	new_player.name = str(id)
 	new_player.global_position = Vector2.ZERO
-	get_node("/root/Main").add_child(new_player)
+	get_node("/root/Startup/Level/Main").add_child(new_player)
 	new_player_created.emit(new_player)
 
-func delete_player(id):
-	players.erase(id)
-	var scene_players = get_tree().get_nodes_in_group("player")
-	for i in scene_players:
-		if i.name == str(id):
-			i.queue_free()
