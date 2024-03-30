@@ -29,6 +29,7 @@ weight = 2
 
 [resource]
 script = ExtResource("6_oqakv")
-rolls = 1
-chance_to_roll = 20.0
+min_rolls = 0
+max_rolls = 1
+chance_to_roll = 10.0
 entries = Array[ExtResource("2_t18ym")]([SubResource("Resource_hwu5o"), SubResource("Resource_yldlj"), SubResource("Resource_s08tf"), SubResource("Resource_jym47")])
