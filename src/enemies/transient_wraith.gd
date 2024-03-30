@@ -31,7 +31,7 @@ func _ready():
 	add_child(_teleport_timer)
 	
 	_projectile_timer.start(projectile_cooldown)
-	_special_attack_timer.start(randf_range(1, 5))
+	_special_attack_timer.start(randf_range(15, 30))
 	_teleport_timer.start(teleport_cooldown)
 
 
@@ -46,12 +46,14 @@ func _physics_process(_delta):
 func _fire_projectile():
 	if (_player == null):
 		return
-	_projectile_spawner.spawn_projectile(_player_direction)
+	
+	var random_angle := Vector2(randf_range(-PI/6, PI/6), randf_range(-PI/6, PI/6)) 
+	_projectile_spawner.spawn_projectile(_player_direction + random_angle)
 	
 	
 func _special_attacks():
 	_split_body()
-	_special_attack_timer.start(randf_range(1, 5))
+	_special_attack_timer.start(randf_range(15, 30))
 	
 	
 func _split_body():
