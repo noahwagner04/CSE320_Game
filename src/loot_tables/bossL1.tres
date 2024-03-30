@@ -1,20 +1,9 @@
-[gd_resource type="Resource" script_class="LootTable" load_steps=2 format=3 uid="uid://ba3u61uxxnlru"]
+[gd_resource type="Resource" script_class="LootTable" load_steps=4 format=3 uid="uid://can5ogchci2bu"]
 
-[ext_resource type="Script" path="res://src/loot_tables/loot_table.gd" id="1_e0ul7"]
+[ext_resource type="Resource" uid="uid://cg52v4jt4ibuf" path="res://src/loot_tables/pools/bossL1_weapons_pool.tres" id="1_1xydn"]
+[ext_resource type="Script" path="res://src/loot_tables/loot_table.gd" id="1_djkuw"]
+[ext_resource type="Resource" uid="uid://j4v7fyr645vp" path="res://src/loot_tables/pools/bossL1_consumables_pool.tres" id="2_r7eme"]
 
 [resource]
-script = ExtResource("1_e0ul7")
-min_weapon_drops = 0
-max_weapon_drops = 2
-weapon_drop_chance = 90.0
-weapon_t1_drop_rate = 20.0
-weapon_t2_drop_rate = 20.0
-weapon_t3_drop_rate = 50.0
-weapon_t4_drop_rate = 10.0
-weapon_t5_drop_rate = 0.0
-dagger_drop = true
-mage_staff_drop = true
-min_health_potion_drops = 0
-max_health_potion_drops = 10
-health_potion_drop_rate = 70.0
-health_potion_drop = true
+script = ExtResource("1_djkuw")
+pools = Array[Resource("res://src/loot_tables/pools/pool.gd")]([ExtResource("1_1xydn"), ExtResource("2_r7eme")])

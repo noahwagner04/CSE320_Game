@@ -34,13 +34,13 @@ func _on_health_container_health_depleted():
 	xp_dropper.drop_xp()
 	$bugsplat.play()
 	await get_tree().create_timer(.27).timeout
-	$ItemDropper.on_death()
+	#$ItemDropper.drop()
 	queue_free()
 
 
 func _on_hurt_box_hurt(hit_box):
 	$bughurt.play(3.3)
-
+	$HitEffectPlayer.play("hit")
 
 func _on_attack_timer_timeout():
 	if _target:

@@ -133,7 +133,7 @@ func _on_health_container_health_depleted():
 	$BearDeath.play( )
 	await get_tree().create_timer( 3.19 ).timeout
 	_xp_dropper.drop_xp()
-	$ItemDropper.on_death()
+	$ItemDropper.drop()
 	queue_free()
 
 
@@ -149,3 +149,4 @@ func _on_hurt_box_hurt(_hit_box):
 		_summon_voles(ring_num)
 		
 	$BearHurt.play( .42 )
+	$HitEffectPlayer.play( "hit" )

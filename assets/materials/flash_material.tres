@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://djxhuuigo1bmj"]
+
+[ext_resource type="Shader" path="res://src/shaders/flash_effect.gdshader" id="1_1a5oj"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_1a5oj")
+shader_parameter/opacity = 0.0
