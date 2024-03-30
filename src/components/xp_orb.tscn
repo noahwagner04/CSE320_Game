@@ -8,7 +8,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8acr"]
 radius = 7.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_brvmu"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4xwe"]
+radius = 200.0
 
 [node name="xp_orb" type="Area2D"]
 collision_layer = 0
@@ -21,16 +22,19 @@ texture = ExtResource("2_pgeco")
 shape = SubResource("CircleShape2D_m8acr")
 
 [node name="MotionController" parent="." instance=ExtResource("3_jg14a")]
-max_speed = 20.0
-move_force_mag = 500.0
-friction_mag = 500.0
+max_speed = 5.0
+move_force_mag = 20.0
+mass = 50.0
+friction_mag = 10.0
 
 [node name="ColliderDetector" parent="." instance=ExtResource("4_1vg4d")]
+unique_name_in_owner = true
 collision_layer = 0
 detect_area = false
 detect_character_body = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColliderDetector"]
-shape = SubResource("CircleShape2D_brvmu")
+visible = false
+shape = SubResource("CircleShape2D_p4xwe")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
