@@ -1,9 +1,12 @@
 extends ItemData
 class_name ItemDataConsumable
 
-@export var heal_value: int
+@export var health_recover_value: int
+@export var stamina_recover_value: int
 
 func use(target):
-	if heal_value != 0:
-		target.heal(heal_value)
-	pass
+	if health_recover_value != 0:
+		target.heal(health_recover_value)
+	if stamina_recover_value != 0:
+		target.energize(stamina_recover_value)
+

@@ -36,12 +36,13 @@ func _on_health_container_health_depleted():
 	xp_dropper.drop_xp()
 	$voledeath.play(.05)
 	await get_tree().create_timer(.3).timeout
-	$ItemDropper.on_death()
+	$ItemDropper.drop()
 	queue_free()
 
 
 func _on_hurt_box_hurt(hit_box):
 	$volehurt.play()
+	$HitEffectPlayer.play("hit")
 
 	
 func _on_tree_entered():

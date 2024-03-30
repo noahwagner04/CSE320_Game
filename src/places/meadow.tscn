@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b6vlyexlobsos" path="res://src/components/spawner.tscn" id="2_0b0rp"]
 [ext_resource type="PackedScene" uid="uid://dde3h6haoynnn" path="res://src/enemies/giant_vole.tscn" id="3_p1cuf"]
 [ext_resource type="PackedScene" uid="uid://djv6bxpkal1st" path="res://src/enemies/giant_dragonfly.tscn" id="6_fr1my"]
-[ext_resource type="PackedScene" path="res://src/enemies/bat.tscn" id="7_pwqxa"]
+[ext_resource type="PackedScene" uid="uid://c8g203cfa4llk" path="res://src/enemies/bat.tscn" id="7_pwqxa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ka513"]
 resource_name = "Ground"
