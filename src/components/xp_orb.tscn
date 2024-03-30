@@ -22,7 +22,7 @@ texture = ExtResource("2_pgeco")
 shape = SubResource("CircleShape2D_m8acr")
 
 [node name="MotionController" parent="." instance=ExtResource("3_jg14a")]
-max_speed = 400.0
+max_speed = 300.0
 move_force_mag = 2000.0
 friction_mag = 1000.0
 
