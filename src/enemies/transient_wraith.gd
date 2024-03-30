@@ -10,7 +10,6 @@ var _special_attack_timer:= Timer.new()
 var _teleport_timer:= Timer.new()
 var _player_direction: Vector2
 var _second_phase: bool = false
-var _transient_wraith_scene: PackedScene = preload("res://src/enemies/transient_wraith.tscn")
 
 @onready var _projectile_spawner: Node2D = $ProjectileSpawner
 @onready var health_container: HealthContainer = $HealthContainer
@@ -36,7 +35,7 @@ func _ready():
 	_teleport_timer.start(teleport_cooldown)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if _player == null:
 		_player = get_tree().get_first_node_in_group("player")
 		return
@@ -126,7 +125,7 @@ func _on_health_container_health_depleted():
 	queue_free()
 
 
-func _on_hurt_box_hurt(hit_box):
+func _on_hurt_box_hurt(_hit_box):
 	if (_second_phase == false && health_container.health <= health_container.max_health * 0.5):
 		_second_phase = true
 		#teleport_cooldown = teleport_cooldown / 2
