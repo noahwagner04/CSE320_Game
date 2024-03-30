@@ -3,22 +3,21 @@ extends Area2D
 var xp_value: int = 10
 var xp_direction: Vector2 = Vector2(0.0, 0.0)
 
-var xp_speed: float = 0
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	xp_speed = randf_range(10,60)
-	var random_angle = randf_range(0, 2 * PI)
-	xp_direction = Vector2(cos(random_angle), sin(random_angle))
+@onready var motion_controller = $MotionController
+@onready var col_detector = $ColliderDetector
+var _target: Node2D
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position += xp_direction * delta * xp_speed
-	if xp_speed <= 0:
-		xp_speed = 0
+	_target = col_detector.get_closest_collider()
+	
+	if _target == null:
+		motion_controller.apply_friction(delta)
 	else:
-		xp_speed -= 0.5
+		motion_controller.move(global_position.direction_to(_target.global_position), delta)
+	
+	position += motion_controller.velocity * delta
 
 
 func _on_body_entered(body):
