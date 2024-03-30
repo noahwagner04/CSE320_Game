@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_u4sh8"]
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="5_nghf6"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="6_sqlyv"]
-[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="8_uxnep"]
+[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="8_uxnep"]
 [ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="9_lrtek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5sefs"]
