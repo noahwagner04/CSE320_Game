@@ -1,46 +1,93 @@
 extends CharacterBody2D
 
-
-@export var teleport_range: float = 400
-@export var teleport_cooldown: float = 3
 @export var projectile_cooldown: float = 0.5
+#@export var special_attack_cooldown: float = 5
+@export var teleport_cooldown: float = 3
+@export var teleport_range: float = 400
 
-var projectile_timer:= Timer.new()
-var teleport_timer:= Timer.new()
-var player_direction: Vector2
-var second_phase: bool = false
+var _projectile_timer:= Timer.new()
+var _special_attack_timer:= Timer.new()
+var _teleport_timer:= Timer.new()
+var _player_direction: Vector2
+var _second_phase: bool = false
+var _transient_wraith_scene: PackedScene = preload("res://src/enemies/transient_wraith.tscn")
 
-@onready var projectile_spawner: Node2D = $ProjectileSpawner
+@onready var _projectile_spawner: Node2D = $ProjectileSpawner
 @onready var health_container: HealthContainer = $HealthContainer
-@onready var player: Node = get_tree().get_first_node_in_group("player")
+@onready var _player: Node = get_tree().get_first_node_in_group("player")
 
 
 func _ready():
-	projectile_timer.timeout.connect(fire_projectile)
-	teleport_timer.timeout.connect(teleport)
+	add_to_group("transient_wraiths")
+	
+	_projectile_timer.timeout.connect(_fire_projectile)
+	_special_attack_timer.timeout.connect(_special_attacks)
+	_teleport_timer.timeout.connect(teleport)
+	
 	#teleport_timer.one_shot = true
-	add_child(teleport_timer)
-	add_child(projectile_timer)
-	teleport_timer.start(teleport_cooldown)
-	projectile_timer.start(projectile_cooldown)
+	_special_attack_timer.one_shot = true
+	
+	add_child(_projectile_timer)
+	add_child(_special_attack_timer)
+	add_child(_teleport_timer)
+	
+	_projectile_timer.start(projectile_cooldown)
+	_special_attack_timer.start(randf_range(1, 5))
+	_teleport_timer.start(teleport_cooldown)
 
 
 func _physics_process(delta):
-	if player == null:
-		player = get_tree().get_first_node_in_group("player")
+	if _player == null:
+		_player = get_tree().get_first_node_in_group("player")
 		return
 		
-	player_direction = to_local(player.global_position).normalized()
+	_player_direction = to_local(_player.global_position).normalized()
 
 
-func fire_projectile():
-	if (player == null):
+func _fire_projectile():
+	if (_player == null):
 		return
-	projectile_spawner.spawn_projectile(player_direction)
+	_projectile_spawner.spawn_projectile(_player_direction)
+	
+	
+func _special_attacks():
+	_split_body()
+	_special_attack_timer.start(randf_range(1, 5))
+	
+	
+func _split_body():
+	if (health_container.health <= 0.25 * health_container.max_health):
+		var first_wraith = get_tree().get_first_node_in_group("transient_wraiths")
+		if (first_wraith != null):
+			first_wraith.health_container.max_health *= 2
+			first_wraith.health_container.heal(health_container.health)
+		return
+		
+	var nodes = get_tree().get_nodes_in_group("transient_wraiths")
+	var group_size = nodes.size()
+	
+	if (group_size >= 4):
+		#print(group_size)
+		#print(get_parent().get_children())
+		return 
+	
+	var _new_wraith: Node = duplicate()
+	
+	call_deferred("add_sibling", _new_wraith, false)
+	
+	_new_wraith.teleport()
+	
+	if not _new_wraith.is_node_ready():
+		await _new_wraith.ready
+		
+	var split_health: float = 0.5 * health_container.health 
+	health_container.health = split_health
+	_new_wraith.health_container.health = split_health
+	_new_wraith.health_container.max_health = split_health
 	
 	
 func teleport():
-	if (player == null):
+	if (_player == null):
 		return
 		
 	var global_x: float
@@ -49,7 +96,7 @@ func teleport():
 	var new_x_pos: float
 	var new_y_pos: float
 		
-	if (global_position.distance_to(player.global_position) <= 250):
+	if (global_position.distance_to(_player.global_position) <= 250):
 		global_x = global_position.x
 		global_y = global_position.y
 		
@@ -80,9 +127,9 @@ func _on_health_container_health_depleted():
 
 
 func _on_hurt_box_hurt(hit_box):
-	if (second_phase == false && health_container.health <= health_container.max_health * 0.5):
-		second_phase = true
+	if (_second_phase == false && health_container.health <= health_container.max_health * 0.5):
+		_second_phase = true
 		#teleport_cooldown = teleport_cooldown / 2
-		teleport_timer.start(teleport_cooldown / 2)
-		projectile_timer.start(projectile_cooldown / 2)
+		_teleport_timer.start(teleport_cooldown / 2)
+		_projectile_timer.start(projectile_cooldown / 2)
 		
