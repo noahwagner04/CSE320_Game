@@ -11,13 +11,12 @@ config_version=5
 [application]
 
 config/name="CS320_Game"
-run/main_scene="res://src/UI/main_menu.tscn"
+run/main_scene="res://src/startup.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://assets/icon.svg"
 
 [autoload]
 
-ConnectionHandler="*res://src/connection_handler.gd"
 GameManager="*res://src/game_manager.gd"
 PlayerManager="*res://src/player/player_manager.gd"
 

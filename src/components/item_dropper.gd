@@ -31,8 +31,16 @@ func handle_pool(pool: Pool):
 		if entry == null:
 			continue
 		total_weight += entry.weight
+		
+	# do minimum rolls
+	for ii in pool.min_rolls:
+		roll_pool(pool)
 	
-	for ii in pool.rolls:
+	# do the rest of the chanced rolls
+	var chanced_rolls = pool.max_rolls - pool.min_rolls
+	if chanced_rolls <= 0:
+		return
+	for ii in chanced_rolls:
 		# check if pool will actually roll
 		if randf_range(0, 100) > pool.chance_to_roll:
 			continue

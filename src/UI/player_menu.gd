@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+@onready var level_label = $Panel/VBoxContainer/Level
 @onready var health_label : RichTextLabel = $Panel/VBoxContainer/Health
 @onready var defense_label : RichTextLabel = $Panel/VBoxContainer/Defense
 @onready var hp_regen_label : RichTextLabel = $"Panel/VBoxContainer/HP Regen"
@@ -21,6 +22,7 @@ func toggle_player_menu():
 
 func render_stats():
 	var stats = $"../PlayerStats"
+	level_label.bbcode_text = "Level " + str(stats.level) + (" MAX" if stats.level == stats.max_level else "")
 	health_label.bbcode_text = "Health " + str(stats.health)
 	defense_label.bbcode_text = "Defense " + str(stats.defense) + " (" + ("+" if stats.defense_mod >= 0 else "") + str(stats.defense_mod) + ")" 
 	hp_regen_label.bbcode_text = "HP Regen " + str(stats.hp_regen) + " (" + ("+" if stats.hp_regen_mod >= 0 else "") + str(stats.hp_regen_mod) + ")" 
