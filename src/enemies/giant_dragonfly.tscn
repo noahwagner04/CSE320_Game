@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://djv6bxpkal1st"]
+[gd_scene load_steps=17 format=3 uid="uid://djv6bxpkal1st"]
 
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_44esr"]
 [ext_resource type="Texture2D" uid="uid://dkenseujuv7a1" path="res://assets/enemies/giant_dragonfly.png" id="1_gxes3"]
@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dp41ha8binalc" path="res://assets/sfx/splattt-6295.mp3" id="9_ayftr"]
 [ext_resource type="AudioStream" uid="uid://4gm8rvv20s56" path="res://assets/sfx/bumblebee-45600.mp3" id="10_b15yy"]
 [ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="12_8fnxu"]
-[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
+[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3yxi0"]
 radius = 300.0
@@ -22,6 +22,11 @@ height = 20.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mio1n"]
 size = Vector2(13, 19)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a7wof"]
+properties/0/path = NodePath(".:sync_pos")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="GiantDragonfly" type="CharacterBody2D"]
 z_index = 1
@@ -88,6 +93,11 @@ xp_drop_amount = 20
 root_node = NodePath("../Sprite2D")
 sprite = NodePath("../Sprite2D")
 
+[node name="DragonflySync" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_a7wof")
+
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="tree_entered" from="DragonflySync" to="." method="_on_tree_entered"]

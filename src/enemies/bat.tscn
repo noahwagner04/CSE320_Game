@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8g203cfa4llk"]
+[gd_scene load_steps=15 format=3 uid="uid://c8g203cfa4llk"]
 
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="1_6lb5e"]
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_40erc"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_u4sh8"]
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="5_nghf6"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="6_sqlyv"]
-[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="8_uxnep"]
+[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="8_uxnep"]
 [ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="9_lrtek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5sefs"]
@@ -22,6 +22,11 @@ size = Vector2(22, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um2o4"]
 size = Vector2(22, 10)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2tojv"]
+properties/0/path = NodePath(".:sync_pos")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Bat" type="CharacterBody2D"]
 collision_layer = 2
@@ -82,5 +87,10 @@ xp_drop_amount = 30
 [node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("9_lrtek")]
 sprite = NodePath("../Sprite2D")
 
+[node name="BatSync" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_2tojv")
+
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
+[connection signal="tree_entered" from="BatSync" to="." method="_on_tree_entered"]
