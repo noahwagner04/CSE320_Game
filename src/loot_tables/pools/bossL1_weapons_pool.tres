@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="Pool" load_steps=15 format=3 uid="uid://cg52v4jt4ibuf"]
+
+[ext_resource type="Resource" uid="uid://cv41b4o3k80ve" path="res://src/items/dagger1.tres" id="1_g8ovm"]
+[ext_resource type="Script" path="res://src/loot_tables/entries/entry.gd" id="2_mk6kr"]
+[ext_resource type="Resource" uid="uid://crf0upx26nnhn" path="res://src/items/dagger2.tres" id="3_dlbbf"]
+[ext_resource type="Resource" uid="uid://bao00ul1xacpy" path="res://src/items/dagger3.tres" id="4_dkgvx"]
+[ext_resource type="Resource" uid="uid://dhgpje7w7l1de" path="res://src/items/mage_staff1.tres" id="4_h2kev"]
+[ext_resource type="Resource" uid="uid://b2ajho3iyapir" path="res://src/items/mage_staff2.tres" id="5_i7sqn"]
+[ext_resource type="Script" path="res://src/loot_tables/pools/pool.gd" id="6_jrnka"]
+[ext_resource type="Resource" uid="uid://dexb7douil1ub" path="res://src/items/mage_staff3.tres" id="7_7ga8n"]
+
+[sub_resource type="Resource" id="Resource_hwu5o"]
+script = ExtResource("2_mk6kr")
+item = ExtResource("1_g8ovm")
+weight = 1
+
+[sub_resource type="Resource" id="Resource_yldlj"]
+script = ExtResource("2_mk6kr")
+item = ExtResource("3_dlbbf")
+weight = 2
+
+[sub_resource type="Resource" id="Resource_ey1jm"]
+script = ExtResource("2_mk6kr")
+item = ExtResource("4_dkgvx")
+weight = 1
+
+[sub_resource type="Resource" id="Resource_s08tf"]
+script = ExtResource("2_mk6kr")
+item = ExtResource("4_h2kev")
+weight = 1
+
+[sub_resource type="Resource" id="Resource_jym47"]
+script = ExtResource("2_mk6kr")
+item = ExtResource("5_i7sqn")
+weight = 2
+
+[sub_resource type="Resource" id="Resource_dv55q"]
+script = ExtResource("2_mk6kr")
+item = ExtResource("7_7ga8n")
+weight = 1
+
+[resource]
+script = ExtResource("6_jrnka")
+min_rolls = 1
+max_rolls = 4
+chance_to_roll = 30.0
+entries = Array[ExtResource("2_mk6kr")]([SubResource("Resource_hwu5o"), SubResource("Resource_yldlj"), SubResource("Resource_ey1jm"), SubResource("Resource_s08tf"), SubResource("Resource_jym47"), SubResource("Resource_dv55q")])

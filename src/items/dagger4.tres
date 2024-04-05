@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemDataWeapon" load_steps=5 format=3 uid="uid://bb3nr2dl7rvfn"]
+
+[ext_resource type="Script" path="res://src/inventory/item_data_weapon.gd" id="1_l1sop"]
+[ext_resource type="PackedScene" uid="uid://c03lcp1vpib8k" path="res://src/weapons/dagger.tscn" id="2_y4yjr"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5d6jf"]
+load_path = "res://.godot/imported/32x32.png-e72894ccb86f36ffcb11d38e5757662e.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1aqh"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(96, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_l1sop")
+weapon = ExtResource("2_y4yjr")
+weapon_rarity = 4
+name = "Dagger"
+description = "Almost a perfect dagger!"
+stackable = false
+texture = SubResource("AtlasTexture_x1aqh")
