@@ -33,10 +33,9 @@ func _physics_process(_delta):
 
 
 func _on_health_container_health_depleted():
-	xp_dropper.drop_xp()
-	$voledeath.play(.05)
-	await get_tree().create_timer(.3).timeout
 	$ItemDropper.drop()
+	xp_dropper.drop_xp()
+	%DeathAnimator.animate()
 	queue_free()
 
 

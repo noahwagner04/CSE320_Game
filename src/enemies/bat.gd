@@ -24,6 +24,7 @@ func _physics_process(_delta):
 
 func _on_health_container_health_depleted():
 	xp_dropper.drop_xp()
+	$DeathAnimator.animate()
 	queue_free()
 
 
