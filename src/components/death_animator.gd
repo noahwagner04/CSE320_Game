@@ -10,7 +10,7 @@ var death_animation: PackedScene = preload("res://src/components/death_animation
 func animate():
 	var death_instance = death_animation.instantiate()
 	death_instance.global_position = global_position
-	get_tree().get_root().add_child(death_instance)
+	get_tree().get_root().call_deferred("add_child", death_instance)
 	
 	var children = death_instance.get_children(true)
 	var sprite2d: Sprite2D = children.filter(func (child): return child is Sprite2D)[0]
@@ -21,4 +21,4 @@ func animate():
 	death_instance.life_time = life_time
 	death_instance.sound_offset = sound_offset
 	
-	death_instance.play()
+	death_instance.call_deferred("play")
