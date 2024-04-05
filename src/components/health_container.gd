@@ -8,6 +8,7 @@ signal health_depleted
 @export var max_health: float = 100
 
 var health: float
+var is_dead: bool = false
 
 
 func _ready():
@@ -27,5 +28,6 @@ func heal(amount):
 
 
 func _on_health_changed(_amount):
-	if is_zero_approx(health):
+	if is_zero_approx(health) and not is_dead:
 		emit_signal("health_depleted")
+		is_dead = true
