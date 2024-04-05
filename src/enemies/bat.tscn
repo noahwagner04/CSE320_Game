@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c8g203cfa4llk"]
+[gd_scene load_steps=17 format=3 uid="uid://c8g203cfa4llk"]
 
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="1_6lb5e"]
 [ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="1_40erc"]
@@ -24,6 +24,11 @@ size = Vector2(22, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um2o4"]
 size = Vector2(22, 10)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2tojv"]
+properties/0/path = NodePath(".:sync_pos")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Bat" type="CharacterBody2D"]
 collision_layer = 2
@@ -88,5 +93,10 @@ sprite = NodePath("../Sprite2D")
 sprite = ExtResource("2_pv8gb")
 sound_effect = ExtResource("11_d6pq5")
 
+[node name="BatSync" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_2tojv")
+
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
+[connection signal="tree_entered" from="BatSync" to="." method="_on_tree_entered"]
