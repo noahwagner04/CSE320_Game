@@ -37,6 +37,6 @@ func _on_meadow_dungeon_area_body_entered(_body):
 	call_deferred("add_sibling", meadow_dungeon_instance)
 
 	var player: Node = get_tree().get_first_node_in_group("player")
-	player.global_position = Vector2(205,-409)
+	player.global_position = Vector2(72,-603)
 	
 	queue_free()
