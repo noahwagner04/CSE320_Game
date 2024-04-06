@@ -1232,31 +1232,39 @@ layer_0/tile_data = PackedInt32Array(-1245204, 1048576, 12, -1179668, 1048576, 1
 
 [node name="GiantVoleSpawner" parent="." instance=ExtResource("2_0b0rp")]
 radius = 600
-max_spawn = 150
+max_spawn = 50
 scene = ExtResource("3_p1cuf")
 
 [node name="Timer" type="Timer" parent="GiantVoleSpawner"]
+wait_time = 1.341
 
 [node name="GiantDragonflySpawner" parent="." instance=ExtResource("2_0b0rp")]
 radius = 600
-max_spawn = 25
+max_spawn = 5
 scene = ExtResource("6_fr1my")
 
 [node name="Timer" type="Timer" parent="GiantDragonflySpawner"]
-wait_time = 4.0
+wait_time = 10.0
 
-[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://src/enemies/giant_vole.tscn")
-spawn_path = NodePath("../GiantVoleSpawner")
-
-[node name="Spawner" parent="." instance=ExtResource("2_0b0rp")]
+[node name="BatSpawner" parent="." instance=ExtResource("2_0b0rp")]
 radius = 600
 max_spawn = 5
 scene = ExtResource("7_pwqxa")
 
-[node name="Timer" type="Timer" parent="Spawner"]
-wait_time = 6.0
-autostart = true
+[node name="Timer" type="Timer" parent="BatSpawner"]
+wait_time = 10.0
+
+[node name="VoleSpawnerSync" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/enemies/giant_vole.tscn")
+spawn_path = NodePath("../GiantVoleSpawner")
+
+[node name="BatSpawnerSync" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/enemies/bat.tscn")
+spawn_path = NodePath("../BatSpawner")
+
+[node name="DragonflySpawnerSync" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/enemies/giant_dragonfly.tscn")
+spawn_path = NodePath("../GiantDragonflySpawner")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
