@@ -86,8 +86,7 @@ func _on_health_container_health_changed(_amount):
 
 
 func _on_health_container_health_depleted():
-	$DeathSound.play()
-	await get_tree().create_timer(1.3).timeout
+	%DeathAnimator.animate()
 	queue_free()
 
 

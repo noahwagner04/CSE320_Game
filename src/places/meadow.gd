@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var giant_vole_timer: Timer = $GiantVoleSpawner/Timer
 @onready var giant_dragonfly_timer: Timer = $GiantDragonflySpawner/Timer
+@onready var bat_timer: Timer = $BatSpawner/Timer
 @onready var boss_behemoth_vole_scene: PackedScene = preload("res://src/enemies/boss_behemoth_vole.tscn")
 
 
@@ -9,6 +10,7 @@ func _ready():
 	if multiplayer.is_server():
 		giant_vole_timer.start()
 		giant_dragonfly_timer.start()
+		bat_timer.start()
 		increase_difficulty()
 
 
