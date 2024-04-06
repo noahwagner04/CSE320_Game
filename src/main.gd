@@ -1,7 +1,6 @@
 extends Node2D
 
 const PickUp = preload("res://src/inventory/pick_up.tscn")
-
 const TEST_INV = preload("res://src/test_inv.tres")
 const TEST_WEAPON_INV = preload("res://src/test_weapon_inv.tres")
 var current_player: CharacterBody2D

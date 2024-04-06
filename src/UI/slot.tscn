@@ -1,12 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://drbl531y5n67e"]
+[gd_scene load_steps=9 format=3 uid="uid://drbl531y5n67e"]
 
 [ext_resource type="Script" path="res://src/UI/slot.gd" id="1_kqqaa"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5d6jf"]
+load_path = "res://.godot/imported/32x32.png-e72894ccb86f36ffcb11d38e5757662e.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeht5"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(672, 1664, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rleh3"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(800, 1664, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axtvw"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(1184, 1664, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83i5u"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(928, 1664, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nem77"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(1056, 1664, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2ylu"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(96, 768, 32, 32)
 
 [node name="Slot" type="PanelContainer"]
 custom_minimum_size = Vector2(64, 64)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_kqqaa")
+rarity_1_texture = SubResource("AtlasTexture_eeht5")
+rarity_2_texture = SubResource("AtlasTexture_rleh3")
+rarity_3_texture = SubResource("AtlasTexture_axtvw")
+rarity_4_texture = SubResource("AtlasTexture_83i5u")
+rarity_5_texture = SubResource("AtlasTexture_nem77")
+rarity_6_texture = SubResource("AtlasTexture_l2ylu")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -14,6 +47,11 @@ theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
+
+[node name="RarityTextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
