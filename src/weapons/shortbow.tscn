@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu2ykiauq5jv"]
+
+[ext_resource type="Script" path="res://src/weapons/shortbow.gd" id="1_g1k3h"]
+[ext_resource type="PackedScene" uid="uid://bhgvfs2sl78bn" path="res://src/components/projectile_spawner.tscn" id="2_ai4k8"]
+[ext_resource type="PackedScene" uid="uid://dxpsqfp7pnv2w" path="res://src/projectiles/shortbow_projectile.tscn" id="3_k0kfy"]
+
+[node name="Shortbow" type="Node2D"]
+script = ExtResource("1_g1k3h")
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("2_ai4k8")]
+projectile = ExtResource("3_k0kfy")

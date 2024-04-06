@@ -1,8 +1,8 @@
 extends Weapon
 
 var time_of_last_special: float = 0.0
-var special_delay: float = 0.3
-var special_projectile_damage: float = 24
+var special_delay: float
+var special_projectile_damage: float
 var special_projectile_range: float = 300
 var special_projectile_knockback: float = 0
 
@@ -11,16 +11,11 @@ var special_projectile_knockback: float = 0
 
 
 func _ready():
-	base_attack_speed = 4.0
-	base_projectile_damage = 6
-	projectile_speed = 500
-	projectile_range = 50
-	projectile_type = "line"
-	dex_ratio = 0.4
-	atk_ratio = 0.6
 	set_base_values()
 	set_rarity_bonuses()
 	set_stat_bonuses()
+	special_projectile_damage = projectile_damage * 2
+	special_delay = attack_speed / 2
 	
 	projectile_spawner.set_universal_projectile_attributes(projectile_damage, 
 		projectile_speed, projectile_range, projectile_type)

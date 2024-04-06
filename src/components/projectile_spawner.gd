@@ -18,6 +18,7 @@ func spawn_projectile(direction):
 	projectile_instance.projectile_direction = projectile_direction
 	projectile_instance.rotation = (projectile_direction).angle()
 	projectile_instance.find_child("Sprite2D").flip_v = false if abs(projectile_instance.rotation) < PI / 2 else true
+	projectile_instance.find_child("Sprite2D").flip_h = false if abs(projectile_instance.rotation) < PI else true
 	projectile_instance.position = global_position
 	set_projectile_instance_values(projectile_instance)
 	get_node("/root").add_child(projectile_instance)
