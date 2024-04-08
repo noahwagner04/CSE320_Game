@@ -31,8 +31,16 @@ func handle_pool(pool: Pool):
 		if entry == null:
 			continue
 		total_weight += entry.weight
+		
+	# do minimum rolls
+	for ii in pool.min_rolls:
+		roll_pool(pool)
 	
-	for ii in pool.rolls:
+	# do the rest of the chanced rolls
+	var chanced_rolls = pool.max_rolls - pool.min_rolls
+	if chanced_rolls <= 0:
+		return
+	for ii in chanced_rolls:
 		# check if pool will actually roll
 		if randf_range(0, 100) > pool.chance_to_roll:
 			continue
@@ -61,7 +69,7 @@ func drop_item(item_data: ItemData):
 	var pick_up = PICK_UP.instantiate()
 	pick_up.slot_data = slot_data
 	pick_up.position = global_position
-	get_node("/root").add_child(pick_up)
+	get_tree().get_root().call_deferred("add_child", pick_up)
 	
 
 func custom_entry_array_sort(entry_a: Entry, entry_b: Entry) -> bool:
