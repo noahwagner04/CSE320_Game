@@ -34,7 +34,7 @@ func _ready():
 	_special_attack_timer.start(randf_range(15, 30))
 	_teleport_timer.start(teleport_cooldown)
 	
-	global_position = Vector2(-462, -345)
+	global_position = get_node("../BossSpawnArea").global_position
 
 
 func _physics_process(_delta):

@@ -33,10 +33,9 @@ func _on_area_2d_body_entered(_body):
 
 
 func _on_meadow_dungeon_area_body_entered(_body):
-	var meadow_dungeon_instance: Node = meadow_dungeon_scene.instantiate()
-	call_deferred("add_sibling", meadow_dungeon_instance)
+	#var meadow_dungeon_instance: Node = meadow_dungeon_scene.instantiate()
+	#call_deferred("add_sibling", meadow_dungeon_instance)
 
 	var player: Node = get_tree().get_first_node_in_group("player")
-	player.global_position = Vector2(72,-603)
-	
-	queue_free()
+	var dungeon_exit: Node = get_node("MeadowDungeon/LeaveDungeonArea/CollisionShape2D")
+	player.global_position = dungeon_exit.to_global(position) + Vector2(64, 0)
