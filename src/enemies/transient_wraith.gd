@@ -4,12 +4,15 @@ extends CharacterBody2D
 #@export var special_attack_cooldown: float = 5
 @export var teleport_cooldown: float = 3
 @export var teleport_range: float = 150
+@export var arena_x_length: float = 890
+@export var arena_y_width: float = 155 
 
 var _projectile_timer:= Timer.new()
 var _special_attack_timer:= Timer.new()
 var _teleport_timer:= Timer.new()
 var _player_direction: Vector2
 var _second_phase: bool = false
+var _home_position: Vector2 = global_position
 
 @onready var _projectile_spawner: Node2D = $ProjectileSpawner
 @onready var health_container: HealthContainer = $HealthContainer
@@ -34,7 +37,7 @@ func _ready():
 	_special_attack_timer.start(randf_range(15, 30))
 	_teleport_timer.start(teleport_cooldown)
 	
-	global_position = Vector2(-462, -345)
+	global_position = get_node("../BossSpawnArea").global_position
 
 
 func _physics_process(_delta):
@@ -106,8 +109,8 @@ func teleport():
 		rand_pos  = randf_range(-teleport_range,teleport_range)
 		new_x_pos = rand_pos + global_x
 		
-		if (new_x_pos > -35):
-			new_x_pos = -35 
+		if (_home_position.x + 445 > new_x_pos):
+			new_x_pos = _home_position.x + 445
 		elif (new_x_pos < -931):
 			new_x_pos = -931
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgi8vrclbu3ch"]
+[gd_scene load_steps=14 format=3 uid="uid://dgi8vrclbu3ch"]
 
 [ext_resource type="Texture2D" uid="uid://de2ulp5npb6s3" path="res://assets/environment/Ground.png" id="1_dr88d"]
 [ext_resource type="Script" path="res://src/places/meadow.gd" id="1_x36d5"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://pvgcwdct5gr1" path="res://assets/environment/MeadowDungeonSprites/32x32_2_93.png" id="3_p1k5l"]
 [ext_resource type="PackedScene" uid="uid://djv6bxpkal1st" path="res://src/enemies/giant_dragonfly.tscn" id="6_fr1my"]
 [ext_resource type="PackedScene" uid="uid://c8g203cfa4llk" path="res://src/enemies/bat.tscn" id="7_pwqxa"]
+[ext_resource type="PackedScene" uid="uid://c0pwd11ycry5w" path="res://src/places/meadow_dungeon.tscn" id="8_dfmk8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ka513"]
 resource_name = "Ground"
@@ -1292,6 +1293,9 @@ shape = SubResource("CircleShape2D_2edun")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeadowDungeonArea"]
 position = Vector2(626, -620)
 shape = SubResource("CircleShape2D_5d5ng")
+
+[node name="MeadowDungeon" parent="." instance=ExtResource("8_dfmk8")]
+position = Vector2(1793, -72)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="MeadowDungeonArea" to="." method="_on_meadow_dungeon_area_body_entered"]
