@@ -14,6 +14,8 @@ var first_frame := true
 func _ready():
 	if not multiplayer.is_server():
 		set_physics_process(false)
+	else:
+		home.global_position = global_position
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
 
 
@@ -38,6 +40,7 @@ func _physics_process(_delta):
 
 func _on_health_container_health_depleted():
 	xp_dropper.drop_xp()
+	$DeathAnimator.animate()
 	queue_free()
 
 
