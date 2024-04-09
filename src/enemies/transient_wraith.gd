@@ -1,18 +1,24 @@
 extends CharacterBody2D
 
 @export var projectile_cooldown: float = 0.5
-#@export var special_attack_cooldown: float = 5
 @export var teleport_cooldown: float = 3
 @export var teleport_range: float = 150
-@export var arena_x_length: float = 890
-@export var arena_y_width: float = 155 
 
+# NOTE: The following 3 variables are used for calculating the boundaries for which the transient wraith
+# must teleport within. Arena x length is the total length of the arena, and arena y width the total
+# width (Assuming the arena is a rectangle, regardless of actual shape)
+@export var arena_x_length: float = 895
+@export var arena_y_width: float = 319
+@export var distance_from_wall: float = 5
+
+var _half_arena_length: float = 0.5 * arena_x_length
+var _half_arena_width: float = 0.5 * arena_y_width
+var _home_position: Vector2
+var _player_direction: Vector2
 var _projectile_timer:= Timer.new()
+var _second_phase: bool = false
 var _special_attack_timer:= Timer.new()
 var _teleport_timer:= Timer.new()
-var _player_direction: Vector2
-var _second_phase: bool = false
-var _home_position: Vector2 = global_position
 
 @onready var _projectile_spawner: Node2D = $ProjectileSpawner
 @onready var health_container: HealthContainer = $HealthContainer
@@ -26,7 +32,6 @@ func _ready():
 	_special_attack_timer.timeout.connect(_special_attacks)
 	_teleport_timer.timeout.connect(teleport)
 	
-	#teleport_timer.one_shot = true
 	_special_attack_timer.one_shot = true
 	
 	add_child(_projectile_timer)
@@ -38,6 +43,7 @@ func _ready():
 	_teleport_timer.start(teleport_cooldown)
 	
 	global_position = get_node("../BossSpawnArea").global_position
+	_home_position = global_position
 
 
 func _physics_process(_delta):
@@ -70,26 +76,23 @@ func _split_body():
 		return
 		
 	var nodes = get_tree().get_nodes_in_group("transient_wraiths")
-	var group_size = nodes.size()
 	
-	if (group_size >= 4):
-		#print(group_size)
-		#print(get_parent().get_children())
+	if (nodes.size() >= 4):
 		return 
 	
-	var _new_wraith: Node = duplicate()
-	
-	call_deferred("add_sibling", _new_wraith, false)
-	
-	_new_wraith.teleport()
-	
-	if not _new_wraith.is_node_ready():
-		await _new_wraith.ready
-		
 	var split_health: float = 0.5 * health_container.health 
+	var new_wraith: Node = duplicate()
+	
+	call_deferred("add_sibling", new_wraith, false)
+	
+	new_wraith.teleport()
+	
+	if not new_wraith.is_node_ready():
+		await new_wraith.ready
+		
 	health_container.health = split_health
-	_new_wraith.health_container.health = split_health
-	_new_wraith.health_container.max_health = split_health
+	new_wraith.health_container.health = split_health
+	new_wraith.health_container.max_health = split_health
 	
 	
 func teleport():
@@ -109,33 +112,31 @@ func teleport():
 		rand_pos  = randf_range(-teleport_range,teleport_range)
 		new_x_pos = rand_pos + global_x
 		
-		if (_home_position.x + 445 > new_x_pos):
-			new_x_pos = _home_position.x + 445
-		elif (new_x_pos < -931):
-			new_x_pos = -931
+		if (new_x_pos > _home_position.x + _half_arena_length):
+			new_x_pos = _home_position.x + _half_arena_length - distance_from_wall
+		elif (new_x_pos < _home_position.x - _half_arena_length):
+			new_x_pos = _home_position.x - _half_arena_length + distance_from_wall
 		
 		rand_pos  = randf_range(-teleport_range,teleport_range)
 		new_y_pos = rand_pos + global_y
 		
-		if (new_y_pos > -171):
-			new_y_pos = -171
-		elif (new_y_pos < -490):
-			new_y_pos = -490
+		if (new_y_pos > _home_position.y + _half_arena_width):
+			new_y_pos = _home_position.y + _half_arena_width - distance_from_wall
+		elif (new_y_pos < _home_position.y - _half_arena_width):
+			new_y_pos = _home_position.y - _half_arena_width + distance_from_wall
 		
 		global_position = Vector2(new_x_pos, new_y_pos)
-	
-		#teleport_timer.start(teleport_cooldown)
 
 
 func _on_health_container_health_depleted():
-	print("freeing wraith boss")
+	# DEBUG
+	#print("freeing wraith boss")
 	queue_free()
 
 
 func _on_hurt_box_hurt(_hit_box):
 	if (_second_phase == false && health_container.health <= health_container.max_health * 0.5):
 		_second_phase = true
-		#teleport_cooldown = teleport_cooldown / 2
 		_teleport_timer.start(teleport_cooldown / 2)
 		_projectile_timer.start(projectile_cooldown / 2)
 		
