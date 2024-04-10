@@ -45,3 +45,4 @@ func _on_hurt_box_hurt(hit_box):
 func _on_attack_timer_timeout():
 	if _target:
 		proj_spawner.spawn_projectile(global_position.direction_to(_target.global_position))
+		$BugSpit.play()

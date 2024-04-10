@@ -109,6 +109,7 @@ func _spit_vomit():
 	var _vomit_proj_instance: Node = _vomit_proj_scene.instantiate()
 	call_deferred("add_sibling", _vomit_proj_instance, false)
 	_vomits += 1
+	$BearSpit.play()
 
 
 func _summon_voles(ring_num):

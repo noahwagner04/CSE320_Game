@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cic55om7hfudf"]
+[gd_scene load_steps=18 format=3 uid="uid://cic55om7hfudf"]
 
 [ext_resource type="Script" path="res://src/enemies/boss_behemoth_vole.gd" id="1_y2xdq"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_43mtr"]
@@ -9,9 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://d1rcwk6f4ckue" path="res://assets/sfx/bear-191995.mp3" id="7_sgxui"]
 [ext_resource type="AudioStream" uid="uid://bpur0gxpcjuf4" path="res://assets/sfx/didgeridoo-monster-roar-6962.mp3" id="8_comgt"]
 [ext_resource type="AudioStream" uid="uid://bo160wmkk6oxl" path="res://assets/sfx/bearbark.mp3" id="9_7sex8"]
+[ext_resource type="AudioStream" uid="uid://di6b36xyt1tv8" path="res://assets/sfx/spit.mp3" id="10_o4pnt"]
 [ext_resource type="PackedScene" uid="uid://bufu6hk0opx26" path="res://src/components/item_dropper.tscn" id="11_shdnd"]
 [ext_resource type="Resource" uid="uid://can5ogchci2bu" path="res://src/loot_tables/bossL1.tres" id="12_chnbf"]
-[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="12_xvlsu"]
+[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="12_xvlsu"]
 [ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="13_tgxy5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wb35t"]
@@ -86,6 +87,9 @@ max_polyphony = 10
 stream = ExtResource("9_7sex8")
 volume_db = -11.243
 max_polyphony = 10
+
+[node name="BearSpit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_o4pnt")
 
 [node name="xp_dropper" parent="." instance=ExtResource("12_xvlsu")]
 xp_drop_amount = 200
