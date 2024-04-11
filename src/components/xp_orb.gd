@@ -1,6 +1,6 @@
 extends Area2D
 
-var xp_value: int = 100
+var xp_value: int = 10
 var xp_direction: Vector2 = Vector2(0.0, 0.0)
 
 @onready var motion_controller = $MotionController
