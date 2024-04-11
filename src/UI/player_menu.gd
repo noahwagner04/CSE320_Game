@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@onready var level_label = $Stats/VBoxContainer/Level
 @onready var health_label : RichTextLabel = $Stats/VBoxContainer/Health
 @onready var defense_label : RichTextLabel = $Stats/VBoxContainer/Defense
 @onready var hp_regen_label : RichTextLabel = $"Stats/VBoxContainer/HP Regen"
