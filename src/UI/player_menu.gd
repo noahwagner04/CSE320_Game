@@ -29,8 +29,6 @@ func render_xp():
 
 func render_stats():
 	var stats = $"../PlayerStats"
-	var player_level = get_player_level()
-	xp_label.bbcode_text = "Level " + str(stats.level) + (" MAX" if stats.level == stats.max_level else "") + "\nXP " + str(stats.xp) + "/" + str(stats.xp_level_thresholds[player_level - 1])
 	health_label.bbcode_text = "Health " + str(stats.health)
 	defense_label.bbcode_text = "Defense " + str(stats.defense) + " (" + ("+" if stats.defense_mod >= 0 else "") + str(stats.defense_mod) + ")" 
 	hp_regen_label.bbcode_text = "HP Regen " + str(stats.hp_regen) + " (" + ("+" if stats.hp_regen_mod >= 0 else "") + str(stats.hp_regen_mod) + ")" 
