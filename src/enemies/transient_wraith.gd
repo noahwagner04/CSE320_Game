@@ -2,18 +2,19 @@ extends CharacterBody2D
 
 @export var projectile_cooldown: float = 0.5
 @export var teleport_cooldown: float = 3
-@export var teleport_range: float = 150
+@export var teleport_x_range: float = 150
+@export var teleport_y_range: float = 50
 
-# NOTE: The following 3 variables are used for calculating the boundaries for which the transient wraith
-# must teleport within. Arena x length is the total length of the arena, and arena y width the total
-# width (Assuming the arena is a rectangle, regardless of actual shape)
-@export var arena_x_length: float = 895
-@export var arena_y_width: float = 319
+# NOTE: The following 5 variables are used as the boundaries for which the transient wraith
+# must teleport within; the max/min x/y positions are the global x and y values 
+# the wraith is confined to. The distance_from_wall variable is to provide extra space to doubly
+# make sure the wraith isn't getting stuck anywhere
+@export var max_x_position: int = 2424
+@export var max_y_position: int = 352
+@export var min_x_position: int = 1536
+@export var min_y_position: int = 32
 @export var distance_from_wall: float = 5
 
-var _half_arena_length: float = 0.5 * arena_x_length
-var _half_arena_width: float = 0.5 * arena_y_width
-var _home_position: Vector2
 var _player_direction: Vector2
 var _projectile_timer:= Timer.new()
 var _second_phase: bool = false
@@ -41,9 +42,6 @@ func _ready():
 	_projectile_timer.start(projectile_cooldown)
 	_special_attack_timer.start(randf_range(15, 30))
 	_teleport_timer.start(teleport_cooldown)
-	
-	global_position = get_node("../BossSpawnArea").global_position
-	_home_position = global_position
 
 
 func _physics_process(_delta):
@@ -99,31 +97,28 @@ func teleport():
 	if (_player == null):
 		return
 		
-	var global_x: float
-	var global_y: float
-	var rand_pos: float
-	var new_x_pos: float
-	var new_y_pos: float
-		
 	if (global_position.distance_to(_player.global_position) <= 250):
-		global_x = global_position.x
-		global_y = global_position.y
+		var global_x: float = global_position.x
+		var global_y: float = global_position.y
+		var new_x_pos: float
+		var new_y_pos: float
+		var rand_pos: float
 		
-		rand_pos  = randf_range(-teleport_range,teleport_range)
+		rand_pos  = randf_range(-teleport_x_range,teleport_x_range)
 		new_x_pos = rand_pos + global_x
 		
-		if (new_x_pos > _home_position.x + _half_arena_length):
-			new_x_pos = _home_position.x + _half_arena_length - distance_from_wall
-		elif (new_x_pos < _home_position.x - _half_arena_length):
-			new_x_pos = _home_position.x - _half_arena_length + distance_from_wall
+		if (new_x_pos > max_x_position):
+			new_x_pos = max_x_position - distance_from_wall
+		elif (new_x_pos < min_x_position):
+			new_x_pos = min_x_position + distance_from_wall
 		
-		rand_pos  = randf_range(-teleport_range,teleport_range)
+		rand_pos  = randf_range(-teleport_y_range,teleport_y_range)
 		new_y_pos = rand_pos + global_y
 		
-		if (new_y_pos > _home_position.y + _half_arena_width):
-			new_y_pos = _home_position.y + _half_arena_width - distance_from_wall
-		elif (new_y_pos < _home_position.y - _half_arena_width):
-			new_y_pos = _home_position.y - _half_arena_width + distance_from_wall
+		if (new_y_pos > max_y_position):
+			new_y_pos = max_y_position - distance_from_wall
+		elif (new_y_pos < min_y_position):
+			new_y_pos = min_y_position + distance_from_wall
 		
 		global_position = Vector2(new_x_pos, new_y_pos)
 
