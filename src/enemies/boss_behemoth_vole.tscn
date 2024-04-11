@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bo160wmkk6oxl" path="res://assets/sfx/bearbark.mp3" id="9_7sex8"]
 [ext_resource type="PackedScene" uid="uid://bufu6hk0opx26" path="res://src/components/item_dropper.tscn" id="11_shdnd"]
 [ext_resource type="Resource" uid="uid://can5ogchci2bu" path="res://src/loot_tables/bossL1.tres" id="12_chnbf"]
-[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="12_xvlsu"]
+[ext_resource type="PackedScene" uid="uid://wt5ry5pjhw87" path="res://src/components/xp_dropper.tscn" id="12_xvlsu"]
 [ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="13_tgxy5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wb35t"]

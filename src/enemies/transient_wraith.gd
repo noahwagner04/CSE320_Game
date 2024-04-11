@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var projectile_cooldown: float = 0.5
 #@export var special_attack_cooldown: float = 5
 @export var teleport_cooldown: float = 3
-@export var teleport_range: float = 400
+@export var teleport_range: float = 150
 
 var _projectile_timer:= Timer.new()
 var _special_attack_timer:= Timer.new()
@@ -33,6 +33,8 @@ func _ready():
 	_projectile_timer.start(projectile_cooldown)
 	_special_attack_timer.start(randf_range(15, 30))
 	_teleport_timer.start(teleport_cooldown)
+	
+	global_position = Vector2(-462, -345)
 
 
 func _physics_process(_delta):
@@ -104,18 +106,18 @@ func teleport():
 		rand_pos  = randf_range(-teleport_range,teleport_range)
 		new_x_pos = rand_pos + global_x
 		
-		if (new_x_pos > 640):
-			new_x_pos = 640 
-		elif (new_x_pos < -640):
-			new_x_pos = -640
+		if (new_x_pos > -35):
+			new_x_pos = -35 
+		elif (new_x_pos < -931):
+			new_x_pos = -931
 		
 		rand_pos  = randf_range(-teleport_range,teleport_range)
 		new_y_pos = rand_pos + global_y
 		
-		if (new_y_pos > 640):
-			new_y_pos = 640
-		elif (new_y_pos < -640):
-			new_y_pos = -640
+		if (new_y_pos > -171):
+			new_y_pos = -171
+		elif (new_y_pos < -490):
+			new_y_pos = -490
 		
 		global_position = Vector2(new_x_pos, new_y_pos)
 	

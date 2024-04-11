@@ -69,7 +69,7 @@ func drop_item(item_data: ItemData):
 	var pick_up = PICK_UP.instantiate()
 	pick_up.slot_data = slot_data
 	pick_up.position = global_position
-	get_node("/root").add_child(pick_up)
+	get_tree().get_root().call_deferred("add_child", pick_up)
 	
 
 func custom_entry_array_sort(entry_a: Entry, entry_b: Entry) -> bool:
