@@ -109,6 +109,7 @@ func _spit_vomit():
 	var _vomit_proj_instance: Node = _vomit_proj_scene.instantiate()
 	call_deferred("add_sibling", _vomit_proj_instance, false)
 	_vomits += 1
+	$BearRanged.play()
 
 
 func _summon_voles(ring_num):
@@ -127,11 +128,11 @@ func _summon_voles(ring_num):
 			
 		i += 1
 	$BearSummon.play( .32 )
-	
-	
+
+
 func _on_health_container_health_depleted():
-	$BearDeath.play( )
-	await get_tree().create_timer( 3.19 ).timeout
+	$BearDeath.play()
+	await get_tree().create_timer(3.19).timeout
 	_xp_dropper.drop_xp()
 	$ItemDropper.drop()
 	queue_free()
