@@ -30,15 +30,15 @@ RichTextLabel/styles/normal = SubResource("StyleBoxFlat_k5pfn")
 [node name="PlayerMenu" type="CanvasLayer"]
 script = ExtResource("1_tw7kh")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Stats" type="Panel" parent="."]
 visible = false
 offset_left = 1617.0
 offset_top = 10.0
 offset_right = 1914.0
-offset_bottom = 313.0
+offset_bottom = 280.0
 theme = SubResource("Theme_lxtyf")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Stats"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,47 +50,72 @@ offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Level" type="RichTextLabel" parent="Panel/VBoxContainer"]
-layout_mode = 2
-text = "Level"
-fit_content = true
-
-[node name="Health" type="RichTextLabel" parent="Panel/VBoxContainer"]
+[node name="Health" type="RichTextLabel" parent="Stats/VBoxContainer"]
 layout_mode = 2
 text = "Health "
 fit_content = true
 
-[node name="Defense" type="RichTextLabel" parent="Panel/VBoxContainer"]
+[node name="Defense" type="RichTextLabel" parent="Stats/VBoxContainer"]
 layout_mode = 2
 text = "Defense "
 fit_content = true
 
-[node name="HP Regen" type="RichTextLabel" parent="Panel/VBoxContainer"]
+[node name="HP Regen" type="RichTextLabel" parent="Stats/VBoxContainer"]
 layout_mode = 2
 text = "HP Regen"
 fit_content = true
 
-[node name="Attack" type="RichTextLabel" parent="Panel/VBoxContainer"]
+[node name="Attack" type="RichTextLabel" parent="Stats/VBoxContainer"]
 layout_mode = 2
 text = "Attack "
 fit_content = true
 
-[node name="Dexterity" type="RichTextLabel" parent="Panel/VBoxContainer"]
+[node name="Dexterity" type="RichTextLabel" parent="Stats/VBoxContainer"]
 layout_mode = 2
 text = "Dexterity "
 fit_content = true
 
-[node name="Speed" type="RichTextLabel" parent="Panel/VBoxContainer"]
+[node name="Speed" type="RichTextLabel" parent="Stats/VBoxContainer"]
 layout_mode = 2
 text = "Speed "
 fit_content = true
 
-[node name="SP Regen" type="RichTextLabel" parent="Panel/VBoxContainer"]
+[node name="SP Regen" type="RichTextLabel" parent="Stats/VBoxContainer"]
 layout_mode = 2
 text = "SP Regen "
 fit_content = true
 
-[node name="Stamina" type="RichTextLabel" parent="Panel/VBoxContainer"]
+[node name="Stamina" type="RichTextLabel" parent="Stats/VBoxContainer"]
 layout_mode = 2
 text = "Stamina "
+fit_content = true
+
+[node name="xp" type="Panel" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.5
+offset_top = 10.0
+offset_right = 76.5
+offset_bottom = 72.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme = SubResource("Theme_lxtyf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="xp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="xp" type="RichTextLabel" parent="xp/VBoxContainer"]
+layout_mode = 2
+text = "Level 1 
+XP 0/100"
 fit_content = true
