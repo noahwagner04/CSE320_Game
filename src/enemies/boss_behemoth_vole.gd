@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 @export var agro_dist: float = 375
-@export var max_too_close_dist: float = 80
-@export_range(0, 12, 1) var total_vomit_amount: int = 8
+@export var max_too_close_dist: float = 100
+@export_range(0, 12, 1) var total_vomit_amount: int = 10
 
 var _is_backstepping: bool = false
 var _backstep_timer:= Timer.new()
@@ -75,10 +75,10 @@ func _physics_process(_delta):
 	if (_player_dist <= agro_dist):
 		_target = _player.global_position
 		if (_special_timer.is_stopped()):
-			_special_timer.start(randf_range(1, 5))
+			_special_timer.start(randf_range(1, 3))
 	else:
-		if (global_position == _start_position):
-			_health_container.heal(_delta) 
+		if (global_position.distance_to(_start_position) <= 64):
+			_health_container.heal(_delta * 10) 
 			if (_vomits != 0 && _health_container.health == _max_hp):
 				_second_phase = false
 				_vomits = 0
@@ -101,7 +101,6 @@ func _set_back_step():
 
 func _special_attacks():
 	if ( _vomits < total_vomit_amount ):
-		#if ( randf() <= 0.3 ):
 		_spit_vomit()
 	
 	
@@ -139,14 +138,15 @@ func _on_health_container_health_depleted():
 
 
 func _on_hurt_box_hurt(_hit_box):
-	var curr_health: float = _health_container.health
-
 	if ( !_is_backstepping && _is_player_close && _backstep_timer.is_stopped() ):
-		_backstep_timer.start(1.5)
+		_backstep_timer.start(1)
+		
+	var curr_health: float = _health_container.health
 	
 	if (_second_phase == false && !_is_backstepping && curr_health <= _max_hp * 0.5):
 		_second_phase = true
-		var ring_num := int(6 - curr_health / _max_hp * 10)
+		var player_level: int = _player.get_node("PlayerStats").level
+		var ring_num: int = clamp(int(player_level / 2), 1, 6)
 		_summon_voles(ring_num)
 		
 	$BearHurt.play( .42 )
