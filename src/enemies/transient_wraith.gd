@@ -1,15 +1,25 @@
 extends CharacterBody2D
 
 @export var projectile_cooldown: float = 0.5
-#@export var special_attack_cooldown: float = 5
 @export var teleport_cooldown: float = 3
-@export var teleport_range: float = 150
+@export var teleport_x_range: float = 150
+@export var teleport_y_range: float = 50
 
+# NOTE: The following 5 variables are used as the boundaries for which the transient wraith
+# must teleport within; the max/min x/y positions are the global x and y values 
+# the wraith is confined to. The distance_from_wall variable is to provide extra space to doubly
+# make sure the wraith isn't getting stuck anywhere
+@export var max_x_position: int = 2424
+@export var max_y_position: int = 352
+@export var min_x_position: int = 1536
+@export var min_y_position: int = 32
+@export var distance_from_wall: float = 5
+
+var _player_direction: Vector2
 var _projectile_timer:= Timer.new()
+var _second_phase: bool = false
 var _special_attack_timer:= Timer.new()
 var _teleport_timer:= Timer.new()
-var _player_direction: Vector2
-var _second_phase: bool = false
 
 @onready var _projectile_spawner: Node2D = $ProjectileSpawner
 @onready var health_container: HealthContainer = $HealthContainer
@@ -23,7 +33,6 @@ func _ready():
 	_special_attack_timer.timeout.connect(_special_attacks)
 	_teleport_timer.timeout.connect(teleport)
 	
-	#teleport_timer.one_shot = true
 	_special_attack_timer.one_shot = true
 	
 	add_child(_projectile_timer)
@@ -34,7 +43,7 @@ func _ready():
 	_special_attack_timer.start(randf_range(15, 30))
 	_teleport_timer.start(teleport_cooldown)
 	
-	global_position = Vector2(-462, -345)
+	global_position = get_node("../TransientWraithSpawn").global_position
 
 
 func _physics_process(_delta):
@@ -67,72 +76,64 @@ func _split_body():
 		return
 		
 	var nodes = get_tree().get_nodes_in_group("transient_wraiths")
-	var group_size = nodes.size()
 	
-	if (group_size >= 4):
-		#print(group_size)
-		#print(get_parent().get_children())
+	if (nodes.size() >= 4):
 		return 
 	
-	var _new_wraith: Node = duplicate()
-	
-	call_deferred("add_sibling", _new_wraith, false)
-	
-	_new_wraith.teleport()
-	
-	if not _new_wraith.is_node_ready():
-		await _new_wraith.ready
-		
 	var split_health: float = 0.5 * health_container.health 
+	var new_wraith: Node = duplicate()
+	
+	call_deferred("add_sibling", new_wraith, false)
+	
+	new_wraith.teleport()
+	
+	if not new_wraith.is_node_ready():
+		await new_wraith.ready
+		
 	health_container.health = split_health
-	_new_wraith.health_container.health = split_health
-	_new_wraith.health_container.max_health = split_health
+	new_wraith.health_container.health = split_health
+	new_wraith.health_container.max_health = split_health
 	
 	
 func teleport():
 	if (_player == null):
 		return
 		
-	var global_x: float
-	var global_y: float
-	var rand_pos: float
-	var new_x_pos: float
-	var new_y_pos: float
-		
 	if (global_position.distance_to(_player.global_position) <= 250):
-		global_x = global_position.x
-		global_y = global_position.y
+		var global_x: float = global_position.x
+		var global_y: float = global_position.y
+		var new_x_pos: float
+		var new_y_pos: float
+		var rand_pos: float
 		
-		rand_pos  = randf_range(-teleport_range,teleport_range)
+		rand_pos  = randf_range(-teleport_x_range,teleport_x_range)
 		new_x_pos = rand_pos + global_x
 		
-		if (new_x_pos > -35):
-			new_x_pos = -35 
-		elif (new_x_pos < -931):
-			new_x_pos = -931
+		if (new_x_pos > max_x_position):
+			new_x_pos = max_x_position - distance_from_wall
+		elif (new_x_pos < min_x_position):
+			new_x_pos = min_x_position + distance_from_wall
 		
-		rand_pos  = randf_range(-teleport_range,teleport_range)
+		rand_pos  = randf_range(-teleport_y_range,teleport_y_range)
 		new_y_pos = rand_pos + global_y
 		
-		if (new_y_pos > -171):
-			new_y_pos = -171
-		elif (new_y_pos < -490):
-			new_y_pos = -490
+		if (new_y_pos > max_y_position):
+			new_y_pos = max_y_position - distance_from_wall
+		elif (new_y_pos < min_y_position):
+			new_y_pos = min_y_position + distance_from_wall
 		
 		global_position = Vector2(new_x_pos, new_y_pos)
-	
-		#teleport_timer.start(teleport_cooldown)
 
 
 func _on_health_container_health_depleted():
-	print("freeing wraith boss")
+	# DEBUG
+	#print("freeing wraith boss")
 	queue_free()
 
 
 func _on_hurt_box_hurt(_hit_box):
 	if (_second_phase == false && health_container.health <= health_container.max_health * 0.5):
 		_second_phase = true
-		#teleport_cooldown = teleport_cooldown / 2
 		_teleport_timer.start(teleport_cooldown / 2)
 		_projectile_timer.start(projectile_cooldown / 2)
 		
