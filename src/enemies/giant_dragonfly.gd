@@ -14,8 +14,6 @@ var first_frame := true
 
 
 func _ready():
-	if not multiplayer.is_server():
-		set_physics_process(false)
 	$AttackTimer.start()
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
 
@@ -64,6 +62,7 @@ func _on_attack_timer_timeout():
 
 
 func _on_tree_entered():
+	set_physics_process(false)
 	mult_sync = %DragonflySync
 	mult_sync.set_multiplayer_authority(1)
 	
