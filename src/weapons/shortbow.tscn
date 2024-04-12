@@ -6,6 +6,10 @@
 
 [node name="Shortbow" type="Node2D"]
 script = ExtResource("1_g1k3h")
+projectile_speed = 500.0
+projectile_range = 400.0
+base_dex_ratio = 1.5
+base_atk_ratio = 5.0
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("2_ai4k8")]
 projectile = ExtResource("3_k0kfy")

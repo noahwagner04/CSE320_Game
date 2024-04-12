@@ -31,7 +31,7 @@ func basic_attack():
 		return
 	time_of_last_attack = current_time
 	var direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
-	projectile_spawner.spawn_melee_projectile(direction)
+	projectile_spawner.spawn_melee_projectile(direction, true)
 
 func item_special():
 	var current_time = Time.get_ticks_msec() / 1000.0
@@ -43,7 +43,7 @@ func item_special():
 	projectile_spawner.projectile_range = special_projectile_range
 	projectile_spawner.set_knockback_projectile_attributes(false, special_projectile_knockback)
 	var direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
-	projectile_spawner.spawn_projectile(direction)
+	projectile_spawner.spawn_projectile(direction, true)
 	projectile_spawner.projectile_damage = projectile_damage
 	projectile_spawner.projectile_range = projectile_range
 	projectile_spawner.set_knockback_projectile_attributes(knockback_component.effect_active,
