@@ -29,8 +29,10 @@ func _ready():
 
 # For future reference, the call in _ready doesn't need an argument;
 # GameManager's emit passes the argument automatically.
-func on_player_created(new_player: CharacterBody2D):
-	current_player = new_player
+@rpc("any_peer", "call_local")
+func on_player_created(id: int):
+	current_player = get_node("/root/Startup/Level/Main/Players/" + str(id))
+	print(current_player)
 	#current_player.inventory_data = TEST_INV
 	#current_player.weapon_inventory_data = TEST_WEAPON_INV
 	current_player.toggle_inventory.connect(toggle_inventory_interface)
@@ -56,8 +58,10 @@ func add_player(id: int):
 	var character = preload("res://src/player/player.tscn").instantiate()
 	character.global_position = Vector2.ZERO
 	character.name = str(id)
-	on_player_created(character)
+	print("attempt on "+ str(id))
 	$Players.add_child(character, true)
+	on_player_created.rpc_id(id,id)
+	print(str(id) + " " + current_player.name)
 
 
 func del_player(id: int):
