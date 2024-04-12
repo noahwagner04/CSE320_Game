@@ -51,12 +51,12 @@ func _on_health_container_health_depleted():
 
 func _on_hurt_box_hurt(hit_box):
 	$volehurt.play()
-	$HitEffectPlayer.play("hit")
 
-	
+
 func _on_tree_entered():
 	mult_sync = %VoleSync
 	mult_sync.set_multiplayer_authority(1)
+
 
 @rpc("any_peer")
 func set_spawn_location(spawn_location):

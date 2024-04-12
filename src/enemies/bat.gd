@@ -44,10 +44,6 @@ func _on_health_container_health_depleted():
 	queue_free()
 
 
-func _on_health_container_health_changed(amount):
-	$HitEffectPlayer.play("hit")
-
-
 func _on_tree_entered():
 	mult_sync = %BatSync
 	mult_sync.set_multiplayer_authority(1)

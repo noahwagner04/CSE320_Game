@@ -55,7 +55,7 @@ func _on_health_container_health_depleted():
 
 func _on_hurt_box_hurt(hit_box):
 	$bughurt.play(3.3)
-	$HitEffectPlayer.play("hit")
+
 
 func _on_attack_timer_timeout():
 	if _target:

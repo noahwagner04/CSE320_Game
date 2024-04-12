@@ -99,7 +99,8 @@ xp_drop_amount = 10
 [node name="ItemDropper" parent="." instance=ExtResource("11_0evsp")]
 loot_table = ExtResource("12_hghiu")
 
-[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("13_176fi")]
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("13_176fi")]
+health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
 
 [node name="DeathAnimator" parent="." instance=ExtResource("14_oxfny")]
