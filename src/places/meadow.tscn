@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dgi8vrclbu3ch"]
+[gd_scene load_steps=18 format=3 uid="uid://dgi8vrclbu3ch"]
 
 [ext_resource type="Texture2D" uid="uid://de2ulp5npb6s3" path="res://assets/environment/Ground.png" id="1_dr88d"]
 [ext_resource type="Script" path="res://src/places/meadow.gd" id="1_x36d5"]
@@ -2811,9 +2811,6 @@ physics_layer_0/collision_mask = 0
 sources/4 = SubResource("TileSetAtlasSource_ajb0h")
 sources/0 = SubResource("TileSetAtlasSource_6jvd3")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2edun"]
-radius = 144.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d5ng"]
 radius = 14.0
 
@@ -2878,14 +2875,6 @@ spawn_path = NodePath("../BatSpawner")
 _spawnable_scenes = PackedStringArray("res://src/enemies/giant_dragonfly.tscn")
 spawn_path = NodePath("../GiantDragonflySpawner")
 
-[node name="BehemothVoleSpawn" type="Area2D" parent="."]
-collision_layer = 0
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BehemothVoleSpawn"]
-position = Vector2(-319, 327)
-shape = SubResource("CircleShape2D_2edun")
-
 [node name="MeadowDungeonEntrance" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeadowDungeonEntrance"]
@@ -2905,7 +2894,10 @@ position = Vector2(2112, 192)
 position = Vector2(-288, 160)
 shape = SubResource("SegmentShape2D_bt2vs")
 
-[connection signal="body_entered" from="BehemothVoleSpawn" to="." method="_on_behemoth_vole_spawn_body_entered"]
+[node name="BabyVole" parent="." instance=ExtResource("3_p1cuf")]
+
 [connection signal="body_entered" from="MeadowDungeonEntrance" to="." method="_on_meadow_dungeon_entrance_body_entered"]
 [connection signal="body_entered" from="MeadowDungeonExit" to="." method="_on_meadow_dungeon_exit_body_entered"]
 [connection signal="body_entered" from="TransientWraithSpawn" to="." method="_on_transient_wraith_spawn_body_entered"]
+[connection signal="tree_entered" from="BabyVole" to="." method="_on_baby_vole_tree_entered"]
+[connection signal="tree_exited" from="BabyVole" to="." method="_on_baby_vole_tree_exited"]

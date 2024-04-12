@@ -42,6 +42,8 @@ func _ready():
 	_projectile_timer.start(projectile_cooldown)
 	_special_attack_timer.start(randf_range(15, 30))
 	_teleport_timer.start(teleport_cooldown)
+	
+	global_position = get_node("../TransientWraithSpawn").global_position
 
 
 func _physics_process(_delta):
