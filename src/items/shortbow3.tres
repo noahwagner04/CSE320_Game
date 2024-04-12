@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemDataWeapon" load_steps=5 format=3 uid="uid://c3pycx6kjrwhe"]
+
+[ext_resource type="Script" path="res://src/inventory/item_data_weapon.gd" id="1_7d2a5"]
+[ext_resource type="PackedScene" uid="uid://cu2ykiauq5jv" path="res://src/weapons/shortbow.tscn" id="2_ahudf"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5d6jf"]
+load_path = "res://.godot/imported/32x32.png-e72894ccb86f36ffcb11d38e5757662e.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asv3d"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(1376, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_7d2a5")
+weapon = ExtResource("2_ahudf")
+weapon_rarity = 3
+name = "Shortbow"
+description = "A short bow!!!"
+stackable = false
+texture = SubResource("AtlasTexture_asv3d")
