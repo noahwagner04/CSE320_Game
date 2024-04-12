@@ -8,6 +8,10 @@
 
 [node name="Dagger" type="Node2D"]
 script = ExtResource("1_vykls")
+projectile_speed = 500.0
+projectile_range = 50.0
+base_dex_ratio = 1.5
+base_atk_ratio = 6.0
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("2_rvw1l")]
 projectile = ExtResource("3_wn77i")
