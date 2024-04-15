@@ -6,11 +6,9 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+# Plays a random sound from an array to allow diversity of SFX
 
-func playsound( sounds, audioplayer ):
+func play_sound_from_array( sounds, audioplayer ):
 	var num = sounds.size()
 	var random = randi_range( 0, num )
 	var mp3 = sounds[ num ]
@@ -18,8 +16,6 @@ func playsound( sounds, audioplayer ):
 		audioplayer.stream = mp3
 		audioplayer.play()
 
-	pass
+func change_sound_pitch( audioplayer, pitch ):
+	audioplayer.pitch_scale = pitch
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

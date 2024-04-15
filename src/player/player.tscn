@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
 [ext_resource type="PackedScene" uid="uid://22wskpfroyx6" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
 [ext_resource type="PackedScene" uid="uid://bun6y0ddq8lx3" path="res://src/components/player_stats.tscn" id="9_10w05"]
-[ext_resource type="PackedScene" path="res://src/components/death_animator.tscn" id="13_a8vj6"]
+[ext_resource type="PackedScene" uid="uid://bq1h12ufhn45c" path="res://src/components/death_animator.tscn" id="13_a8vj6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyc80"]
 bg_color = Color(0.6, 0, 0, 1)

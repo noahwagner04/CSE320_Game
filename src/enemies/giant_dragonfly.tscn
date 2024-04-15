@@ -12,8 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://clqrrrx4ey2ix" path="res://assets/sfx/bugspit.mp3" id="10_1rrn1"]
 [ext_resource type="AudioStream" uid="uid://4gm8rvv20s56" path="res://assets/sfx/bumblebee-45600.mp3" id="10_b15yy"]
 [ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="12_8fnxu"]
-[ext_resource type="PackedScene" path="res://src/components/death_animator.tscn" id="13_qnlge"]
-[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
+[ext_resource type="PackedScene" uid="uid://bq1h12ufhn45c" path="res://src/components/death_animator.tscn" id="13_qnlge"]
+[ext_resource type="PackedScene" uid="uid://wt5ry5pjhw87" path="res://src/components/xp_dropper.tscn" id="13_vykgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3yxi0"]
 radius = 300.0
@@ -91,8 +91,8 @@ stream = ExtResource("10_1rrn1")
 [node name="xp_dropper" parent="." instance=ExtResource("13_vykgy")]
 xp_drop_amount = 20
 
-[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("12_8fnxu")]
-root_node = NodePath("../Sprite2D")
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("12_8fnxu")]
+health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
 
 [node name="DeathAnimator" parent="." instance=ExtResource("13_qnlge")]

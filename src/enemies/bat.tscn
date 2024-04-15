@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_u4sh8"]
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="5_nghf6"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="6_sqlyv"]
-[ext_resource type="PackedScene" uid="uid://cbcgu24ydlycu" path="res://src/components/xp_dropper.tscn" id="8_uxnep"]
+[ext_resource type="PackedScene" uid="uid://wt5ry5pjhw87" path="res://src/components/xp_dropper.tscn" id="8_uxnep"]
 [ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="9_lrtek"]
-[ext_resource type="PackedScene" path="res://src/components/death_animator.tscn" id="10_5gkr8"]
-[ext_resource type="AudioStream" uid="uid://dp41ha8binalc" path="res://assets/sfx/splattt-6295.mp3" id="11_d6pq5"]
+[ext_resource type="PackedScene" uid="uid://bq1h12ufhn45c" path="res://src/components/death_animator.tscn" id="10_5gkr8"]
+[ext_resource type="AudioStream" uid="uid://bcfbyfiwj7eyy" path="res://assets/sfx/bathurt.mp3" id="11_04w8b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5sefs"]
 radius = 250.0
@@ -86,17 +86,17 @@ shape = SubResource("RectangleShape2D_um2o4")
 [node name="xp_dropper" parent="." instance=ExtResource("8_uxnep")]
 xp_drop_amount = 30
 
-[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("9_lrtek")]
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("9_lrtek")]
+health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
 
 [node name="DeathAnimator" parent="." instance=ExtResource("10_5gkr8")]
 sprite = ExtResource("2_pv8gb")
-sound_effect = ExtResource("11_d6pq5")
+sound_effect = ExtResource("11_04w8b")
 
 [node name="BatSync" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_2tojv")
 
-[connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="tree_entered" from="BatSync" to="." method="_on_tree_entered"]

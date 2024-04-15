@@ -42,10 +42,6 @@ func _on_health_container_health_depleted():
 	queue_free()
 
 
-func _on_health_container_health_changed(amount):
-	$HitEffectPlayer.play("hit")
-
-
 func _on_tree_entered():
 	set_physics_process(false)
 	mult_sync = %BatSync
