@@ -1,20 +1,21 @@
 extends CharacterBody2D
 
-@export var agro_dist: float = 300
-
 var home := Node2D.new()
-var sync_pos := Vector2.ZERO
+var sync_pos : Vector2
 var mult_sync: MultiplayerSynchronizer
+var first_frame := true
 
 var _rand_target_mod := Vector2((randf() * 2 - 1) * 10, (randf() * 2 - 1) * 10)
 var _target: Node2D
 
 @onready var motion_controller: MotionController = %MotionController
 @onready var col_detector: Area2D = %ColliderDetector
+@onready var xp_dropper = $xp_dropper
 
 
 func _ready():
-	home.global_position = global_position
+	if multiplayer.is_server():
+		home.global_position = global_position
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
 
 
@@ -25,27 +26,40 @@ func _physics_process(_delta):
 	
 		var new_target = _target.global_position + _rand_target_mod
 		
-		motion_controller.acc_dir = global_position.direction_to(new_target)
-		motion_controller.update(_delta)
-		velocity = motion_controller.get_velocity()
+		motion_controller.move(global_position.direction_to(new_target), _delta)
+		velocity = motion_controller.velocity
 		move_and_slide()
 		
 		sync_pos = global_position
+		
+		if first_frame:
+			set_spawn_location.rpc(global_position)
+			first_frame = false
 		
 	else:
 		global_position = global_position.lerp(sync_pos, 0.4)
 
 
 func _on_health_container_health_depleted():
-	$voledeath.play(.05)
-	await get_tree().create_timer(.3).timeout
+	$ItemDropper.drop()
+	xp_dropper.drop_xp()
+	%DeathAnimator.animate()
 	queue_free()
 
 
 func _on_hurt_box_hurt(hit_box):
 	$volehurt.play()
 
-	
+
 func _on_tree_entered():
+	set_physics_process(false)
 	mult_sync = %VoleSync
 	mult_sync.set_multiplayer_authority(1)
+
+
+@rpc("any_peer")
+func set_spawn_location(spawn_location):
+	home.global_position = spawn_location
+	global_position = spawn_location
+	sync_pos = global_position
+	set_physics_process(true)

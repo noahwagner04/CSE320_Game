@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ldya24kqafli"]
+[gd_scene load_steps=19 format=3 uid="uid://ldya24kqafli"]
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://g6tn4jeh7kq4" path="res://assets/sfx/clean-fast-swooshaiff-14784.mp3" id="6_at6ld"]
 [ext_resource type="PackedScene" uid="uid://22wskpfroyx6" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
 [ext_resource type="PackedScene" uid="uid://bun6y0ddq8lx3" path="res://src/components/player_stats.tscn" id="9_10w05"]
+[ext_resource type="PackedScene" uid="uid://bq1h12ufhn45c" path="res://src/components/death_animator.tscn" id="13_a8vj6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyc80"]
 bg_color = Color(0.6, 0, 0, 1)
@@ -55,9 +56,9 @@ max_polyphony = 10
 
 [node name="MotionController" parent="." instance=ExtResource("2_rqy15")]
 unique_name_in_owner = true
-friction = 3000.0
 max_speed = 300.0
-acc_mag = 3000.0
+move_force_mag = 3000.0
+friction_mag = 3000.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_2f0gs")]
 unique_name_in_owner = true
@@ -97,6 +98,13 @@ shape = SubResource("RectangleShape2D_vhwkk")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_ofmfc")
+
+[node name="DeathAnimator" parent="." instance=ExtResource("13_a8vj6")]
+unique_name_in_owner = true
+sprite = ExtResource("1_63jkc")
+sound_effect = ExtResource("3_65lng")
+sound_offset = 0.2
+life_time = 1.5
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bhaepfhg5q4dv"]
+
+[ext_resource type="Script" path="res://src/components/xp_orb.gd" id="1_iohxl"]
+[ext_resource type="Texture2D" uid="uid://cpltxh8lvduxy" path="res://assets/effects/xp-orb.png" id="2_pgeco"]
+[ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="3_jg14a"]
+[ext_resource type="PackedScene" uid="uid://0eylbqrkfcsh" path="res://src/components/collider_detector.tscn" id="4_1vg4d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8acr"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4xwe"]
+radius = 200.0
+
+[node name="xp_orb" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_iohxl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pgeco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m8acr")
+
+[node name="MotionController" parent="." instance=ExtResource("3_jg14a")]
+max_speed = 300.0
+move_force_mag = 2000.0
+friction_mag = 1000.0
+
+[node name="ColliderDetector" parent="." instance=ExtResource("4_1vg4d")]
+unique_name_in_owner = true
+collision_layer = 0
+detect_area = false
+detect_character_body = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColliderDetector"]
+visible = false
+shape = SubResource("CircleShape2D_p4xwe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

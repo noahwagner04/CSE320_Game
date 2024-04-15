@@ -1,8 +1,8 @@
 extends Weapon
 
 var time_of_last_special: float = 0.0
-var special_delay: float = 0.3
-var special_projectile_damage: float = 24
+var special_delay: float
+var special_projectile_damage: float
 var special_projectile_range: float = 300
 var special_projectile_knockback: float = 0
 
@@ -10,18 +10,12 @@ var special_projectile_knockback: float = 0
 @onready var knockback_component = $KnockbackComponent
 
 
-
 func _ready():
-	base_attack_speed = 4.0
-	base_projectile_damage = 6
-	projectile_speed = 500
-	projectile_range = 50
-	projectile_type = "line"
-	dex_ratio = 0.4
-	atk_ratio = 0.6
 	set_base_values()
 	set_rarity_bonuses()
 	set_stat_bonuses()
+	special_projectile_damage = projectile_damage * 2
+	special_delay = attack_speed / 2
 	
 	projectile_spawner.set_universal_projectile_attributes(projectile_damage, 
 		projectile_speed, projectile_range, projectile_type)
@@ -37,7 +31,7 @@ func basic_attack():
 		return
 	time_of_last_attack = current_time
 	var direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
-	projectile_spawner.spawn_melee_projectile(direction)
+	projectile_spawner.spawn_melee_projectile(direction, true)
 
 func item_special():
 	var current_time = Time.get_ticks_msec() / 1000.0
@@ -49,7 +43,7 @@ func item_special():
 	projectile_spawner.projectile_range = special_projectile_range
 	projectile_spawner.set_knockback_projectile_attributes(false, special_projectile_knockback)
 	var direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
-	projectile_spawner.spawn_projectile(direction)
+	projectile_spawner.spawn_projectile(direction, true)
 	projectile_spawner.projectile_damage = projectile_damage
 	projectile_spawner.projectile_range = projectile_range
 	projectile_spawner.set_knockback_projectile_attributes(knockback_component.effect_active,

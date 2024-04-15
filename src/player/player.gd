@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 signal toggle_inventory()
 
@@ -18,20 +19,18 @@ const EQUIP_INVENTORY_WEAPON = 0
 @onready var player_stats = $PlayerStats
 
 func _ready():
-	set_health()
-	PlayerManager.player = self
-	weapon_inventory_data.weapon_changed.connect(change_weapon)
-	weapon_inventory_data.weapon_removed.connect(removed_weapon)
-	# exported inventories: would likely start based on class selection
-	# based on class, select starting weapon
-	# for now, using a default starting_weapon resource of dagger
-	starting_item_data_weapon = preload("res://src/items/dagger.tres")
-	# again, this is based off of the test_weapon_inventory.tres having
-		# a dagger. 
-	change_weapon(starting_item_data_weapon)
-	
-	
 	if multiplayer.get_unique_id() == str(name).to_int():
+		set_health()
+		PlayerManager.player = self
+		weapon_inventory_data.weapon_changed.connect(change_weapon)
+		weapon_inventory_data.weapon_removed.connect(removed_weapon)
+		# exported inventories: would likely start based on class selection
+		# based on class, select starting weapon
+		# for now, using a default starting_weapon resource of dagger
+		starting_item_data_weapon = preload("res://src/items/dagger1.tres")
+		# again, this is based off of the test_weapon_inventory.tres having
+		# a dagger. 
+		change_weapon(starting_item_data_weapon)
 		$Camera2D.make_current()
 
 func set_health():
@@ -67,14 +66,13 @@ func move(_delta):
 	
 	# apply friction if no input is pressed
 	if direction.length() == 0:
-		motion_controller.stop_desired_motion()
+		motion_controller.apply_friction(_delta)
 	
 	# apply acceleration and limit velocity
-	motion_controller.acc_dir = direction
-	motion_controller.update(_delta)
+	motion_controller.move(direction, _delta)
 	
 	# move the player
-	velocity = motion_controller.get_velocity()
+	velocity = motion_controller.velocity
 	move_and_slide()
 	
 
@@ -86,8 +84,7 @@ func _on_health_container_health_changed(_amount):
 
 
 func _on_health_container_health_depleted():
-	$DeathSound.play()
-	await get_tree().create_timer(1.3).timeout
+	%DeathAnimator.animate()
 	queue_free()
 
 
@@ -105,6 +102,9 @@ func get_drop_position() -> Vector2:
 	
 func heal(amount: int):
 	health_container.heal(amount)
+	
+func energize(amount: int):
+	print("stamina recovered by %s" % amount)
 
 func change_weapon(weapon_item_data: ItemDataWeapon):
 	if equipped_weapon:

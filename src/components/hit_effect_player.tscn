@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7cxtbmahq3d3"]
+
+[ext_resource type="Script" path="res://src/components/hit_effect_player.gd" id="1_ihkb6"]
+[ext_resource type="PackedScene" uid="uid://b6vlyexlobsos" path="res://src/components/spawner.tscn" id="2_rww4j"]
+[ext_resource type="PackedScene" uid="uid://bny1k33o7r2yx" path="res://src/components/damage_text.tscn" id="3_2iu2m"]
+
+[node name="HitEffectPlayer" type="Node2D"]
+script = ExtResource("1_ihkb6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Spawner" parent="." instance=ExtResource("2_rww4j")]
+unique_name_in_owner = true
+position = Vector2(0, -5)
+radius = 5
+debug = false
+max_spawn = 10
+scene = ExtResource("3_2iu2m")
+spawn_as_child = false
