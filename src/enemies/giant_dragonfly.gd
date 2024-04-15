@@ -14,8 +14,6 @@ var first_frame := true
 
 
 func _ready():
-	if not multiplayer.is_server():
-		set_physics_process(false)
 	$AttackTimer.start()
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
 
@@ -55,14 +53,16 @@ func _on_health_container_health_depleted():
 
 func _on_hurt_box_hurt(hit_box):
 	$bughurt.play(3.3)
-	$HitEffectPlayer.play("hit")
+
 
 func _on_attack_timer_timeout():
 	if _target:
 		proj_spawner.spawn_projectile(global_position.direction_to(_target.global_position))
+		$BugRanged.play()
 
 
 func _on_tree_entered():
+	set_physics_process(false)
 	mult_sync = %DragonflySync
 	mult_sync.set_multiplayer_authority(1)
 	

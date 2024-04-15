@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cic55om7hfudf"]
+[gd_scene load_steps=18 format=3 uid="uid://cic55om7hfudf"]
 
 [ext_resource type="Script" path="res://src/enemies/boss_behemoth_vole.gd" id="1_y2xdq"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_43mtr"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="5_8ttyp"]
 [ext_resource type="AudioStream" uid="uid://d1rcwk6f4ckue" path="res://assets/sfx/bear-191995.mp3" id="7_sgxui"]
 [ext_resource type="AudioStream" uid="uid://bpur0gxpcjuf4" path="res://assets/sfx/didgeridoo-monster-roar-6962.mp3" id="8_comgt"]
+[ext_resource type="AudioStream" uid="uid://bbcm23sgvif5m" path="res://assets/sfx/spit.mp3" id="8_h2fnj"]
 [ext_resource type="AudioStream" uid="uid://bo160wmkk6oxl" path="res://assets/sfx/bearbark.mp3" id="9_7sex8"]
 [ext_resource type="PackedScene" uid="uid://bufu6hk0opx26" path="res://src/components/item_dropper.tscn" id="11_shdnd"]
 [ext_resource type="Resource" uid="uid://can5ogchci2bu" path="res://src/loot_tables/bossL1.tres" id="12_chnbf"]
@@ -39,7 +40,7 @@ move_force_mag = 560.0
 friction_mag = 900.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_rebr2")]
-max_health = 500.0
+max_health = 1500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.5, 2.5)
@@ -78,6 +79,9 @@ stream = ExtResource("7_sgxui")
 volume_db = 2.971
 max_polyphony = 10
 
+[node name="BearRanged" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_h2fnj")
+
 [node name="BearSummon" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_comgt")
 max_polyphony = 10
@@ -93,7 +97,8 @@ xp_drop_amount = 200
 [node name="ItemDropper" parent="." instance=ExtResource("11_shdnd")]
 loot_table = ExtResource("12_chnbf")
 
-[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("13_tgxy5")]
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("13_tgxy5")]
+health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
