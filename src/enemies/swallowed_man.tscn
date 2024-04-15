@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dxoarw6w1dm6h" path="res://src/components/health_container.tscn" id="4_vq134"]
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="5_gn7li"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="6_mw65k"]
-[ext_resource type="PackedScene" path="res://src/components/xp_dropper.tscn" id="7_2pwqu"]
+[ext_resource type="PackedScene" uid="uid://wt5ry5pjhw87" path="res://src/components/xp_dropper.tscn" id="7_2pwqu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uyugy"]
 atlas = ExtResource("1_dblfl")
@@ -73,6 +73,8 @@ shape = SubResource("CapsuleShape2D_6ejrx")
 
 [node name="xp_dropper" parent="." instance=ExtResource("7_2pwqu")]
 xp_drop_amount = 20
+
+[node name="SkelPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
