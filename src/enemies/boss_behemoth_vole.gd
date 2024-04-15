@@ -150,4 +150,3 @@ func _on_hurt_box_hurt(_hit_box):
 		_summon_voles(ring_num)
 		
 	$BearHurt.play( .42 )
-	$HitEffectPlayer.play( "hit" )

@@ -5,15 +5,6 @@ var aoe_explosion: bool = false
 
 
 func _ready():
-	
-	base_attack_speed = 1.0
-	base_projectile_damage = 10
-	projectile_speed = 300
-	projectile_range = 500
-	projectile_type = "line"
-	aoe_explosion = false
-	dex_ratio = 0.1
-	atk_ratio = 1.0
 	set_base_values()
 	set_rarity_bonuses()
 	set_stat_bonuses()

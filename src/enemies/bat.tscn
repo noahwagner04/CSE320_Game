@@ -86,7 +86,8 @@ shape = SubResource("RectangleShape2D_um2o4")
 [node name="xp_dropper" parent="." instance=ExtResource("8_uxnep")]
 xp_drop_amount = 30
 
-[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("9_lrtek")]
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("9_lrtek")]
+health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
 
 [node name="DeathAnimator" parent="." instance=ExtResource("10_5gkr8")]
@@ -97,6 +98,5 @@ sound_effect = ExtResource("11_d6pq5")
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_2tojv")
 
-[connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="tree_entered" from="BatSync" to="." method="_on_tree_entered"]

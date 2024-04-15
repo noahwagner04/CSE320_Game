@@ -19,20 +19,18 @@ const EQUIP_INVENTORY_WEAPON = 0
 @onready var player_stats = $PlayerStats
 
 func _ready():
-	set_health()
-	PlayerManager.player = self
-	weapon_inventory_data.weapon_changed.connect(change_weapon)
-	weapon_inventory_data.weapon_removed.connect(removed_weapon)
-	# exported inventories: would likely start based on class selection
-	# based on class, select starting weapon
-	# for now, using a default starting_weapon resource of dagger
-	starting_item_data_weapon = preload("res://src/items/dagger1.tres")
-	# again, this is based off of the test_weapon_inventory.tres having
-		# a dagger. 
-	change_weapon(starting_item_data_weapon)
-	
-	
 	if multiplayer.get_unique_id() == str(name).to_int():
+		set_health()
+		PlayerManager.player = self
+		weapon_inventory_data.weapon_changed.connect(change_weapon)
+		weapon_inventory_data.weapon_removed.connect(removed_weapon)
+		# exported inventories: would likely start based on class selection
+		# based on class, select starting weapon
+		# for now, using a default starting_weapon resource of dagger
+		starting_item_data_weapon = preload("res://src/items/dagger1.tres")
+		# again, this is based off of the test_weapon_inventory.tres having
+		# a dagger. 
+		change_weapon(starting_item_data_weapon)
 		$Camera2D.make_current()
 
 func set_health():

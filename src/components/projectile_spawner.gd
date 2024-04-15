@@ -11,26 +11,26 @@ extends Node2D
 @onready var knockback_component = $KnockbackComponent
 
 	
-func spawn_projectile(direction):
+func spawn_projectile(direction: Vector2, flip_v: bool = false):
 	projectile_direction = direction
 	
 	var projectile_instance = projectile.instantiate()
 	projectile_instance.projectile_direction = projectile_direction
 	projectile_instance.rotation = (projectile_direction).angle()
-	projectile_instance.find_child("Sprite2D").flip_v = false if abs(projectile_instance.rotation) < PI / 2 else true
+	if flip_v: projectile_instance.find_child("Sprite2D").flip_v = false if abs(projectile_instance.rotation) < PI / 2 else true
 	projectile_instance.position = global_position
 	set_projectile_instance_values(projectile_instance)
 	get_node("/root").add_child(projectile_instance)
 	set_poison_projectile_instance_values(projectile_instance)
 	set_knockback_projectile_instance_values(projectile_instance)
 
-func spawn_melee_projectile(direction):
+func spawn_melee_projectile(direction, flip_v: bool = false):
 	projectile_direction = direction
 	
 	var projectile_instance = projectile.instantiate()
 	projectile_instance.projectile_direction = projectile_direction
 	projectile_instance.rotation = (projectile_direction).angle()
-	projectile_instance.find_child("Sprite2D").flip_v = false if abs(projectile_instance.rotation) < PI / 2 else true
+	if flip_v: projectile_instance.find_child("Sprite2D").flip_v = false if abs(projectile_instance.rotation) < PI / 2 else true
 	projectile_instance.position = position
 	set_projectile_instance_values(projectile_instance)
 	add_child(projectile_instance)
