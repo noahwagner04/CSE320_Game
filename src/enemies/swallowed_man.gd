@@ -7,8 +7,8 @@ extends CharacterBody2D
 @onready var player: Node = get_tree().get_first_node_in_group("player")
 @onready var xp_dropper = $xp_dropper
 
-var skelhurt = load("res://assets/bear-trap-103800.mp3")
-var skeldeath = load("res://assets/wraithdeath.mp3")
+var skelhurt = load("res://assets/sfx/bear-trap-103800.mp3")
+var skeldeath = load("res://assets/sfx/wraithdeath.mp3")
 
 func _physics_process(delta):
 	if (player == null):

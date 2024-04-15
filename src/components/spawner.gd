@@ -56,11 +56,9 @@ func _get_configuration_warnings():
 
 func instantiate() -> Node2D:
 	if spawned_count >= max_spawn:
-		print("greater than")
 		return null
 	var instance = scene.instantiate()
 	if not instance is Node2D:
-		print("not node 2d")
 		instance.queue_free()
 		return null
 	var angle = randf() * 2 * PI
