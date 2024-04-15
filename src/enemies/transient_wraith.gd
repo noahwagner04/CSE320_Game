@@ -21,6 +21,11 @@ var _second_phase: bool = false
 var _special_attack_timer:= Timer.new()
 var _teleport_timer:= Timer.new()
 
+#Audio loads
+var wraithtp = load("res://assets/sfx/wraithtp.mp3")
+var wraithhurt = load("res://assets/sfx/wraithhurt.mp3")
+var wraithdeath = load("res://assets/sfx/wraithdeath.mp3")
+
 @onready var _projectile_spawner: Node2D = $ProjectileSpawner
 @onready var health_container: HealthContainer = $HealthContainer
 @onready var _player: Node = get_tree().get_first_node_in_group("player")
@@ -123,6 +128,10 @@ func teleport():
 			new_y_pos = min_y_position + distance_from_wall
 		
 		global_position = Vector2(new_x_pos, new_y_pos)
+		
+		#Audio stuff here
+		$WraithPlayer.stream = wraithtp
+		$WraithPlayer.play()
 
 
 func _on_health_container_health_depleted():
@@ -136,4 +145,6 @@ func _on_hurt_box_hurt(_hit_box):
 		_second_phase = true
 		_teleport_timer.start(teleport_cooldown / 2)
 		_projectile_timer.start(projectile_cooldown / 2)
-		
+	#Audio on hit
+	$WraithPlayer.stream = wraithhurt
+	$WraithPlayer.play()
