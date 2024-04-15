@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2i4338omgekx"]
+
+[ext_resource type="Script" path="res://src/weapons/vole_bone_shortbow.gd" id="1_7ps5x"]
+[ext_resource type="PackedScene" uid="uid://bhgvfs2sl78bn" path="res://src/components/projectile_spawner.tscn" id="2_ojcb5"]
+[ext_resource type="PackedScene" uid="uid://dxpsqfp7pnv2w" path="res://src/projectiles/shortbow_projectile.tscn" id="3_jv8wi"]
+[ext_resource type="Script" path="res://src/components/poison_component.gd" id="4_yya5t"]
+
+[node name="VoleBoneShortbow" type="Node2D"]
+script = ExtResource("1_7ps5x")
+projectile_speed = 500.0
+projectile_range = 400.0
+base_dex_ratio = 1.5
+base_atk_ratio = 5.0
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource("2_ojcb5")]
+projectile = ExtResource("3_jv8wi")
+
+[node name="PoisonComponent" type="Node" parent="."]
+script = ExtResource("4_yya5t")
+effect_active = true
+percent_of_max_health_per_second = 5.0
+duration = 10.0

@@ -1,4 +1,5 @@
 extends Weapon
+class_name Shortbow
 
 var time_of_last_special = 0.0
 var special_delay = 0.3
