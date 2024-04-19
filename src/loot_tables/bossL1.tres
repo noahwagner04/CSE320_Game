@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=9 format=3 uid="uid://can5ogchci2bu"]
+
+[ext_resource type="Resource" uid="uid://cg52v4jt4ibuf" path="res://src/loot_tables/pools/bossL1_weapons_pool.tres" id="1_1xydn"]
+[ext_resource type="Script" path="res://src/loot_tables/loot_table.gd" id="1_djkuw"]
+[ext_resource type="Resource" uid="uid://j4v7fyr645vp" path="res://src/loot_tables/pools/bossL1_consumables_pool.tres" id="2_r7eme"]
+[ext_resource type="Resource" uid="uid://bjkqho8cocr2t" path="res://src/items/vole_bone_shortbow.tres" id="3_o1ird"]
+[ext_resource type="Script" path="res://src/loot_tables/entries/entry.gd" id="4_8ty5t"]
+[ext_resource type="Script" path="res://src/loot_tables/pools/pool.gd" id="5_2s0l6"]
+
+[sub_resource type="Resource" id="Resource_h1d4w"]
+script = ExtResource("4_8ty5t")
+item = ExtResource("3_o1ird")
+weight = 1
+
+[sub_resource type="Resource" id="Resource_n8ttt"]
+script = ExtResource("5_2s0l6")
+min_rolls = 1
+max_rolls = 1
+chance_to_roll = 0.0
+entries = Array[ExtResource("4_8ty5t")]([SubResource("Resource_h1d4w")])
+
+[resource]
+script = ExtResource("1_djkuw")
+pools = Array[ExtResource("5_2s0l6")]([ExtResource("1_1xydn"), ExtResource("2_r7eme"), SubResource("Resource_n8ttt")])

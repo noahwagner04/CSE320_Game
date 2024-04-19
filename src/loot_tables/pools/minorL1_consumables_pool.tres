@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Pool" load_steps=9 format=3 uid="uid://bic01bvwi2d5j"]
+
+[ext_resource type="Script" path="res://src/loot_tables/pools/pool.gd" id="1_1htlg"]
+[ext_resource type="Resource" uid="uid://caf84bc2rqsw8" path="res://src/items/health_potion.tres" id="1_aqlho"]
+[ext_resource type="Script" path="res://src/loot_tables/entries/entry.gd" id="2_76fa0"]
+[ext_resource type="Resource" uid="uid://cnm6cri145ubb" path="res://src/items/stamina_potion.tres" id="3_jkwv2"]
+[ext_resource type="Resource" uid="uid://32rhd8pg318" path="res://src/items/monsters_energy.tres" id="4_21yqe"]
+
+[sub_resource type="Resource" id="Resource_nuods"]
+script = ExtResource("2_76fa0")
+item = ExtResource("1_aqlho")
+weight = 2
+
+[sub_resource type="Resource" id="Resource_ps4bu"]
+script = ExtResource("2_76fa0")
+item = ExtResource("3_jkwv2")
+weight = 2
+
+[sub_resource type="Resource" id="Resource_7lqpc"]
+script = ExtResource("2_76fa0")
+item = ExtResource("4_21yqe")
+weight = 1
+
+[resource]
+script = ExtResource("1_1htlg")
+min_rolls = 0
+max_rolls = 1
+chance_to_roll = 20.0
+entries = Array[ExtResource("2_76fa0")]([SubResource("Resource_nuods"), SubResource("Resource_ps4bu"), SubResource("Resource_7lqpc")])

@@ -39,7 +39,7 @@ script = ExtResource("1_nb65q")
 max_speed = 500.0
 
 [node name="HealthContainer" parent="." instance=ExtResource("2_ohq7i")]
-max_health = 1500.0
+max_health = 3000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 1)
@@ -84,6 +84,8 @@ projectile = ExtResource("8_w2jq2")
 projectile_damage = 15.0
 projectile_speed = 120.0
 projectile_range = 500.0
+
+[node name="WraithPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

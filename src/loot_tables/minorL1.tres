@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=4 format=3 uid="uid://c7iqvsjxjm5i6"]
+
+[ext_resource type="Resource" uid="uid://m5ioq3jbrqp" path="res://src/loot_tables/pools/minorL1_weapons_pool.tres" id="1_etx3x"]
+[ext_resource type="Script" path="res://src/loot_tables/loot_table.gd" id="1_mxxgg"]
+[ext_resource type="Resource" uid="uid://bic01bvwi2d5j" path="res://src/loot_tables/pools/minorL1_consumables_pool.tres" id="2_mpo7j"]
+
+[resource]
+script = ExtResource("1_mxxgg")
+pools = Array[Resource("res://src/loot_tables/pools/pool.gd")]([ExtResource("1_etx3x"), ExtResource("2_mpo7j")])
