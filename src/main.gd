@@ -25,6 +25,8 @@ func _ready():
 	# Spawn the local player unless this is a dedicated server export.
 	if not OS.has_feature("dedicated_server"):
 		add_player(1)
+		
+	$MusicPlayer.play()
 
 
 # For future reference, the call in _ready doesn't need an argument;
