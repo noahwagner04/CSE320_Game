@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemDataWeapon" load_steps=5 format=3 uid="uid://bjkqho8cocr2t"]
+
+[ext_resource type="Script" path="res://src/inventory/item_data_weapon.gd" id="1_oolsn"]
+[ext_resource type="PackedScene" uid="uid://d2i4338omgekx" path="res://src/weapons/vole_bone_shortbow.tscn" id="2_17ilk"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5d6jf"]
+load_path = "res://.godot/imported/32x32.png-e72894ccb86f36ffcb11d38e5757662e.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lymp"]
+atlas = SubResource("CompressedTexture2D_5d6jf")
+region = Rect2(1376, 320, 32, 32)
+
+[resource]
+script = ExtResource("1_oolsn")
+weapon = ExtResource("2_17ilk")
+weapon_rarity = 6
+name = "Vole Bone Shortbow"
+description = "A shortbow made from the bones of the behemoth vole"
+stackable = false
+texture = SubResource("AtlasTexture_4lymp")

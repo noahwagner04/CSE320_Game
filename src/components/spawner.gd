@@ -54,23 +54,33 @@ func _get_configuration_warnings():
 		return ["Add a child Timer node to spawn on an interval."]
 
 
-func spawn():
+func instantiate() -> Node2D:
 	if spawned_count >= max_spawn:
-		return
+		return null
 	var instance = scene.instantiate()
 	if not instance is Node2D:
 		instance.queue_free()
-		return
+		return null
 	var angle = randf() * 2 * PI
 	instance.global_position = Vector2(cos(angle), sin(angle)) * radius * randf()
 	instance.global_position += global_position
+	return instance
+
+
+func add_to_tree(instance: Node2D):
 	instance.tree_exited.connect(_on_despawn)
-	if(spawn_as_child):
+	if spawn_as_child:
 		add_child(instance, true)
 	else:
 		_root.call_deferred("add_child", instance, true)
 	spawned_count += 1
 	emit_signal("scene_spawned", instance)
+
+
+func spawn():
+	var instance = instantiate()
+	if instance:
+		add_to_tree(instance)
 
 
 func _on_despawn():

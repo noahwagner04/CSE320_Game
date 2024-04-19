@@ -27,7 +27,7 @@ region = Rect2(1056, 1664, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l2ylu"]
 atlas = SubResource("CompressedTexture2D_5d6jf")
-region = Rect2(96, 768, 32, 32)
+region = Rect2(3360, 32, 32, 32)
 
 [node name="Slot" type="PanelContainer"]
 custom_minimum_size = Vector2(64, 64)
