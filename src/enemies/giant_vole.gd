@@ -14,9 +14,7 @@ var _target: Node2D
 
 
 func _ready():
-	if not multiplayer.is_server():
-		set_physics_process(false)
-	else:
+	if multiplayer.is_server():
 		home.global_position = global_position
 	motion_controller.max_speed += (randf() * 2 - 1) * 10
 
@@ -51,12 +49,13 @@ func _on_health_container_health_depleted():
 
 func _on_hurt_box_hurt(hit_box):
 	$volehurt.play()
-	$HitEffectPlayer.play("hit")
 
-	
+
 func _on_tree_entered():
+	set_physics_process(false)
 	mult_sync = %VoleSync
 	mult_sync.set_multiplayer_authority(1)
+
 
 @rpc("any_peer")
 func set_spawn_location(spawn_location):

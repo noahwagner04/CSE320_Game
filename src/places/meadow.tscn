@@ -2845,7 +2845,7 @@ max_spawn = 50
 scene = ExtResource("3_p1cuf")
 
 [node name="Timer" type="Timer" parent="GiantVoleSpawner"]
-wait_time = 1.341
+wait_time = 1.203
 
 [node name="GiantDragonflySpawner" parent="." instance=ExtResource("2_0b0rp")]
 radius = 600

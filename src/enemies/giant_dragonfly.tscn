@@ -91,8 +91,8 @@ stream = ExtResource("10_1rrn1")
 [node name="xp_dropper" parent="." instance=ExtResource("13_vykgy")]
 xp_drop_amount = 20
 
-[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("12_8fnxu")]
-root_node = NodePath("../Sprite2D")
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("12_8fnxu")]
+health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
 
 [node name="DeathAnimator" parent="." instance=ExtResource("13_qnlge")]
