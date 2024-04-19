@@ -16,8 +16,8 @@ script = ExtResource("1_xf2dr")
 [node name="PoisonComponent" type="Node" parent="."]
 script = ExtResource("4_jsvhh")
 effect_active = true
-percent_of_max_health_per_second = 5.0
-duration = 4.0
+percent_of_max_health_per_second = 10.0
+duration = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.65, 0.65)
