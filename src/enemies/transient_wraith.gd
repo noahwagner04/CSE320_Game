@@ -75,9 +75,9 @@ func _special_attacks():
 func _split_body():
 	if (health_container.health <= 0.25 * health_container.max_health):
 		var first_wraith = get_tree().get_first_node_in_group("transient_wraiths")
-		if (first_wraith != null):
-			first_wraith.health_container.max_health *= 2
-			first_wraith.health_container.heal(health_container.health)
+		if (first_wraith != null and first_wraith != self):
+			first_wraith.get_node("HealthContainer").heal(health_container.health)
+			queue_free()
 		return
 		
 	var nodes = get_tree().get_nodes_in_group("transient_wraiths")
@@ -86,18 +86,16 @@ func _split_body():
 		return 
 	
 	var split_health: float = 0.5 * health_container.health 
+	health_container.health = split_health
+	
 	var new_wraith: Node = duplicate()
-	
 	call_deferred("add_sibling", new_wraith, false)
-	
-	new_wraith.teleport()
 	
 	if not new_wraith.is_node_ready():
 		await new_wraith.ready
-		
-	health_container.health = split_health
-	new_wraith.health_container.health = split_health
-	new_wraith.health_container.max_health = split_health
+
+	new_wraith.get_node("HealthContainer").health = split_health
+	new_wraith.teleport()
 	
 	
 func teleport():
