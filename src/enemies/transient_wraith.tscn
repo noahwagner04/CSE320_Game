@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bcq2upb3df7xk"]
+[gd_scene load_steps=16 format=3 uid="uid://bcq2upb3df7xk"]
 
 [ext_resource type="Script" path="res://src/enemies/transient_wraith.gd" id="1_nb65q"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="1_rmsyv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="5_fjf0u"]
 [ext_resource type="PackedScene" uid="uid://bhgvfs2sl78bn" path="res://src/components/projectile_spawner.tscn" id="7_rbhy7"]
 [ext_resource type="PackedScene" uid="uid://c6y45sooyea0y" path="res://src/projectiles/wraith_green_energy.tscn" id="8_w2jq2"]
+[ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="9_6nb2q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a822r"]
 size = Vector2(30, 30)
@@ -86,6 +87,10 @@ projectile_speed = 120.0
 projectile_range = 500.0
 
 [node name="WraithPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("9_6nb2q")]
+health_container = NodePath("../HealthContainer")
+sprite = NodePath("../Sprite2D")
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

@@ -18,6 +18,9 @@ func _ready():
 	
 	sprite.material = _flash_material.duplicate()
 	
+	if animation_player.has_animation_library("hit_effect"):
+		return
+	
 	var animation = Animation.new()
 	
 	var relative_sprite_path = str(get_node(animation_player.root_node).get_path_to(sprite))
@@ -37,11 +40,11 @@ func _ready():
 	
 	var animation_library = AnimationLibrary.new()
 	animation_library.add_animation("hit", animation)
-	animation_player.add_animation_library("", animation_library)
+	animation_player.add_animation_library("hit_effect", animation_library)
 
 
 func play():
-	animation_player.play("hit")
+	animation_player.play("hit_effect/hit")
 
 
 func spawn_hit_text(damage):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ldya24kqafli"]
+[gd_scene load_steps=20 format=3 uid="uid://ldya24kqafli"]
 
 [ext_resource type="Texture2D" uid="uid://1uob3lhs3b7i" path="res://assets/player/warrior.png" id="1_63jkc"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_e7sba"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://22wskpfroyx6" path="res://src/UI/player_menu.tscn" id="8_ul1em"]
 [ext_resource type="PackedScene" uid="uid://bun6y0ddq8lx3" path="res://src/components/player_stats.tscn" id="9_10w05"]
 [ext_resource type="PackedScene" uid="uid://bq1h12ufhn45c" path="res://src/components/death_animator.tscn" id="13_a8vj6"]
+[ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="14_557uw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyc80"]
 bg_color = Color(0.6, 0, 0, 1)
@@ -99,12 +100,16 @@ shape = SubResource("RectangleShape2D_vhwkk")
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_ofmfc")
 
-[node name="DeathAnimator" parent="." instance=ExtResource("13_a8vj6")]
+[node name="DeathAnimator" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("13_a8vj6")]
 unique_name_in_owner = true
-sprite = ExtResource("1_63jkc")
+sprite = NodePath("../Sprite2D")
 sound_effect = ExtResource("3_65lng")
 sound_offset = 0.2
 life_time = 1.5
+
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("14_557uw")]
+health_container = NodePath("../HealthContainer")
+sprite = NodePath("../Sprite2D")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="health_changed" from="HealthContainer" to="." method="_on_health_container_health_changed"]

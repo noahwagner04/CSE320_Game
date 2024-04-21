@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_8asym"]
 [ext_resource type="PackedScene" uid="uid://dgi8vrclbu3ch" path="res://src/places/meadow.tscn" id="1_y2l12"]
-[ext_resource type="PackedScene" uid="uid://bs0jf15i4nj8u" path="res://src/UI/inventory.tscn" id="3_bj3aa"]
+[ext_resource type="PackedScene" path="res://src/UI/inventory.tscn" id="3_bj3aa"]
 [ext_resource type="Script" path="res://src/inventory/inventory_interface.gd" id="4_ri52f"]
-[ext_resource type="PackedScene" uid="uid://drbl531y5n67e" path="res://src/UI/slot.tscn" id="6_sdpfa"]
+[ext_resource type="PackedScene" path="res://src/UI/slot.tscn" id="6_sdpfa"]
 [ext_resource type="AudioStream" uid="uid://bsvotcoegjmef" path="res://assets/music/MainThemeLoop.wav" id="7_o7b8c"]
-[ext_resource type="PackedScene" uid="uid://cao0gknxyrwn1" path="res://src/UI/hot_bar_inventory.tscn" id="10_3kks7"]
+[ext_resource type="PackedScene" path="res://src/UI/hot_bar_inventory.tscn" id="10_3kks7"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8asym")

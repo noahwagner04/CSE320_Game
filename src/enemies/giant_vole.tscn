@@ -106,9 +106,9 @@ loot_table = ExtResource("12_hghiu")
 health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
 
-[node name="DeathAnimator" parent="." instance=ExtResource("14_oxfny")]
+[node name="DeathAnimator" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("14_oxfny")]
 unique_name_in_owner = true
-sprite = ExtResource("1_6ruth")
+sprite = NodePath("../Sprite2D")
 sound_effect = ExtResource("9_6qna4")
 sound_offset = 0.05
 

@@ -2896,8 +2896,13 @@ shape = SubResource("SegmentShape2D_bt2vs")
 
 [node name="BabyVole" parent="." instance=ExtResource("3_p1cuf")]
 
+[node name="DeathAnimator" parent="BabyVole" index="12"]
+sprite_scale = Vector2(0.5, 0.5)
+
 [connection signal="body_entered" from="MeadowDungeonEntrance" to="." method="_on_meadow_dungeon_entrance_body_entered"]
 [connection signal="body_entered" from="MeadowDungeonExit" to="." method="_on_meadow_dungeon_exit_body_entered"]
 [connection signal="body_entered" from="TransientWraithSpawn" to="." method="_on_transient_wraith_spawn_body_entered"]
 [connection signal="tree_entered" from="BabyVole" to="." method="_on_baby_vole_tree_entered"]
 [connection signal="tree_exited" from="BabyVole" to="." method="_on_baby_vole_tree_exited"]
+
+[editable path="BabyVole"]

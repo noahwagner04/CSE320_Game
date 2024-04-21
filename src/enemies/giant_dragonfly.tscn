@@ -95,9 +95,9 @@ xp_drop_amount = 20
 health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
 
-[node name="DeathAnimator" parent="." instance=ExtResource("13_qnlge")]
+[node name="DeathAnimator" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("13_qnlge")]
 unique_name_in_owner = true
-sprite = ExtResource("1_gxes3")
+sprite = NodePath("../Sprite2D")
 sound_effect = ExtResource("9_ayftr")
 
 [node name="DragonflySync" type="MultiplayerSynchronizer" parent="."]

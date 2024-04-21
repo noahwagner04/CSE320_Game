@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cic55om7hfudf"]
+[gd_scene load_steps=19 format=3 uid="uid://cic55om7hfudf"]
 
 [ext_resource type="Script" path="res://src/enemies/boss_behemoth_vole.gd" id="1_y2xdq"]
 [ext_resource type="PackedScene" uid="uid://dr6f73vjifb6k" path="res://src/components/motion_controller.tscn" id="2_43mtr"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://can5ogchci2bu" path="res://src/loot_tables/bossL1.tres" id="12_chnbf"]
 [ext_resource type="PackedScene" uid="uid://wt5ry5pjhw87" path="res://src/components/xp_dropper.tscn" id="12_xvlsu"]
 [ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="13_tgxy5"]
+[ext_resource type="PackedScene" uid="uid://bq1h12ufhn45c" path="res://src/components/death_animator.tscn" id="15_ed4in"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wb35t"]
 radius = 19.0
@@ -74,11 +75,6 @@ position = Vector2(0, -3)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_4fh4u")
 
-[node name="BearDeath" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_sgxui")
-volume_db = 2.971
-max_polyphony = 10
-
 [node name="BearRanged" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_h2fnj")
 
@@ -100,6 +96,12 @@ loot_table = ExtResource("12_chnbf")
 [node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("13_tgxy5")]
 health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
+
+[node name="DeathAnimator" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("15_ed4in")]
+sprite = NodePath("../Sprite2D")
+sprite_scale = Vector2(2.5, 2.5)
+sound_effect = ExtResource("7_sgxui")
+sound_Volume_dB = 2.971
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

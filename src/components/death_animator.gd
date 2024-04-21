@@ -1,7 +1,9 @@
 extends Node2D
 
-@export var sprite: Texture
+@export var sprite: Sprite2D
+@export var sprite_scale := Vector2(1, 1)
 @export var sound_effect: AudioStream
+@export var sound_Volume_dB: float = 0
 @export var sound_offset: float
 @export var life_time: float = 1
 
@@ -16,8 +18,10 @@ func animate():
 	var sprite2d: Sprite2D = children.filter(func (child): return child is Sprite2D)[0]
 	var audio_stream: AudioStreamPlayer2D = children.filter(func (child): return child is AudioStreamPlayer2D)[0]
 	
-	sprite2d.set_texture(sprite)
+	sprite2d.set_texture(sprite.get_texture())
+	sprite2d.set_scale(sprite_scale)
 	audio_stream.set_stream(sound_effect)
+	audio_stream.set_volume_db(sound_Volume_dB)
 	death_instance.life_time = life_time
 	death_instance.sound_offset = sound_offset
 	
