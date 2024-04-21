@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0flc8682bqiw"]
+[gd_scene load_steps=12 format=3 uid="uid://d0flc8682bqiw"]
 
 [ext_resource type="Texture2D" uid="uid://c2tihctaoj8bd" path="res://assets/inventory_items/32x32.png" id="1_dblfl"]
 [ext_resource type="Script" path="res://src/enemies/swallowed_man.gd" id="1_kyvox"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bp2x7jc1o5ynq" path="res://src/components/hit_box.tscn" id="5_gn7li"]
 [ext_resource type="PackedScene" uid="uid://cnmy034x62h8s" path="res://src/components/hurt_box.tscn" id="6_mw65k"]
 [ext_resource type="PackedScene" uid="uid://wt5ry5pjhw87" path="res://src/components/xp_dropper.tscn" id="7_2pwqu"]
+[ext_resource type="PackedScene" uid="uid://c7cxtbmahq3d3" path="res://src/components/hit_effect_player.tscn" id="8_w8jkp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uyugy"]
 atlas = ExtResource("1_dblfl")
@@ -75,6 +76,10 @@ shape = SubResource("CapsuleShape2D_6ejrx")
 xp_drop_amount = 20
 
 [node name="SkelPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="HitEffectPlayer" parent="." node_paths=PackedStringArray("health_container", "sprite") instance=ExtResource("8_w8jkp")]
+health_container = NodePath("../HealthContainer")
+sprite = NodePath("../Sprite2D")
 
 [connection signal="health_depleted" from="HealthContainer" to="." method="_on_health_container_health_depleted"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

@@ -130,8 +130,7 @@ func _summon_voles(ring_num):
 
 
 func _on_health_container_health_depleted():
-	$BearDeath.play()
-	await get_tree().create_timer(3.19).timeout
+	$DeathAnimator.animate()
 	_xp_dropper.drop_xp()
 	$ItemDropper.drop()
 	queue_free()

@@ -90,8 +90,8 @@ xp_drop_amount = 30
 health_container = NodePath("../HealthContainer")
 sprite = NodePath("../Sprite2D")
 
-[node name="DeathAnimator" parent="." instance=ExtResource("10_5gkr8")]
-sprite = ExtResource("2_pv8gb")
+[node name="DeathAnimator" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("10_5gkr8")]
+sprite = NodePath("../Sprite2D")
 sound_effect = ExtResource("11_04w8b")
 
 [node name="BatSync" type="MultiplayerSynchronizer" parent="."]
